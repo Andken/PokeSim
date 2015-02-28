@@ -8,7 +8,6 @@ with open('WaterDeck.csv', 'rb') as csvfile:
     deck = list()
 
 
-    print "=========DECK==========="
     for card in cards:
         deck.append(card)        
 
@@ -17,6 +16,9 @@ with open('WaterDeck.csv', 'rb') as csvfile:
     playable_hand = False
 
     while not playable_hand:
+        print "========================"
+        print "=========DECK==========="
+        print "========================"
         shuffle(deck)
         for card in deck:
             print ', '.join(card)
@@ -45,4 +47,7 @@ with open('WaterDeck.csv', 'rb') as csvfile:
     for i in range(7,13):
         prizes.append(deck[i])
 
+    print "====Prizes==="
+    for card in prizes:
+        print ', '.join(card)
     
