@@ -3,7 +3,7 @@
 import csv
 from random import shuffle
 
-sims = 50000
+sims = 500
 
 mulligans_by_number = {}
 mulligans_by_number[0] = 0
@@ -24,26 +24,26 @@ for j in range(0,sims):
         playable_hand = False
 
         while not playable_hand:
-            # print "========================"
-            # print "=========DECK==========="
-            # print "========================"
+            print "========================"
+            print "=========DECK==========="
+            print "========================"
             shuffle(deck)
-            # for card in deck:
-                # print ', '.join(card)
+            for card in deck:
+                print ', '.join(card)
 
             del hand[:]
             for i in range(0,7):
                 hand.append(deck[i])
 
-            # print "=========Potential Hand:"
+            print "=========Potential Hand:"
             for card in hand:
-                # print card[0]
+                print card[0]
 
                 # the second number is whether it's a basic pokemon to see if a mulligan is needed
                 playable_hand = playable_hand or (card[2] == "1")
 
             mulligans = mulligans + int(not playable_hand)
-            # print "======Playable Hand: " + str(playable_hand)
+            print "======Playable Hand: " + str(playable_hand)
 
 
         if(mulligans in mulligans_by_number):
@@ -51,9 +51,9 @@ for j in range(0,sims):
         else:
             mulligans_by_number[mulligans] = 1
 
-        # print "====Actual Hand==="
-        # for card in hand:
-            # print card[0]
+        print "====Actual Hand==="
+        for card in hand:
+            print card[0]
 
 
         # prize cards
@@ -61,7 +61,7 @@ for j in range(0,sims):
         for i in range(7,13):
             prizes.append(deck[i])
 
-        # print "====Prizes==="
+        print "====Prizes==="
         disaster = False
         for card in prizes:
             # each card has a value...if all card of that value are in the prizes, that's a disaster
@@ -71,7 +71,7 @@ for j in range(0,sims):
             # print "number of " + card[0] + ": " + str(len(deck_indices)) + " : " + str(len(prize_indices))
             disaster = disaster | (len(deck_indices) == len(prize_indices))
 
-        # print "====Disaster: " + str(disaster)
+        print "====Disaster: " + str(disaster)
         disasters = disasters + disaster
 
 print "================================="
