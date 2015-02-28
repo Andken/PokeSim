@@ -48,6 +48,13 @@ with open('WaterDeck.csv', 'rb') as csvfile:
         prizes.append(deck[i])
 
     print "====Prizes==="
+    disaster = False
     for card in prizes:
-        print ', '.join(card)
+        # each card has a value...if all card of that value are in the prizes, that's a disaster
+        deck_indices = [i for i, x in enumerate(deck) if x[1] == card[1]]
+        prize_indices = [i for i, x in enumerate(prizes) if x[1] == card[1]]
+
+        print "number of " + card[0] + ": " + str(len(deck_indices)) + " : " + str(len(prize_indices))
+        disaster = disaster | (len(deck_indices) == len(prize_indices))
     
+    print "====Disaster: " + str(disaster)
