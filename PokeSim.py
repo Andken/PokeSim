@@ -1,7 +1,16 @@
 #!/usr/bin/python
 
 import csv
+from random import shuffle
+
 with open('WaterDeck.csv', 'rb') as csvfile:
-    card = csv.reader(csvfile, delimiter=',')
-    for element in card:
-        print ', '.join(element)
+    cards = csv.reader(csvfile, delimiter=',')
+    deck = list()
+    for card in cards:
+        deck.append(card)        
+
+    shuffle(deck)
+    for card in deck:
+        print ', '.join(card)
+
+
