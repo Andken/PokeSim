@@ -3,12 +3,11 @@
 import csv
 from random import shuffle
 
-sims = 2000
+sims = 1
 
 mulligans_by_number = {}
 mulligans_by_number[0] = 0
 disasters = 0
-
 
 for j in range(0,sims):
     with open('WaterDeck.csv', 'rb') as csvfile:
@@ -73,6 +72,21 @@ for j in range(0,sims):
 
         print "====Disaster: " + str(disaster)
         disasters = disasters + disaster
+
+        # play a Basic and draw a card
+        basic = next(card for card in hand if card[2] == "Basic")
+        bench = []
+        bench.append(basic)
+        hand.remove(basic)
+
+        print "==========================New hand="
+        for card in hand:
+            print card[0]
+
+        print "==========================Bench="
+        for card in bench:
+            print card[0]
+
 
 print "================================="
 print "===Sims:      " + str(sims)
