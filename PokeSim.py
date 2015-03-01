@@ -76,8 +76,8 @@ for j in range(0,sims):
 
 print "================================="
 print "===Sims:      " + str(sims)
-print "===Disasters: " + str(disasters)
+print "===Disasters: " + str(disasters) + "(" + str(100.0*disasters/sims) + "%)"
 print "===Mulligans: "
 for key in sorted(mulligans_by_number.iterkeys()):
-    print "   " + str(key) + ": " + str(mulligans_by_number[key])
+    print "   " + str(key) + ": " + str(mulligans_by_number[key]) + "(" + str(100.0*mulligans_by_number[key]/sims) + "%)"
 
