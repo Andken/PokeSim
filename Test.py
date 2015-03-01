@@ -43,10 +43,12 @@ class TestDeckOperations(unittest.TestCase):
             self.assertEqual(bft.BlastoiseFirstTurn(copy.deepcopy(list(p)), self.discard, self.deck), True)    
 
     def test_BlastoiseFirstTurnWithDiscard(self):
+        self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
         self.hand.append(["Blastoise","2","Evolve"])
         self.hand.append(["Blastoise","2","Evolve"])
         self.hand.append(["Ultra Ball","0","Item-UnrestrictedDiscard"])
-        self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
+        for p in itertools.permutations(self.hand):
+            self.assertEqual(bft.BlastoiseFirstTurn(copy.deepcopy(list(p)), self.discard, self.deck), True)    
 
 if __name__ == '__main__':
     unittest.main()
