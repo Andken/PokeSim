@@ -2,37 +2,7 @@
 
 import csv
 from random import shuffle
-
-def ContainsType(cards, type):
-    for card in cards:
-        if(card[2] == type):
-            return True
-    return False
-
-def PlayBasic(hand, bench):
-    basic = next(card for card in hand if card[2] == "Basic")
-    bench.append(basic)
-    hand.remove(basic)
-
-def DrawCard(hand, deck):
-    hand.append(deck[0])
-    del deck[0]
-
-def PrintCards(label, cards):
-    print label
-    for card in cards:
-        print card[0]
-
-def ContainsName(cards, name):
-    for card in cards:
-        if(card[0] == name):
-            return True
-    return False
-
-def BlastioseFirstTurn(hand, discard, deck):
-    if(len(hand) == 1):
-        return ContainsName(hand, "Archie's Ace in the Hole") and ContainsName(discard, "Blastoise")
-    return False
+import DeckOperations as do
 
 sims = 1
 
@@ -56,12 +26,12 @@ for j in range(0,sims):
                 deck.append(card)        
 
             #shuffle(deck)
-            PrintCards("============\n=== DECK ===\n============", deck)
+            do.PrintCards("============\n=== DECK ===\n============", deck)
     
             for i in range(0,7):
-                DrawCard(hand, deck)
+                do.DrawCard(hand, deck)
 
-            playable_hand = ContainsType(hand, "Basic")
+            playable_hand = do.ContainsType(hand, "Basic")
 
             mulligans = mulligans + int(not playable_hand)
 
@@ -70,15 +40,15 @@ for j in range(0,sims):
         else:
             mulligans_by_number[mulligans] = 1
 
-        PrintCards("====Actual Hand====", hand)
+        do.PrintCards("====Actual Hand====", hand)
 
 
         # prize cards
         prizes = list()
         for i in range(0,6):
-            DrawCard(prizes, deck)
+            do.DrawCard(prizes, deck)
 
-        PrintCards("====Prizes===", prizes)
+        do.PrintCards("====Prizes===", prizes)
         disaster = False
         for card in prizes:
             # each card has a value...if all card of that value are in the prizes, that's a disaster
@@ -93,14 +63,14 @@ for j in range(0,sims):
         bench = []
 
         # play a Basic and draw a card
-        if(ContainsType(hand, "Basic")):
-            PlayBasic(hand, bench)
+        if(do.ContainsType(hand, "Basic")):
+            do.PlayBasic(hand, bench)
 
-        DrawCard(hand, deck)
+        do.DrawCard(hand, deck)
 
-        PrintCards("==========================New hand=", hand)
-        PrintCards("==========================Bench=", bench)
-        PrintCards("==========================Deck=", deck)
+        do.PrintCards("==========================New hand=", hand)
+        do.PrintCards("==========================Bench=", bench)
+        do.PrintCards("==========================Deck=", deck)
 
 
 
