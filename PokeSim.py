@@ -3,7 +3,7 @@
 import csv
 from random import shuffle
 
-sims = 500
+sims = 2000
 
 mulligans_by_number = {}
 mulligans_by_number[0] = 0
