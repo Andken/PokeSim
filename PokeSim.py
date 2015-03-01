@@ -3,6 +3,27 @@
 import csv
 from random import shuffle
 
+
+def ContainsBasic(hand):
+    playable_hand = False
+    for card in hand:
+        # the second number is whether it's a basic pokemon to see if a mulligan is needed
+        playable_hand = playable_hand or (card[2] == "Basic")
+    return playable_hand
+    
+
+def PlayBasic(hand, bench):
+    basic = next(card for card in hand if card[2] == "Basic")
+    bench.append(basic)
+    hand.remove(basic)
+
+
+
+
+
+
+
+
 sims = 1
 
 mulligans_by_number = {}
@@ -35,12 +56,7 @@ for j in range(0,sims):
             hand.extend(deck[:7])
             del deck[:7]
 
-            print "=========Potential Hand:"
-            for card in hand:
-                print card[0]
-
-                # the second number is whether it's a basic pokemon to see if a mulligan is needed
-                playable_hand = playable_hand or (card[2] == "Basic")
+            playable_hand = ContainsBasic(hand)
 
             mulligans = mulligans + int(not playable_hand)
             print "======Playable Hand: " + str(playable_hand)
@@ -74,11 +90,12 @@ for j in range(0,sims):
         print "====Disaster: " + str(disaster)
         disasters = disasters + disaster
 
-        # play a Basic and draw a card
-        basic = next(card for card in hand if card[2] == "Basic")
         bench = []
-        bench.append(basic)
-        hand.remove(basic)
+
+        # play a Basic and draw a card
+        if(ContainsBasic(hand)):
+            PlayBasic(hand, bench)
+
 
         print "==========================New hand="
         for card in hand:
@@ -101,4 +118,15 @@ print "===Disasters: " + str(disasters) + "(" + str(100.0*disasters/sims) + "%)"
 print "===Mulligans: "
 for key in sorted(mulligans_by_number.iterkeys()):
     print "   " + str(key) + ": " + str(mulligans_by_number[key]) + "(" + str(100.0*mulligans_by_number[key]/sims) + "%)"
+
+
+
+
+
+
+
+
+
+
+
 
