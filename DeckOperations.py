@@ -1,6 +1,9 @@
 def BlastioseFirstTurn(hand, discard, deck):
     if(len(hand) == 1):
-        return ContainsName(hand, "Archie's Ace in the Hole") and ContainsName(discard, "Blastoise")
+        if ContainsName(hand, "Archie's Ace in the Hole"):
+            return ContainsName(discard, "Blastoise")
+        if ContainsName(hand, "VS Seeker"):
+            return (ContainsName(discard, "Archie's Ace in the Hole") and ContainsName(discard, "Blastoise"))
 
     # play each card in turn
     for card in hand:

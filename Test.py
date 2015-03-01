@@ -11,8 +11,14 @@ class TestDeckOperations(unittest.TestCase):
         self.hand = list()
         self.deck = list()
 
-    def test_SimpleBlastioseFirstTurn(self):
+    def test_SimpleBlastioseFirstTurn1(self):
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
+        self.discard.append(["Blastoise","2","Evolve"])
+        self.assertEqual(do.BlastioseFirstTurn(self.hand, self.discard, self.deck), True)
+
+    def test_SimpleBlastioseFirstTurn2(self):
+        self.hand.append(["VS Seeker","0","Item"])
+        self.discard.append(["Archie's Ace in the Hole","1","Supporter"])
         self.discard.append(["Blastoise","2","Evolve"])
         self.assertEqual(do.BlastioseFirstTurn(self.hand, self.discard, self.deck), True)
 
