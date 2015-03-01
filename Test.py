@@ -71,6 +71,13 @@ class TestDeckOperations(unittest.TestCase):
         self.hand.append(["Ultra Ball","0","Item-UnrestrictedDiscard"])
         checkHand(self, True)
 
+    def test_BlastoiseFirstTurnWithDiscardAndVSSeeker(self):
+        self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
+        self.hand.append(["VS Seeker","0","Item"])
+        self.hand.append(["Blastoise","2","Evolve"])
+        self.hand.append(["Ultra Ball","0","Item-UnrestrictedDiscard"])
+        checkHand(self, True)
+
 if __name__ == '__main__':
     unittest.main()
 
