@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import DeckOperations as do
-import BFT as bft
+import BlastoiseFirstTurn as bft
 import unittest
 
 import unittest
