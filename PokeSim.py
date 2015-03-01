@@ -40,7 +40,7 @@ for j in range(0,sims):
                 print card[0]
 
                 # the second number is whether it's a basic pokemon to see if a mulligan is needed
-                playable_hand = playable_hand or (card[2] == "1")
+                playable_hand = playable_hand or (card[2] == "Basic")
 
             mulligans = mulligans + int(not playable_hand)
             print "======Playable Hand: " + str(playable_hand)
