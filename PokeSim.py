@@ -13,10 +13,7 @@ for j in range(0,sims):
     with open('WaterDeck.csv', 'rb') as csvfile:
         cards = csv.reader(csvfile, delimiter=',')
         deck = list()
-
-
-        for card in cards:
-            deck.append(card)        
+        discard = list()
 
         hand = list()
         mulligans = 0
@@ -26,13 +23,17 @@ for j in range(0,sims):
             print "========================"
             print "=========DECK==========="
             print "========================"
-            shuffle(deck)
+            deck = list()
+            for card in cards:
+                deck.append(card)        
+
+            #shuffle(deck)
             for card in deck:
                 print ', '.join(card)
 
-            del hand[:]
-            for i in range(0,7):
-                hand.append(deck[i])
+            hand = list()
+            hand.extend(deck[:7])
+            del deck[:7]
 
             print "=========Potential Hand:"
             for card in hand:
@@ -57,8 +58,8 @@ for j in range(0,sims):
 
         # prize cards
         prizes = list()
-        for i in range(7,13):
-            prizes.append(deck[i])
+        prizes.extend(deck[:6])
+        del deck[:6]
 
         print "====Prizes==="
         disaster = False
@@ -67,7 +68,7 @@ for j in range(0,sims):
             deck_indices = [i for i, x in enumerate(deck) if x[1] == card[1]]
             prize_indices = [i for i, x in enumerate(prizes) if x[1] == card[1]]
 
-            # print "number of " + card[0] + ": " + str(len(deck_indices)) + " : " + str(len(prize_indices))
+            print card[0]
             disaster = disaster | (len(deck_indices) == len(prize_indices))
 
         print "====Disaster: " + str(disaster)
@@ -86,6 +87,12 @@ for j in range(0,sims):
         print "==========================Bench="
         for card in bench:
             print card[0]
+
+        print "==========================Deck="
+        for card in deck:
+            print card[0]
+
+
 
 
 print "================================="
