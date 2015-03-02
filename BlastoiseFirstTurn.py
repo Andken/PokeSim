@@ -131,6 +131,28 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
                             hh.SetCalculation(new_hand_after_card_added, 
                                               new_discard_post_play, new_deck,
                                               bench, energy_attached, False, memoization)
+                if(card[0] == "Ultra Ball"):
+                    for new_card_name in ["Blastoise",
+                                          "Exeggcute",
+                                          "Keldeo EX"]:
+                        new_hand_after_card_added = copy.deepcopy(new_hand_post_play)
+                        new_deck = copy.deepcopy(deck)
+                        if(do.ContainsName(new_deck, new_card_name)):
+                            new_card = do.GetCard(new_deck, new_card_name)
+                            do.MoveCard(new_deck, new_hand_after_card_added, new_card)
+                        # else do nothing
+
+                        if(BlastoiseFirstTurn(new_hand_after_card_added, 
+                                              new_discard_post_play, new_deck, 
+                                              bench, energy_attached, memoization)):
+                            hh.SetCalculation(new_hand_after_card_added, 
+                                              new_discard_post_play, new_deck, 
+                                              bench, energy_attached, True, memoization)
+                            return True
+                        else:
+                            hh.SetCalculation(new_hand_after_card_added, 
+                                              new_discard_post_play, new_deck,
+                                              bench, energy_attached, False, memoization)
 
                 else:
                     if(BlastoiseFirstTurn(new_hand_post_play, new_discard_post_play, deck, 
