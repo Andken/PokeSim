@@ -16,6 +16,8 @@ class TestCardTypes(unittest.TestCase):
     def test_SingleCard(self):
         card = ct.Card()
         self.assertEqual(card.canPlay(self.hand, self.discard, self.deck, self.bench), False)
+        results = card.play(self.hand, self.discard, self.deck, self.bench)
+        self.assertEqual(results, [(self.hand, self.discard, self.deck, self.bench)])
 
 if __name__ == '__main__':
     unittest.main()
