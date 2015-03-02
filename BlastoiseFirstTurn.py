@@ -17,10 +17,10 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
             return (do.ContainsName(discard, "Archie's Ace in the Hole") and do.ContainsName(discard, "Blastoise"))
 
     if(do.ContainsName(discard, "Exeggcute")):
-        exeggcute = GetCard(discard, "Exeggcute")
+        exeggcute = do.GetCard(discard, "Exeggcute")
         new_hand = copy.deepcopy(hand)
         new_discard = copy.deepcopy(discard)
-        do.PlayCard(new_hand, new_discard, card)
+        do.PlayCard(new_discard, new_hand, exeggcute)
         if(BlastoiseFirstTurn(new_hand, new_discard, deck, bench, energy_attached, memoization)):
             hh.SetCalculation(new_hand, energy_attached, True, memoization)
             return True

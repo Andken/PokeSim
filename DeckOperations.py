@@ -31,7 +31,6 @@ def PlayCard(hand, discard, card):
 def GetCard(cards, name):
     for card in cards:
         if(card[0] == name):
-            cards.remove(card)
             return card
     return 0
 

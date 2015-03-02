@@ -197,6 +197,13 @@ class TestDeckOperations(unittest.TestCase):
         self.discard.append(("Blastoise","2","Evolve"))
         checkHand(self, False)
 
+    def test_Exeggcute(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Blastoise","2","Evolve"))
+        self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
+        self.discard.append(("Exeggcute","0","Basic"))
+        checkHand(self, True)
+
 if __name__ == '__main__':
     unittest.main()
 
