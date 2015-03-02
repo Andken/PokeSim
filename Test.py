@@ -8,9 +8,10 @@ import itertools
 
 def checkHand(test, expr):
     for p in itertools.permutations(test.hand):
+        memoization = dict()
         test.assertEqual(bft.BlastoiseFirstTurn(copy.deepcopy(list(p)), 
                                                 copy.deepcopy(test.discard), 
-                                                copy.deepcopy(test.deck)), expr)
+                                                copy.deepcopy(test.deck), memoization), expr)
         
 
 class TestDeckOperations(unittest.TestCase):
@@ -97,12 +98,12 @@ class TestDeckOperations(unittest.TestCase):
 
     def test_MultiDiscard(self):
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
-        self.hand.append(["Battle Compressor","0","Item-Anytime"])
-        self.hand.append(["Battle Compressor","0","Item-Anytime"])
         self.hand.append(["Blastoise","2","Evolve"])
         self.hand.append(["Blastoise","2","Evolve"])
         self.hand.append(["Ultra Ball","0","Item-UnrestrictedDiscard"])
         self.hand.append(["Ultra Ball","0","Item-UnrestrictedDiscard"])
+        self.hand.append(["Battle Compressor","0","Item-Anytime"])
+        self.hand.append(["Battle Compressor","0","Item-Anytime"])
         checkHand(self, True)
 
 if __name__ == '__main__':

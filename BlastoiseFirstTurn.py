@@ -2,7 +2,7 @@ import DeckOperations as do
 import itertools
 import copy
 
-def BlastoiseFirstTurn(hand, discard, deck):
+def BlastoiseFirstTurn(hand, discard, deck, memoization):
     if(len(hand) == 0):
         return False
 
@@ -20,7 +20,7 @@ def BlastoiseFirstTurn(hand, discard, deck):
             new_hand = copy.deepcopy(hand)
             new_discard = copy.deepcopy(discard)
             do.PlayCard(new_hand, new_discard, card)
-            if(BlastoiseFirstTurn(new_hand, new_discard, deck)):
+            if(BlastoiseFirstTurn(new_hand, new_discard, deck, memoization)):
                 return True
             else:
                 continue
@@ -35,7 +35,7 @@ def BlastoiseFirstTurn(hand, discard, deck):
                 new_discard_post_play = copy.deepcopy(new_discard)
                 do.PlayCard(new_hand_post_play, new_discard_post_play, subset[0])
                 do.PlayCard(new_hand_post_play, new_discard_post_play, subset[1])
-                if(BlastoiseFirstTurn(new_hand_post_play, new_discard_post_play, deck)):
+                if(BlastoiseFirstTurn(new_hand_post_play, new_discard_post_play, deck, memoization)):
                     return True
                        
     return False
