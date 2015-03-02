@@ -136,6 +136,13 @@ class TestDeckOperations(unittest.TestCase):
         self.discard.append(("Blastoise","2","Evolve"))
         checkHand(self, True)
 
+    def test_TooMuchEnergy(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        checkHand(self, False)
+
 if __name__ == '__main__':
     unittest.main()
 
