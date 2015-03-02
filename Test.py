@@ -165,6 +165,27 @@ class TestDeckOperations(unittest.TestCase):
         self.discard.append(("Blastoise","2","Evolve"))
         checkHand(self, True)
 
+    def test_MultipleBasics(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Keldeo EX","3","Basic"))
+        self.hand.append(("Keldeo EX","3","Basic"))
+        self.hand.append(("Keldeo EX","3","Basic"))
+        self.hand.append(("Keldeo EX","3","Basic"))
+        self.hand.append(("Keldeo EX","3","Basic"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
+
+    def test_FullBench(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Keldeo EX","3","Basic"))
+        self.bench.append(("Keldeo EX","3","Basic"))
+        self.bench.append(("Keldeo EX","3","Basic"))
+        self.bench.append(("Keldeo EX","3","Basic"))
+        self.bench.append(("Keldeo EX","3","Basic"))
+        self.bench.append(("Keldeo EX","3","Basic"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        checkHand(self, False)
+
     def test_TooManyBasics(self):
         self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
         self.hand.append(("Keldeo EX","3","Basic"))
