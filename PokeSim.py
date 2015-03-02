@@ -28,7 +28,7 @@ for j in range(0,sims):
             for card in cards:
                 deck.append(tuple(card))        
 
-            shuffle(deck)
+            #shuffle(deck)
             do.PrintCards("============\n=== DECK ===\n============", deck)
     
             for i in range(0,7):
