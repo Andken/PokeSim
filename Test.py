@@ -240,6 +240,57 @@ class TestDeckOperations(unittest.TestCase):
         self.deck.append(("Blastoise","2","Evolve"))
         checkHand(self, True)
 
+    def test_UltraBallToGetKeldeoEX_1(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
+        self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
+        self.deck.append(("Keldeo EX","3","Basic"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
+
+    def test_UltraBallToGetKeldeoEX_2(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
+        self.deck.append(("Keldeo EX","3","Basic"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
+
+    def test_UltraBallToGetKeldeoEX_3(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
+        self.deck.append(("Keldeo EX","3","Basic"))
+        self.bench.append(("Keldeo EX","3","Basic"))
+        self.bench.append(("Keldeo EX","3","Basic"))
+        self.bench.append(("Keldeo EX","3","Basic"))
+        self.bench.append(("Keldeo EX","3","Basic"))
+        self.bench.append(("Keldeo EX","3","Basic"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
+
+    def test_UltraBallToGetNothing(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
+
+    def test_UltraBallToGetExeggcute(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
+        self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        self.deck.append(("Exeggcute","0","Basic"))
+        checkHand(self, True)
+
     def test_ComputerTrainerToGetArchie(self):
         self.hand.append(("Computer Trainer","0","Item-UnrestrictedDiscard"))
         self.hand.append(("Water Energy","0","Energy"))

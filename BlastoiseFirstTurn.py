@@ -131,10 +131,11 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
                             hh.SetCalculation(new_hand_after_card_added, 
                                               new_discard_post_play, new_deck,
                                               bench, energy_attached, False, memoization)
-                if(card[0] == "Ultra Ball"):
+                elif(card[0] == "Ultra Ball"):
                     for new_card_name in ["Blastoise",
                                           "Exeggcute",
-                                          "Keldeo EX"]:
+                                          "Keldeo EX",
+                                          "NOTHING"]:
                         new_hand_after_card_added = copy.deepcopy(new_hand_post_play)
                         new_deck = copy.deepcopy(deck)
                         if(do.ContainsName(new_deck, new_card_name)):
