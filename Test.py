@@ -3,15 +3,15 @@
 import DeckOperations as do
 import BlastoiseFirstTurn as bft
 import unittest
-import copy
+from copy import deepcopy
 import itertools
 
 def checkHand(test, expr):
     memoization = dict()
-    test.assertEqual(bft.BlastoiseFirstTurn(copy.deepcopy(test.hand), 
-                                            copy.deepcopy(test.discard), 
-                                            copy.deepcopy(test.deck),
-                                            copy.deepcopy(test.bench),
+    test.assertEqual(bft.BlastoiseFirstTurn(deepcopy(test.hand), 
+                                            deepcopy(test.discard), 
+                                            deepcopy(test.deck),
+                                            deepcopy(test.bench),
                                             False,
                                             memoization), expr)
 
