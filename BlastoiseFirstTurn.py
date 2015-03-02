@@ -102,7 +102,6 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, memoization):
                 new_discard_post_play = deepcopy(new_discard)
                 do.MoveCard(new_hand_post_play, new_discard_post_play, subset[0])
                 do.MoveCard(new_hand_post_play, new_discard_post_play, subset[1])
-
                 # special types of Item-UnrestrictedDiscard
                 if(card[0] == "Computer Trainer"):
                     for new_card_name in ["Archie's Ace in the Hole", 
