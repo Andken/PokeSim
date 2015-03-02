@@ -1,54 +1,54 @@
 import DeckOperations as do
 
 class Card:
-    def play(hand, discard, bench, deck):
+    def play(self, hand, discard, bench, deck):
         return [(hand, discard, bench, deck)]
 
-    def canPlay(hand, discard, bench, deck):
-        return False;
+    def canPlay(self, hand, discard, bench, deck):
+        return False
 
 class Supporter(Card):
     pass
 
 class Energy(Card):
-    def play(hand, discard, bench, deck):
+    def play(self, hand, discard, bench, deck):
         new_hand = deepcopy(hand)
         new_bench = deepcopy(bench)
         do.MoveCard(new_hand, new_bench, card)
         return [(new_hand, discard, new_bench, deck)]
 
-    def canPlay(hand, discard, bench, deck):
-        return not do.ContainsType(bench, "Energy"):
+    def canPlay(self, hand, discard, bench, deck):
+        return not do.ContainsType(bench, "Energy")
 
 class WaterEnergy(Energy):
     pass
 
 class BasicPokemon(Card):
-    def play(hand, discard, bench, deck):
+    def play(self, hand, discard, bench, deck):
         new_hand = deepcopy(hand)
         new_bench = deepcopy(bench)
         do.MoveCard(new_hand, new_bench, card)
         return [(new_hand, discard, deck, new_bench)]
 
-    def canPlay(hand, discard, bench, deck):
+    def canPlay(self, hand, discard, bench, deck):
         return len(bench) < 5
 
 class EvolvedPokemon(Card):
     pass
 
 class ItemAnytime(Card):
-    def play(hand, discard, bench, deck):
+    def play(self, hand, discard, bench, deck):
         new_hand = deepcopy(hand)
         new_discard = deepcopy(discard)
         new_deck = deepcopy(deck)
         do.MoveCard(new_hand, new_discard, card)
         return [(new_hand, new_discard, bench, deck)]
 
-    def canPlay(hand, discard, bench, deck):
+    def canPlay(self, hand, discard, bench, deck):
         return True
 
 class BattleCompressor(ItemAnytime):
-    def play(hand, discard, bench, deck):
+    def play(self, hand, discard, bench, deck):
         new_hand = deepcopy(hand)
         new_discard = deepcopy(discard)
         new_deck = deepcopy(deck)
@@ -74,7 +74,7 @@ class BattleCompressor(ItemAnytime):
 
 # Work here!
 class DiscardType(Card):
-    def play(hand, discard, deck, bench):
+    def play(self, hand, discard, deck, bench):
         return [(hand, discard, deck, bench)]
 
     def getDiscards(hand, discard, deck, bench):
@@ -92,11 +92,11 @@ class DiscardType(Card):
 
         return possible_discards
 
-    def canPlay(hand, discard, deck, bench):
+    def canPlay(self, hand, discard, deck, bench):
         return (len(hand)-1) >= 2
 
 class ComputerTrainer(DiscardType):
-    def play(hand, discard, deck, bench):
+    def play(self, hand, discard, deck, bench):
         possible_states = list()
 
         discards = getDiscards(hand, discard, deck, bench)
@@ -125,7 +125,7 @@ class ComputerTrainer(DiscardType):
         return possible_states
 
 class UltraBall(DiscardType):
-    def play(hand, discard, deck, bench):
+    def play(self, hand, discard, deck, bench):
         possible_states = list()
 
         discards = getDiscards(hand, discard, deck, bench)

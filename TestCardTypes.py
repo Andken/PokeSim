@@ -1,10 +1,7 @@
 #!/usr/bin/python
 
-import DeckOperations as do
-import BlastoiseFirstTurn as bft
 import unittest
-from copy import deepcopy
-import itertools
+import CardTypes as ct
 
 class TestCardTypes(unittest.TestCase):
     def setUp(self):
@@ -15,6 +12,10 @@ class TestCardTypes(unittest.TestCase):
 
     def test_EmptyHand(self):
         pass
+
+    def test_SingleCard(self):
+        card = ct.Card()
+        self.assertEqual(card.canPlay(self.hand, self.discard, self.deck, self.bench), False)
 
 if __name__ == '__main__':
     unittest.main()
