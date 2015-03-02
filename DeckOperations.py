@@ -24,7 +24,7 @@ def ContainsName(cards, name):
             return True
     return False
 
-def PlayCard(hand, discard, card):
+def MoveCard(hand, discard, card):
     hand.remove(card)
     discard.append(card)
 
