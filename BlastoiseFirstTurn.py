@@ -4,8 +4,8 @@ import copy
 
 def BlastoiseFirstTurn(hand, discard, deck, memoization):
     hand.sort()
-#    if(tuple(hand) in memoization):
-#        return False
+    if(tuple(hand) in memoization):
+        return memoization[tuple(hand)]
 
     if(len(hand) == 0):
         return False
@@ -20,22 +20,23 @@ def BlastoiseFirstTurn(hand, discard, deck, memoization):
     for card in hand:
         if(card[2] == "Supporter" or card[2] == "Evolve"):
             continue
-        if(card[2] == "Item-Anytime"):
+        elif(card[2] == "Item-Anytime"):
             new_hand = copy.deepcopy(hand)
             new_discard = copy.deepcopy(discard)
             do.PlayCard(new_hand, new_discard, card)
             new_hand.sort()
             if(BlastoiseFirstTurn(new_hand, new_discard, deck, memoization)):
+                memoization[tuple(new_hand)] = True
                 return True
             else:
-                memoization.add(tuple(new_hand))
+                memoization[tuple(new_hand)] = False
                 continue
-        if(card[2] == "Item-UnrestrictedDiscard"):
+        elif(card[2] == "Item-UnrestrictedDiscard"):
             new_hand = copy.deepcopy(hand)
             new_discard = copy.deepcopy(discard)
             do.PlayCard(new_hand, new_discard, card)
             if(len(hand) < 2):
-                memoization.add(tuple(new_hand))
+                memoization[tuple(new_hand)] = False
                 return False
             for subset in itertools.combinations(new_hand, 2):
                 new_hand_post_play = copy.deepcopy(new_hand)
@@ -44,9 +45,10 @@ def BlastoiseFirstTurn(hand, discard, deck, memoization):
                 do.PlayCard(new_hand_post_play, new_discard_post_play, subset[1])
                 new_hand_post_play.sort()
                 if(BlastoiseFirstTurn(new_hand_post_play, new_discard_post_play, deck, memoization)):
+                    memoization[tuple(new_hand_post_play)] = True
                     return True
                 else:
-                    memoization.add(tuple(new_hand_post_play))
+                    memoization[tuple(new_hand_post_play)] = False
                     
-    memoization.add(tuple(hand))
+    memoization[tuple(hand)] = False
     return False

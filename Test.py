@@ -7,7 +7,7 @@ import copy
 import itertools
 
 def checkHand(test, expr):
-    memoization = set()
+    memoization = dict()
     test.assertEqual(bft.BlastoiseFirstTurn(copy.deepcopy(test.hand), 
                                             copy.deepcopy(test.discard), 
                                             copy.deepcopy(test.deck), memoization), expr)        
