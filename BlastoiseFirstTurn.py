@@ -4,6 +4,12 @@ import copy
 import HandHash as hh
 
 def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization):
+    print "============"
+    do.PrintCards("hand==", hand)
+    do.PrintCards("discard==", discard)
+    do.PrintCards("deck==", deck)
+    do.PrintCards("bench==", bench)
+
     if(hh.AlreadyCalculated(hand, energy_attached, memoization)):
         return hh.PreviousCalculation(hand, energy_attached, memoization)
     
@@ -89,19 +95,47 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
             new_hand = copy.deepcopy(hand)
             new_discard = copy.deepcopy(discard)
             do.MoveCard(new_hand, new_discard, card)
-            if(len(hand) < 2):
-                
+            if(len(hand) < 2):                
                 continue
             for subset in itertools.combinations(new_hand, 2):
                 new_hand_post_play = copy.deepcopy(new_hand)
                 new_discard_post_play = copy.deepcopy(new_discard)
                 do.MoveCard(new_hand_post_play, new_discard_post_play, subset[0])
                 do.MoveCard(new_hand_post_play, new_discard_post_play, subset[1])
-                if(BlastoiseFirstTurn(new_hand_post_play, new_discard_post_play, deck, bench, energy_attached, memoization)):
-                    hh.SetCalculation(new_hand_post_play, energy_attached, True, memoization)
-                    return True
+
+                # special types of Item-UnrestrictedDiscard
+                if(card[0] == "Computer Trainer"):
+                    for new_card_name in ["Archie's Ace in the Hole", 
+                                          "Battle Compressor",
+                                          "Blastoise",
+                                          "Exeggcute",
+                                          "Keldeo EX",
+                                          "VS Seeker"]:
+                        new_hand_after_card_added = copy.deepcopy(new_hand_post_play)
+                        new_deck = copy.deepcopy(deck)
+                        if(do.ContainsName(new_deck, new_card_name)):
+                            new_card = do.GetCard(new_deck, new_card_name)
+                            do.MoveCard(new_deck, new_hand_after_card_added, new_card)
+                        else:
+                            # we always have enough water energy
+                            new_hand_after_card_added.append(("Water Energy","0","Energy"))
+
+                        if(BlastoiseFirstTurn(new_hand_after_card_added, 
+                                              new_discard_post_play, new_deck, 
+                                              bench, energy_attached, memoization)):
+                            hh.SetCalculation(new_hand_after_card_added, 
+                                              energy_attached, True, memoization)
+                            return True
+                        else:
+                            hh.SetCalculation(new_hand_after_card_added, energy_attached, 
+                                              False, memoization)
+
                 else:
-                    hh.SetCalculation(new_hand_post_play, energy_attached, False, memoization)
+                    if(BlastoiseFirstTurn(new_hand_post_play, new_discard_post_play, deck, bench, energy_attached, memoization)):
+                        hh.SetCalculation(new_hand_post_play, energy_attached, True, memoization)
+                        return True
+                    else:
+                        hh.SetCalculation(new_hand_post_play, energy_attached, False, memoization)
                     
     hh.SetCalculation(hand, energy_attached, False, memoization)
     return False

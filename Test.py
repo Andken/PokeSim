@@ -251,9 +251,10 @@ class TestDeckOperations(unittest.TestCase):
         self.hand.append(("Computer Trainer","0","Item-UnrestrictedDiscard"))
         self.hand.append(("Water Energy","0","Energy"))
         self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("VS Seeker","0","Item"))
         self.deck.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.deck.append(("Battle Compressor","0","Item-Anytime"))
         self.deck.append(("Blastoise","2","Evolve"))
-        self.deck.append(("VS Seeker","0","Item"))
         checkHand(self, True)
 
     def test_ComputerTrainerToGetWaterEnergy(self):
@@ -273,6 +274,7 @@ class TestDeckOperations(unittest.TestCase):
         self.hand.append(("Water Energy","0","Energy"))
         self.hand.append(("Water Energy","0","Energy"))
         self.hand.append(("Water Energy","0","Energy"))
+        self.bench.append(("Keldeo EX","3","Basic"))
         self.deck.append(("Blastoise","2","Evolve"))
         checkHand(self, True)
 
