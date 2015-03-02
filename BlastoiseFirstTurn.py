@@ -32,11 +32,13 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
                 hh.SetCalculation(new_hand, energy_attached, False, memoization)
                 continue
         elif(card[2] == "Basic"):
+            if(len(bench) >= 5):
+                continue
             new_hand = copy.deepcopy(hand)
-            new_discard = copy.deepcopy(discard)
-            do.PlayCard(new_hand, new_discard, card)
+            new_bench = copy.deepcopy(bench)
+            do.PlayCard(new_hand, new_bench, card)
             new_hand.sort()
-            if(BlastoiseFirstTurn(new_hand, new_discard, deck, bench, energy_attached, memoization)):
+            if(BlastoiseFirstTurn(new_hand, discard, deck, new_bench, energy_attached, memoization)):
                 hh.SetCalculation(new_hand, energy_attached, True, memoization)
                 return True
             else:
