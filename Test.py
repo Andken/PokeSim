@@ -230,6 +230,52 @@ class TestDeckOperations(unittest.TestCase):
         self.deck.append(("Blastoise","2","Evolve"))
         checkHand(self, False)
 
+    def test_ComputerTrainerToGetArchie(self):
+        self.hand.append(("Computer Trainer","0","Item-UnrestrictedDiscard"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.deck.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
+
+    def test_ComputerTrainerToGetVSSeeker(self):
+        self.hand.append(("Computer Trainer","0","Item-UnrestrictedDiscard"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.deck.append(("VS Seeker","0","Item"))
+        self.discard.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
+
+    def test_ComputerTrainerToGetBattleCompressor(self):
+        self.hand.append(("Computer Trainer","0","Item-UnrestrictedDiscard"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.deck.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.deck.append(("Blastoise","2","Evolve"))
+        self.deck.append(("VS Seeker","0","Item"))
+        checkHand(self, True)
+
+    def test_ComputerTrainerToGetWaterEnergy(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Computer Trainer","0","Item-UnrestrictedDiscard"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.deck.append(("Water Energy","0","Energy"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
+
+    def test_ComputerTrainerToGetBlastoise(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Computer Trainer","0","Item-UnrestrictedDiscard"))
+        self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.deck.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
+
 if __name__ == '__main__':
     unittest.main()
 
