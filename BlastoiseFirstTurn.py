@@ -4,14 +4,14 @@ import copy
 import HandHash as hh
 
 def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization):
-    print "============"
-    do.PrintCards("hand==", hand)
-    do.PrintCards("discard==", discard)
-    do.PrintCards("deck==", deck)
-    do.PrintCards("bench==", bench)
+#    print "============"
+#    do.PrintCards("hand==", hand)
+#    do.PrintCards("discard==", discard)
+#    do.PrintCards("deck==", deck)
+#    do.PrintCards("bench==", bench)
 
-    if(hh.AlreadyCalculated(hand, energy_attached, memoization)):
-        return hh.PreviousCalculation(hand, energy_attached, memoization)
+    if(hh.AlreadyCalculated(hand, discard, deck, bench, energy_attached, memoization)):
+        return hh.PreviousCalculation(hand, discard, deck, bench, energy_attached, memoization)
     
     if(len(hand) == 0):
         return False
@@ -28,10 +28,10 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
         new_discard = copy.deepcopy(discard)
         do.MoveCard(new_discard, new_hand, exeggcute)
         if(BlastoiseFirstTurn(new_hand, new_discard, deck, bench, energy_attached, memoization)):
-            hh.SetCalculation(new_hand, energy_attached, True, memoization)
+            hh.SetCalculation(new_hand, new_discard, deck, bench, energy_attached, True, memoization)
             return True
         else:
-            hh.SetCalculation(new_hand, energy_attached, False, memoization)
+            hh.SetCalculation(new_hand, new_discard, deck, bench, energy_attached, False, memoization)
         
     # play each card in turn
     for card in hand:
@@ -61,10 +61,10 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
                     new_discard.append(("Water Energy","0","Energy"))
                 
             if(BlastoiseFirstTurn(new_hand, new_discard, new_deck, bench, energy_attached, memoization)):
-                hh.SetCalculation(new_hand, energy_attached, True, memoization)
+                hh.SetCalculation(new_hand, new_discard, new_deck, bench, energy_attached, True, memoization)
                 return True
             else:
-                hh.SetCalculation(new_hand, energy_attached, False, memoization)
+                hh.SetCalculation(new_hand, new_discard, new_deck, bench, energy_attached, False, memoization)
                 continue
         elif(card[2] == "Basic"):
             if(len(bench) >= 5):
@@ -73,10 +73,10 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
             new_bench = copy.deepcopy(bench)
             do.MoveCard(new_hand, new_bench, card)
             if(BlastoiseFirstTurn(new_hand, discard, deck, new_bench, energy_attached, memoization)):
-                hh.SetCalculation(new_hand, energy_attached, True, memoization)
+                hh.SetCalculation(new_hand, discard, deck, new_bench, energy_attached, True, memoization)
                 return True
             else:
-                hh.SetCalculation(new_hand, energy_attached, False, memoization)
+                hh.SetCalculation(new_hand, discard, deck, new_bench, energy_attached, False, memoization)
                 continue
         elif(card[2] == "Energy"):
             if(energy_attached):
@@ -86,10 +86,10 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
                 new_bench = copy.deepcopy(bench)
                 do.MoveCard(new_hand, new_bench, card)
                 if(BlastoiseFirstTurn(new_hand, discard, deck, new_bench, True, memoization)):
-                    hh.SetCalculation(new_hand, energy_attached, True, memoization)
+                    hh.SetCalculation(new_hand, discard, deck, new_bench, energy_attached, True, memoization)
                     return True
                 else:
-                    hh.SetCalculation(new_hand, energy_attached, False, memoization)
+                    hh.SetCalculation(new_hand, discard, deck, new_bench, energy_attached, False, memoization)
                     continue
         elif(card[2] == "Item-UnrestrictedDiscard"):
             new_hand = copy.deepcopy(hand)
@@ -124,18 +124,23 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
                                               new_discard_post_play, new_deck, 
                                               bench, energy_attached, memoization)):
                             hh.SetCalculation(new_hand_after_card_added, 
-                                              energy_attached, True, memoization)
+                                              new_discard_post_play, new_deck, 
+                                              bench, energy_attached, True, memoization)
                             return True
                         else:
-                            hh.SetCalculation(new_hand_after_card_added, energy_attached, 
-                                              False, memoization)
+                            hh.SetCalculation(new_hand_after_card_added, 
+                                              new_discard_post_play, new_deck,
+                                              bench, energy_attached, False, memoization)
 
                 else:
-                    if(BlastoiseFirstTurn(new_hand_post_play, new_discard_post_play, deck, bench, energy_attached, memoization)):
-                        hh.SetCalculation(new_hand_post_play, energy_attached, True, memoization)
+                    if(BlastoiseFirstTurn(new_hand_post_play, new_discard_post_play, deck, 
+                                          bench, energy_attached, memoization)):
+                        hh.SetCalculation(new_hand_post_play, new_discard_post_play, deck, 
+                                          bench, energy_attached, True, memoization)
                         return True
                     else:
-                        hh.SetCalculation(new_hand_post_play, energy_attached, False, memoization)
+                        hh.SetCalculation(new_hand_post_play, new_discard_post_play, deck, 
+                                          bench, energy_attached, False, memoization)
                     
-    hh.SetCalculation(hand, energy_attached, False, memoization)
+    hh.SetCalculation(hand, discard, deck, bench, energy_attached, False, memoization)
     return False

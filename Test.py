@@ -268,13 +268,11 @@ class TestDeckOperations(unittest.TestCase):
 
     def test_ComputerTrainerToGetBlastoise(self):
         self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
         self.hand.append(("Computer Trainer","0","Item-UnrestrictedDiscard"))
         self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
-        self.hand.append(("Water Energy","0","Energy"))
-        self.hand.append(("Water Energy","0","Energy"))
-        self.hand.append(("Water Energy","0","Energy"))
-        self.hand.append(("Water Energy","0","Energy"))
-        self.bench.append(("Keldeo EX","3","Basic"))
         self.deck.append(("Blastoise","2","Evolve"))
         checkHand(self, True)
 
