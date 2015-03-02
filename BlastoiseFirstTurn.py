@@ -4,8 +4,8 @@ import copy
 
 def BlastoiseFirstTurn(hand, discard, deck, memoization):
     hand.sort()
-    if(tuple(hand) in memoization):
-        return False
+#    if(tuple(hand) in memoization):
+#        return False
 
     if(len(hand) == 0):
         return False

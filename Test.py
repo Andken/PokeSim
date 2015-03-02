@@ -10,8 +10,7 @@ def checkHand(test, expr):
     memoization = set()
     test.assertEqual(bft.BlastoiseFirstTurn(copy.deepcopy(test.hand), 
                                             copy.deepcopy(test.discard), 
-                                            copy.deepcopy(test.deck), memoization), expr)
-        
+                                            copy.deepcopy(test.deck), memoization), expr)        
 
 class TestDeckOperations(unittest.TestCase):
     def setUp(self):
@@ -126,6 +125,12 @@ class TestDeckOperations(unittest.TestCase):
         self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
         self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
         checkHand(self, False)
+
+    def test_Energy(self):
+        self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
 
 if __name__ == '__main__':
     unittest.main()
