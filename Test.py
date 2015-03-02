@@ -26,6 +26,17 @@ class TestDeckOperations(unittest.TestCase):
         self.hand.append(["VS Seeker","0","Item"]) 
         checkHand(self, False)
 
+    def test_SimpleSingleVSSeekerAndBlastoise(self):
+        self.hand.append(["VS Seeker","0","Item"]) 
+        self.discard.append(["Blastoise","2","Evolve"])
+        checkHand(self, False)
+
+    def test_SimpleSingleVSSeekerArchieAndBlastoise(self):
+        self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
+        self.hand.append(["VS Seeker","0","Item"]) 
+        self.discard.append(["Blastoise","2","Evolve"])
+        checkHand(self, False)
+
     def test_SimpleBlastoiseFirstTurn(self):
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
         self.discard.append(["Blastoise","2","Evolve"])
