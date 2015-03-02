@@ -217,6 +217,19 @@ class TestDeckOperations(unittest.TestCase):
         self.discard.append(("Blastoise","2","Evolve"))
         checkHand(self, True)
 
+    def test_ArchieAndBlastoiseVSSeekerBattleCompressor(self):
+        self.hand.append(("Battle Compressor","0","Item-Anytime"))
+        self.hand.append(("VS Seeker","0","Item"))
+        self.deck.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.deck.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
+
+    def test_ArchieAndBlastoiseNoVSSeekerBattleCompressor(self):
+        self.hand.append(("Battle Compressor","0","Item-Anytime"))
+        self.deck.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.deck.append(("Blastoise","2","Evolve"))
+        checkHand(self, False)
+
 if __name__ == '__main__':
     unittest.main()
 
