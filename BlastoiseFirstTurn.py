@@ -20,7 +20,7 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
     for card in hand:
         if(card[2] == "Supporter" or card[2] == "Evolve"):
             continue
-        elif(card[2] == "Item-Anytime"):
+        elif(card[2] == "Item-Anytime" or card[2] == "Basic"):
             new_hand = copy.deepcopy(hand)
             new_discard = copy.deepcopy(discard)
             do.PlayCard(new_hand, new_discard, card)

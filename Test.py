@@ -159,6 +159,12 @@ class TestDeckOperations(unittest.TestCase):
         self.hand.append(("Blastoise","2","Evolve"))
         checkHand(self, True)
 
+    def test_Basic(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Keldeo EX","3","Basic"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
+
 if __name__ == '__main__':
     unittest.main()
 
