@@ -143,6 +143,22 @@ class TestDeckOperations(unittest.TestCase):
         self.discard.append(("Blastoise","2","Evolve"))
         checkHand(self, False)
 
+    def test_DiscardEnergy(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
+        self.discard.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
+
+    def test_DiscardEnergyAndBlastoise(self):
+        self.hand.append(("Archie's Ace in the Hole","1","Supporter"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("Water Energy","0","Energy"))
+        self.hand.append(("Ultra Ball","0","Item-UnrestrictedDiscard"))
+        self.hand.append(("Blastoise","2","Evolve"))
+        checkHand(self, True)
+
 if __name__ == '__main__':
     unittest.main()
 
