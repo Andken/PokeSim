@@ -14,9 +14,10 @@ def DrawCard(hand, deck):
     del deck[0]
 
 def PrintCards(label, cards):
-    print label
-    for card in cards:
-        print card[0]
+    pass
+#    print label
+#    for card in cards:
+#        print card[0]
 
 def ContainsName(cards, name):
     for card in cards:

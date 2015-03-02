@@ -6,7 +6,7 @@ import DeckOperations as do
 import BlastoiseFirstTurn as bft
 from copy import deepcopy
 
-sims = 1
+sims = 2500
 
 gold_deck = list()
 mulligans_by_number = {}
@@ -22,6 +22,7 @@ with open('WaterDeck.csv', 'rb') as csvfile:
 
 
 for j in range(0,sims):
+    print str(j) + ":" + str(sims) + "::" + str(successes)
     hand = list()
     discard = list()
 
@@ -64,7 +65,7 @@ for j in range(0,sims):
 
         disaster = disaster | (len(deck_indices) == len(prize_indices))
 
-    print "====Disaster: " + str(disaster)
+    #print "====Disaster: " + str(disaster)
     disasters = disasters + disaster
 
     bench = []
