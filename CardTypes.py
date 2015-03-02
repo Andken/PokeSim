@@ -1,5 +1,14 @@
 import DeckOperations as do
 
+#base
+class Card:
+    def play(self, hand, discard, bench, deck):
+        return [(hand, discard, bench, deck)]
+
+    def canPlay(self, hand, discard, bench, deck):
+        return False
+
+#types of cards
 class BasicPokemon(Card):
     def play(self, hand, discard, bench, deck):
         new_hand = deepcopy(hand)
@@ -9,13 +18,6 @@ class BasicPokemon(Card):
 
     def canPlay(self, hand, discard, bench, deck):
         return len(bench) < 5
-
-class Card:
-    def play(self, hand, discard, bench, deck):
-        return [(hand, discard, bench, deck)]
-
-    def canPlay(self, hand, discard, bench, deck):
-        return False
 
 class DiscardType(Card):
     def play(self, hand, discard, deck, bench):

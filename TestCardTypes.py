@@ -19,6 +19,15 @@ class TestCardTypes(unittest.TestCase):
         results = card.play(self.hand, self.discard, self.deck, self.bench)
         self.assertEqual(results, [(self.hand, self.discard, self.deck, self.bench)])
 
+    def test_CanPlayVSSeeker(self):
+        vss = ct.VSSeeker()
+        self.assertEqual(vss.canPlay(self.hand, self.discard, self.deck, self.bench), False)
+
+        self.discard.append(ct.Skyla())
+
+        vss = ct.VSSeeker()
+        self.assertEqual(vss.canPlay(self.hand, self.discard, self.deck, self.bench), True)
+
 if __name__ == '__main__':
     unittest.main()
 
