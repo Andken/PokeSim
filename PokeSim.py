@@ -3,12 +3,15 @@
 import csv
 from random import shuffle
 import DeckOperations as do
+import BlastoiseFirstTurn as bft
 
 sims = 1
 
 mulligans_by_number = {}
 mulligans_by_number[0] = 0
 disasters = 0
+successes = 0
+memoized = {}
 
 for j in range(0,sims):
     with open('WaterDeck.csv', 'rb') as csvfile:
@@ -23,9 +26,9 @@ for j in range(0,sims):
         while not playable_hand:
             deck = list()
             for card in cards:
-                deck.append(card)        
+                deck.append(tuple(card))        
 
-            #shuffle(deck)
+            shuffle(deck)
             do.PrintCards("============\n=== DECK ===\n============", deck)
     
             for i in range(0,7):
@@ -72,10 +75,11 @@ for j in range(0,sims):
         do.PrintCards("==========================Bench=", bench)
         do.PrintCards("==========================Deck=", deck)
 
-
+        successes = successes + int(bft.BlastoiseFirstTurn(hand, discard, deck, bench, False, memoized))
 
 print "================================="
 print "===Sims:      " + str(sims)
+print "===Successes: " + str(successes) + "(" + str(100.0*successes/sims) + "%)"
 print "===Disasters: " + str(disasters) + "(" + str(100.0*disasters/sims) + "%)"
 print "===Mulligans: "
 for key in sorted(mulligans_by_number.iterkeys()):
