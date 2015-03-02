@@ -48,17 +48,17 @@ class TestDeckOperations(unittest.TestCase):
         self.discard.append(["Blastoise","2","Evolve"])
         checkHand(self, True)
 
-    def test_SimpleEmptyDiscard(self):
+    def test_EmptyDiscard(self):
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
         checkHand(self, False)
 
-    def test_SimpleNotEnoughCards(self):
+    def test_NotEnoughCards(self):
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
         self.hand.append(["Ultra Ball","0","Item-UnrestrictedDiscard"])
         self.discard.append(["Blastoise","2","Evolve"])
         checkHand(self, False)
 
-    def test_BlastoiseFirstTurnWithExtraSupporter(self):
+    def test_ExtraSupporter(self):
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
         self.discard.append(["Blastoise","2","Evolve"])
@@ -72,7 +72,7 @@ class TestDeckOperations(unittest.TestCase):
         self.discard.append(["Blastoise","2","Evolve"])
         checkHand(self, True)
 
-    def test_BlastoiseFirstTurnWithExtraItemAndExtraSupporter(self):
+    def test_ExtraItemAndExtraSupporter(self):
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
         self.hand.append(["Battle Compressor","0","Item-Anytime"])
@@ -81,17 +81,27 @@ class TestDeckOperations(unittest.TestCase):
         self.discard.append(["Blastoise","2","Evolve"])
         checkHand(self, False)
 
-    def test_BlastoiseFirstTurnWithDiscard(self):
+    def test_Discard(self):
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
         self.hand.append(["Blastoise","2","Evolve"])
         self.hand.append(["Blastoise","2","Evolve"])
         self.hand.append(["Ultra Ball","0","Item-UnrestrictedDiscard"])
         checkHand(self, True)
 
-    def test_BlastoiseFirstTurnWithDiscardAndVSSeeker(self):
+    def test_DiscardAndVSSeeker(self):
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
         self.hand.append(["Blastoise","2","Evolve"])
         self.hand.append(["VS Seeker","0","Item"])
+        self.hand.append(["Ultra Ball","0","Item-UnrestrictedDiscard"])
+        checkHand(self, True)
+
+    def test_MultiDiscard(self):
+        self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
+        self.hand.append(["Battle Compressor","0","Item-Anytime"])
+        self.hand.append(["Battle Compressor","0","Item-Anytime"])
+        self.hand.append(["Blastoise","2","Evolve"])
+        self.hand.append(["Blastoise","2","Evolve"])
+        self.hand.append(["Ultra Ball","0","Item-UnrestrictedDiscard"])
         self.hand.append(["Ultra Ball","0","Item-UnrestrictedDiscard"])
         checkHand(self, True)
 

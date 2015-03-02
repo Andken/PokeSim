@@ -20,7 +20,10 @@ def BlastoiseFirstTurn(hand, discard, deck):
             new_hand = copy.deepcopy(hand)
             new_discard = copy.deepcopy(discard)
             do.PlayCard(new_hand, new_discard, card)
-            return BlastoiseFirstTurn(new_hand, new_discard, deck)
+            if(BlastoiseFirstTurn(new_hand, new_discard, deck)):
+                return True
+            else:
+                continue
         if(card[2] == "Item-UnrestrictedDiscard"):
             new_hand = copy.deepcopy(hand)
             new_discard = copy.deepcopy(discard)
