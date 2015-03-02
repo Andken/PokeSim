@@ -79,7 +79,7 @@ for j in range(0,sims):
     do.PrintCards("==========================Bench=", bench)
     do.PrintCards("==========================Deck=", deck)
 
-    successes = successes + int(bft.BlastoiseFirstTurn(hand, discard, deck, bench, False, memoized))
+    successes = successes + int(bft.BlastoiseFirstTurn(hand, discard, deck, bench, memoized))
 
 print "================================="
 print "===Sims:      " + str(sims)
