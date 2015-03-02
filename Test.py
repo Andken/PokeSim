@@ -12,7 +12,6 @@ def checkHand(test, expr):
                                             deepcopy(test.discard), 
                                             deepcopy(test.deck),
                                             deepcopy(test.bench),
-                                            False,
                                             memoization), expr)
 
 class TestDeckOperations(unittest.TestCase):
