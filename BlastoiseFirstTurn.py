@@ -43,12 +43,12 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
                 hh.SetCalculation(new_hand, energy_attached, False, memoization)
                 continue
         elif(card[2] == "Energy"):
-            new_hand = copy.deepcopy(hand)
-            new_bench = copy.deepcopy(bench)
-            do.PlayCard(new_hand, new_bench, card)
             if(energy_attached):
                 continue
             else:
+                new_hand = copy.deepcopy(hand)
+                new_bench = copy.deepcopy(bench)
+                do.PlayCard(new_hand, new_bench, card)
                 if(BlastoiseFirstTurn(new_hand, discard, deck, new_bench, True, memoization)):
                     hh.SetCalculation(new_hand, energy_attached, True, memoization)
                     return True
@@ -59,9 +59,8 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
             new_hand = copy.deepcopy(hand)
             new_discard = copy.deepcopy(discard)
             do.PlayCard(new_hand, new_discard, card)
-            if(len(hand) < 2):
-                hh.SetCalculation(new_hand, energy_attached, False, memoization)
-                return False
+            if(len(hand) < 2):                
+                continue
             for subset in itertools.combinations(new_hand, 2):
                 new_hand_post_play = copy.deepcopy(new_hand)
                 new_discard_post_play = copy.deepcopy(new_discard)
