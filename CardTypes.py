@@ -1,5 +1,15 @@
 import DeckOperations as do
 
+class BasicPokemon(Card):
+    def play(self, hand, discard, bench, deck):
+        new_hand = deepcopy(hand)
+        new_bench = deepcopy(bench)
+        do.MoveCard(new_hand, new_bench, card)
+        return [(new_hand, discard, deck, new_bench)]
+
+    def canPlay(self, hand, discard, bench, deck):
+        return len(bench) < 5
+
 class Card:
     def play(self, hand, discard, bench, deck):
         return [(hand, discard, bench, deck)]
@@ -7,8 +17,27 @@ class Card:
     def canPlay(self, hand, discard, bench, deck):
         return False
 
-class Supporter(Card):
-    pass
+class DiscardType(Card):
+    def play(self, hand, discard, deck, bench):
+        return [(hand, discard, deck, bench)]
+
+    def getDiscards(hand, discard, deck, bench):
+        new_hand = deepcopy(hand)
+        new_discard = deepcopy(discard)
+        do.MoveCard(new_hand, new_discard, card)
+
+        possible_discards = list()
+        for subset in itertools.combinations(new_hand, 2):
+            new_hand_post_play = deepcopy(new_hand)
+            new_discard_post_play = deepcopy(new_discard)
+            do.MoveCard(new_hand_post_play, new_discard_post_play, subset[0])
+            do.MoveCard(new_hand_post_play, new_discard_post_play, subset[1])
+            possible_discards.append((new_hand_post_play, new_discard_post_play, deck, bench))
+
+        return possible_discards
+
+    def canPlay(self, hand, discard, deck, bench):
+        return (len(hand)-1) >= 2
 
 class Energy(Card):
     def play(self, hand, discard, bench, deck):
@@ -20,34 +49,21 @@ class Energy(Card):
     def canPlay(self, hand, discard, bench, deck):
         return not do.ContainsType(bench, "Energy")
 
-class WaterEnergy(Energy):
+class Supporter(Card):
     pass
 
-class BasicPokemon(Card):
-    def play(self, hand, discard, bench, deck):
-        new_hand = deepcopy(hand)
-        new_bench = deepcopy(bench)
-        do.MoveCard(new_hand, new_bench, card)
-        return [(new_hand, discard, deck, new_bench)]
-
-    def canPlay(self, hand, discard, bench, deck):
-        return len(bench) < 5
-
-class EvolvedPokemon(Card):
+# concrete cards
+class ArchiesAceintheHole(Supporter):
     pass
 
-class ItemAnytime(Card):
+class Bicycle(Card):
     def play(self, hand, discard, bench, deck):
-        new_hand = deepcopy(hand)
-        new_discard = deepcopy(discard)
-        new_deck = deepcopy(deck)
-        do.MoveCard(new_hand, new_discard, card)
-        return [(new_hand, new_discard, bench, deck)]
+        return [(hand, discard, bench, deck)]
 
     def canPlay(self, hand, discard, bench, deck):
-        return True
+        return False
 
-class BattleCompressor(ItemAnytime):
+class BattleCompressor(Card):
     def play(self, hand, discard, bench, deck):
         new_hand = deepcopy(hand)
         new_discard = deepcopy(discard)
@@ -72,28 +88,11 @@ class BattleCompressor(ItemAnytime):
         
         return [(new_hand, new_discard, new_deck, bench)]
 
-# Work here!
-class DiscardType(Card):
-    def play(self, hand, discard, deck, bench):
-        return [(hand, discard, deck, bench)]
-
-    def getDiscards(hand, discard, deck, bench):
-        new_hand = deepcopy(hand)
-        new_discard = deepcopy(discard)
-        do.MoveCard(new_hand, new_discard, card)
-
-        possible_discards = list()
-        for subset in itertools.combinations(new_hand, 2):
-            new_hand_post_play = deepcopy(new_hand)
-            new_discard_post_play = deepcopy(new_discard)
-            do.MoveCard(new_hand_post_play, new_discard_post_play, subset[0])
-            do.MoveCard(new_hand_post_play, new_discard_post_play, subset[1])
-            possible_discards.append((new_hand_post_play, new_discard_post_play, deck, bench))
-
-        return possible_discards
-
     def canPlay(self, hand, discard, deck, bench):
-        return (len(hand)-1) >= 2
+        return True
+    
+class Blastoise(Card):
+    pass
 
 class ComputerTrainer(DiscardType):
     def play(self, hand, discard, deck, bench):
@@ -124,6 +123,33 @@ class ComputerTrainer(DiscardType):
 
         return possible_states
 
+class EscapeRope(Card):
+    pass
+
+class Exeggcute(BasicPokemon):
+    pass
+
+class KedeoEX(BasicPokemon):
+    pass
+
+class Maintenance(Card):
+    pass
+
+class N(Supporter):
+    pass
+
+class ProfessorJuniper(Supporter):
+    pass
+
+class Skyla(Supporter):
+    pass
+
+class Suicune(BasicPokemon):
+    pass
+
+class SuperiorEnergyRetriever(Card):
+    pass
+
 class UltraBall(DiscardType):
     def play(self, hand, discard, deck, bench):
         possible_states = list()
@@ -150,4 +176,25 @@ class UltraBall(DiscardType):
                                                possibility[3])
         return possible_states
 
+class VSSeeker(Card):
+    def play(self, hand, discard, deck, bench):
+        possible_states = list()
+
+        for card in discard:
+            if isinstance(card, Supporter):
+                new_hand = deepcopy(hand)
+                new_discard = deepcopy(discard)
+                do.MoveCard(new_discard, new_hand, card)
+                possible_states.append((new_hand, new_discard, deck, bench))
+
+        return possible_states
+
+    def canPlay(self, hand, discard, deck, bench):
+        for card in discard:
+            if isinstance(card, Supporter):
+                return True
+        return False    
+
+class WaterEnergy(Energy):
+    pass
 

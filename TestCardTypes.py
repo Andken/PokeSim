@@ -13,7 +13,7 @@ class TestCardTypes(unittest.TestCase):
     def test_EmptyHand(self):
         pass
 
-    def test_SingleCard(self):
+    def test_AnonymousCard(self):
         card = ct.Card()
         self.assertEqual(card.canPlay(self.hand, self.discard, self.deck, self.bench), False)
         results = card.play(self.hand, self.discard, self.deck, self.bench)
