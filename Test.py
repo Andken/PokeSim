@@ -41,6 +41,12 @@ class TestDeckOperations(unittest.TestCase):
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
         checkHand(self, False)
 
+    def test_SimpleNotEnoughCards(self):
+        self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
+        self.hand.append(["Ultra Ball","0","Item-UnrestrictedDiscard"])
+        self.discard.append(["Blastoise","2","Evolve"])
+        checkHand(self, False)
+
     def test_BlastoiseFirstTurnWithExtraSupporter(self):
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
@@ -73,8 +79,8 @@ class TestDeckOperations(unittest.TestCase):
 
     def test_BlastoiseFirstTurnWithDiscardAndVSSeeker(self):
         self.hand.append(["Archie's Ace in the Hole","1","Supporter"])
-        self.hand.append(["VS Seeker","0","Item"])
         self.hand.append(["Blastoise","2","Evolve"])
+        self.hand.append(["VS Seeker","0","Item"])
         self.hand.append(["Ultra Ball","0","Item-UnrestrictedDiscard"])
         checkHand(self, True)
 
