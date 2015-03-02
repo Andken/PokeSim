@@ -10,13 +10,17 @@ def checkHand(test, expr):
     memoization = dict()
     test.assertEqual(bft.BlastoiseFirstTurn(copy.deepcopy(test.hand), 
                                             copy.deepcopy(test.discard), 
-                                            copy.deepcopy(test.deck), memoization), expr)        
+                                            copy.deepcopy(test.deck),
+                                            copy.deepcopy(test.bench),
+                                            False,
+                                            memoization), expr)
 
 class TestDeckOperations(unittest.TestCase):
     def setUp(self):
         self.hand = list()
         self.discard = list()
         self.deck = list()
+        self.bench = list()
 
     def test_EmptyHand(self):
         checkHand(self, False)
