@@ -34,8 +34,27 @@ def BlastoiseFirstTurn(hand, discard, deck, bench, energy_attached, memoization)
         elif(card[2] == "Item-Anytime"):
             new_hand = copy.deepcopy(hand)
             new_discard = copy.deepcopy(discard)
+            new_deck = copy.deepcopy(deck)
             do.MoveCard(new_hand, new_discard, card)
-            if(BlastoiseFirstTurn(new_hand, new_discard, deck, bench, energy_attached, memoization)):
+            # special types of Item-Anytime
+            if(card[0] == "Battle Compressor"):
+                added_cards = 0
+                if (do.ContainsName(new_deck, "Archie's Ace in the Hole")):
+                    aaith = do.GetCard(new_deck, "Archie's Ace in the Hole")
+                    do.MoveCard(new_deck, new_discard, aaith)
+                    added_cards = added_cards + 1
+                if (do.ContainsName(new_deck, "Blastoise")):
+                    blastoise = do.GetCard(new_deck, "Blastoise")
+                    do.MoveCard(new_deck, new_discard, blastoise)
+                    added_cards = added_cards + 1
+                if (do.ContainsName(new_deck, "Exeggcute")):
+                    exeggcute = do.GetCard(new_deck, "Exeggcute")
+                    do.MoveCard(new_deck, new_discard, exeggcute)
+                    added_cards = added_cards + 1
+                for i in range(added_cards, 3):
+                    new_discard.append(("Water Energy","0","Energy"))
+                
+            if(BlastoiseFirstTurn(new_hand, new_discard, new_deck, bench, energy_attached, memoization)):
                 hh.SetCalculation(new_hand, energy_attached, True, memoization)
                 return True
             else:

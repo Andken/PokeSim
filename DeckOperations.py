@@ -24,9 +24,9 @@ def ContainsName(cards, name):
             return True
     return False
 
-def MoveCard(hand, discard, card):
-    hand.remove(card)
-    discard.append(card)
+def MoveCard(from_cards, to_cards, card):
+    from_cards.remove(card)
+    to_cards.append(card)
 
 def GetCard(cards, name):
     for card in cards:
