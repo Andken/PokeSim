@@ -19,6 +19,27 @@ class TestCardTypes(unittest.TestCase):
         results = card.play(self.hand, self.discard, self.bench, self.deck)
         self.assertEqual(results, [(self.hand, self.discard, self.bench, self.deck)])
 
+    def test_CanPlayArchie(self):
+        self.hand.append(ct.ArchiesAceintheHole())
+        self.assertEqual(self.hand[0].canPlay(self.hand, self.discard, self.bench, self.deck), False)
+
+        self.discard.append(ct.Blastoise())
+
+        self.discard = list()
+
+        self.discard.append(ct.Skyla())
+        self.discard.append(ct.Skyla())
+        self.discard.append(ct.Skyla())
+        self.discard.append(ct.Blastoise())
+        self.discard.append(ct.Skyla())
+        self.discard.append(ct.Skyla())
+
+        self.assertEqual(self.hand[0].canPlay(self.hand, self.discard, self.bench, self.deck), True)
+
+        self.hand.append(ct.ArchiesAceintheHole())
+
+        self.assertEqual(self.hand[0].canPlay(self.hand, self.discard, self.bench, self.deck), False)        
+
     def test_CanPlayBasic(self):
         keldeo_ex = ct.KeldeoEX()
         self.assertEqual(keldeo_ex.canPlay(self.hand, self.discard, self.bench, self.deck), True)

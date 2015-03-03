@@ -8,6 +8,9 @@ class Card:
     def canPlay(self, hand, discard, bench, deck):
         return False
 
+    def isWaterType(self):
+        return False
+
 #types of cards
 class BasicPokemon(Card):
     def play(self, hand, discard, bench, deck):
@@ -56,7 +59,11 @@ class Supporter(Card):
 
 # concrete cards
 class ArchiesAceintheHole(Supporter):
-    pass
+    def canPlay(self, hand, discard, bench, deck):
+        for card in discard:
+            if card.isWaterType():
+                return len(hand) == 1
+        return False
 
 class Bicycle(Card):
     def play(self, hand, discard, bench, deck):
@@ -94,7 +101,8 @@ class BattleCompressor(Card):
         return True
     
 class Blastoise(Card):
-    pass
+    def isWaterType(self):
+        return True
 
 class ComputerTrainer(DiscardType):
     def play(self, hand, discard, deck, bench):
@@ -132,7 +140,8 @@ class Exeggcute(BasicPokemon):
     pass
 
 class KeldeoEX(BasicPokemon):
-    pass
+    def isWaterType(self):
+        return True
 
 class Maintenance(Card):
     pass
@@ -147,7 +156,8 @@ class Skyla(Supporter):
     pass
 
 class Suicune(BasicPokemon):
-    pass
+    def isWaterType(self):
+        return True
 
 class SuperiorEnergyRetriever(Card):
     pass
