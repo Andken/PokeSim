@@ -131,7 +131,7 @@ class EscapeRope(Card):
 class Exeggcute(BasicPokemon):
     pass
 
-class KedeoEX(BasicPokemon):
+class KeldeoEX(BasicPokemon):
     pass
 
 class Maintenance(Card):
