@@ -3,7 +3,7 @@
 import unittest
 import CardTypes as ct
 
-class TestCardTypes(unittest.TestCase):
+class TestCanPlayTypes(unittest.TestCase):
     def setUp(self):
         self.hand = list()
         self.discard = list()
