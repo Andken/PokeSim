@@ -56,7 +56,22 @@ class TestCardTypes(unittest.TestCase):
         vss = ct.VSSeeker()
         self.assertEqual(vss.canPlay(self.hand, self.discard, self.bench, self.deck), False)
 
+        self.discard.append(ct.ProfessorJuniper())
+
+        vss = ct.VSSeeker()
+        self.assertEqual(vss.canPlay(self.hand, self.discard, self.bench, self.deck), True)
+
+        self.discard = list()
+        self.bench.append(ct.Exeggcute())
+        self.bench.append(ct.Exeggcute())
+        self.bench.append(ct.Exeggcute())
+
+        vss = ct.VSSeeker()
+        self.assertEqual(vss.canPlay(self.hand, self.discard, self.bench, self.deck), False)
+
         self.discard.append(ct.Skyla())
+        self.bench.append(ct.Exeggcute())
+        self.bench.append(ct.Exeggcute())
 
         vss = ct.VSSeeker()
         self.assertEqual(vss.canPlay(self.hand, self.discard, self.bench, self.deck), True)
