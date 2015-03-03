@@ -41,21 +41,24 @@ class TestCardTypes(unittest.TestCase):
         self.assertEqual(self.hand[0].canPlay(self.hand, self.discard, self.bench, self.deck), False)        
 
     def test_CanPlayBasic(self):
-        keldeo_ex = ct.KeldeoEX()
-        self.assertEqual(keldeo_ex.canPlay(self.hand, self.discard, self.bench, self.deck), True)
+        self.assertEqual(ct.KeldeoEX().canPlay(self.hand, self.discard, self.bench, self.deck), True)
+        self.assertEqual(ct.Exeggcute().canPlay(self.hand, self.discard, self.bench, self.deck), True)
+        self.assertEqual(ct.Suicune().canPlay(self.hand, self.discard, self.bench, self.deck), True)
 
         self.bench.append(ct.Exeggcute())
         self.bench.append(ct.Exeggcute())
         self.bench.append(ct.Exeggcute())
         self.bench.append(ct.Exeggcute())
 
-        keldeo_ex = ct.KeldeoEX()
-        self.assertEqual(keldeo_ex.canPlay(self.hand, self.discard, self.bench, self.deck), True)
+        self.assertEqual(ct.KeldeoEX().canPlay(self.hand, self.discard, self.bench, self.deck), True)
+        self.assertEqual(ct.Exeggcute().canPlay(self.hand, self.discard, self.bench, self.deck), True)
+        self.assertEqual(ct.Suicune().canPlay(self.hand, self.discard, self.bench, self.deck), True)
 
         self.bench.append(ct.Exeggcute())
 
-        keldeo_ex = ct.KeldeoEX()
-        self.assertEqual(keldeo_ex.canPlay(self.hand, self.discard, self.bench, self.deck), False)
+        self.assertEqual(ct.KeldeoEX().canPlay(self.hand, self.discard, self.bench, self.deck), False)
+        self.assertEqual(ct.Exeggcute().canPlay(self.hand, self.discard, self.bench, self.deck), False)
+        self.assertEqual(ct.Suicune().canPlay(self.hand, self.discard, self.bench, self.deck), False)
 
     def test_CanPlayVSSeeker(self):
         vss = ct.VSSeeker()
