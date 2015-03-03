@@ -48,8 +48,13 @@ class TestCardTypes(unittest.TestCase):
         self.bench.append(ct.Exeggcute())
         self.bench.append(ct.Exeggcute())
         self.bench.append(ct.Exeggcute())
+
+        keldeo_ex = ct.KeldeoEX()
+        self.assertEqual(keldeo_ex.canPlay(self.hand, self.discard, self.bench, self.deck), True)
+
         self.bench.append(ct.Exeggcute())
 
+        keldeo_ex = ct.KeldeoEX()
         self.assertEqual(keldeo_ex.canPlay(self.hand, self.discard, self.bench, self.deck), False)
 
     def test_CanPlayVSSeeker(self):
