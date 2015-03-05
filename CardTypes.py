@@ -92,31 +92,33 @@ class BattleCompressor(Card):
     def name(self):
         return "Battle Compressor"
 
-    def play(self, hand, discard, bench, deck):
-        new_hand = deepcopy(hand)
-        new_discard = deepcopy(discard)
-        new_deck = deepcopy(deck)
-        do.MoveCard(new_hand, new_discard, card)
+    def play(self, p):
+        new_p = deepcopy(p)
+        new_p.hand.remove(self)
+        new_p.discard.append(self)
 
-        added_cards = 0;
-        if (do.ContainsName(new_deck, "Archie's Ace in the Hole")):
-            aaith = do.GetCard(new_deck, "Archie's Ace in the Hole")
-            do.MoveCard(new_deck, new_discard, aaith)
-            added_cards = added_cards + 1
-        if (do.ContainsName(new_deck, "Blastoise")):
-            blastoise = do.GetCard(new_deck, "Blastoise")
-            do.MoveCard(new_deck, new_discard, blastoise)
-            added_cards = added_cards + 1
-        if (do.ContainsName(new_deck, "Exeggcute")):
-            exeggcute = do.GetCard(new_deck, "Exeggcute")
-            do.MoveCard(new_deck, new_discard, exeggcute)
-            added_cards = added_cards + 1
-        for i in range(added_cards, 3):
-            new_discard.append(("Water Energy","0","Energy"))
+        # this might need to be smarter
+        num_discarded_cards = 0
+        if Blastoise() in new_p.deck:
+            new_p.deck.remove(Blastoise())
+            new_p.discard.append(Blastoise())
+            num_discarded_cards += 1
+        if Exeggcute() in new_p.deck:
+            new_p.deck.remove(Exeggcute())
+            new_p.discard.append(Exeggcute())
+            num_discarded_cards += 1
+        if ArchiesAceintheHole() in new_p.deck:
+            new_p.deck.remove(ArchiesAceintheHole())
+            new_p.discard.append(ArchiesAceintheHole())
+            num_discarded_cards += 1
+        while num_discarded_cards < 3 and WaterEnergy() in new_p.deck:
+            new_p.deck.remove(WaterEnergy())
+            new_p.discard.append(WaterEnergy())
+            num_discarded_cards += 1            
         
-        return [(new_hand, new_discard, new_deck, bench)]
+        return [new_p]
 
-    def canPlay(self, hand, discard, deck, bench):
+    def canPlay(self, p):
         return True
     
 class Blastoise(Card):

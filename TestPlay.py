@@ -19,9 +19,10 @@ class TestPlay(unittest.TestCase):
         p1 = PlayerState()
         battle_compressor = c.BattleCompressor()
         p1.hand.append(battle_compressor)
-        p1.deck.append(c.Blastoise)
-        p1.deck.append(c.Blastoise)
-        p1.deck.append(c.Blastoise)
+        p1.deck.append(c.Blastoise())
+        p1.deck.append(c.Blastoise())
+        p1.deck.append(c.Blastoise())
+        
         possible_states = sorted(battle_compressor.play(p1))
 
         print len(possible_states)
