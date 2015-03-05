@@ -76,6 +76,50 @@ class TestPlay(unittest.TestCase):
 
         self.assertEqual(p2 == possible_states[0], True)
         
+    def test_playSimpleBattleCompressor4(self):
+        p1 = PlayerState()
+        p1.hand.append(c.BattleCompressor())
+        p1.deck.append(c.Blastoise())
+        p1.deck.append(c.Blastoise())
+        p1.deck.append(c.WaterEnergy())
+        p1.deck.append(c.WaterEnergy())
+        p1.deck.append(c.WaterEnergy())
+        p1.deck.append(c.WaterEnergy())
+        
+        possible_states = sorted(c.BattleCompressor().play(p1))
+
+        self.assertEqual(len(possible_states), 1)
+
+        p2 = PlayerState(discard=[c.WaterEnergy(), 
+                                  c.BattleCompressor(), 
+                                  c.WaterEnergy(), 
+                                  c.Blastoise()], 
+                         deck=[c.Blastoise(), c.WaterEnergy(), c.WaterEnergy()])
+
+        self.assertEqual(p2 == possible_states[0], True)
+        
+    def test_playSimpleBattleCompressor5(self):
+        p1 = PlayerState()
+        p1.hand.append(c.BattleCompressor())
+        p1.deck.append(c.Exeggcute())
+        p1.deck.append(c.Blastoise())
+        p1.deck.append(c.WaterEnergy())
+        p1.deck.append(c.WaterEnergy())
+        p1.deck.append(c.WaterEnergy())
+        p1.deck.append(c.WaterEnergy())
+        
+        possible_states = sorted(c.BattleCompressor().play(p1))
+
+        self.assertEqual(len(possible_states), 1)
+
+        p2 = PlayerState(discard=[c.WaterEnergy(), 
+                                  c.BattleCompressor(), 
+                                  c.Exeggcute(),
+                                  c.Blastoise()], 
+                         deck=[c.WaterEnergy(), c.WaterEnergy(), c.WaterEnergy()])
+
+        self.assertEqual(p2 == possible_states[0], True)
+        
 
 if __name__ == '__main__':
     unittest.main()
