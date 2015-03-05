@@ -1,4 +1,5 @@
 import DeckOperations as do
+from copy import deepcopy
 
 #base
 class Card:
@@ -22,14 +23,14 @@ class Card:
 
 #types of cards
 class BasicPokemon(Card):
-    def play(self, hand, discard, bench, deck):
-        new_hand = deepcopy(hand)
-        new_bench = deepcopy(bench)
-        do.MoveCard(new_hand, new_bench, card)
-        return [(new_hand, discard, deck, new_bench)]
+    def play(self, p):
+        new_p = deepcopy(p)
+        new_p.hand.remove(self)
+        new_p.bench.append(self)
+        return [new_p]
 
-    def canPlay(self, hand, discard, bench, deck):
-        return len(bench) < 5
+    def canPlay(self, p):
+        return (len(p.bench)) < 5 and (self in p.hand)
 
 class DiscardType(Card):
     def play(self, hand, discard, deck, bench):
