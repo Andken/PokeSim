@@ -2,6 +2,15 @@ import DeckOperations as do
 
 #base
 class Card:
+    def name(self):
+        raise "Not implemented"
+
+    def __hash__(self):
+        return hash(self.name())
+
+    def __eq__(self, other):
+        return self.name() == other.name()
+
     def play(self, hand, discard, bench, deck):
         return [(hand, discard, bench, deck)]
 
@@ -59,6 +68,9 @@ class Supporter(Card):
 
 # concrete cards
 class ArchiesAceintheHole(Supporter):
+    def name(self):
+        return "Archie's Ace in the Hole"
+
     def canPlay(self, hand, discard, bench, deck):
         for card in discard:
             if card.isWaterType():
@@ -66,6 +78,9 @@ class ArchiesAceintheHole(Supporter):
         return False
 
 class Bicycle(Card):
+    def name(self):
+        return "Bicycle"
+
     def play(self, hand, discard, bench, deck):
         return [(hand, discard, bench, deck)]
 
@@ -73,6 +88,9 @@ class Bicycle(Card):
         return False
 
 class BattleCompressor(Card):
+    def name(self):
+        return "Battle Compressor"
+
     def play(self, hand, discard, bench, deck):
         new_hand = deepcopy(hand)
         new_discard = deepcopy(discard)
@@ -101,10 +119,16 @@ class BattleCompressor(Card):
         return True
     
 class Blastoise(Card):
+    def name(self):
+        return "Blastoise"
+
     def isWaterType(self):
         return True
 
 class ComputerTrainer(DiscardType):
+    def name(self):
+        return "Computer Trainer"
+
     def play(self, hand, discard, deck, bench):
         possible_states = list()
 
@@ -134,35 +158,51 @@ class ComputerTrainer(DiscardType):
         return possible_states
 
 class EscapeRope(Card):
-    pass
+    def name(self):
+        return "Escape Rope"
 
 class Exeggcute(BasicPokemon):
-    pass
+    def name(self):
+        return "Exeggcute"
 
 class KeldeoEX(BasicPokemon):
+    def name(self):
+        return "Keldeo EX"
+
     def isWaterType(self):
         return True
 
 class Maintenance(Card):
-    pass
+    def name(self):
+        return "Maintenance"
 
 class N(Supporter):
-    pass
+    def name(self):
+        return "N"
 
 class ProfessorJuniper(Supporter):
-    pass
+    def name(self):
+        return "Professor Juniper"
 
 class Skyla(Supporter):
-    pass
+    def name(self):
+        return "Skyla"
 
 class Suicune(BasicPokemon):
+    def name(self):
+        return "Suicune"
+
     def isWaterType(self):
         return True
 
 class SuperiorEnergyRetriever(Card):
-    pass
+    def name(self):
+        return "Superior Energy Retriever"
 
 class UltraBall(DiscardType):
+    def name(self):
+        return "Ultra Ball"
+
     def play(self, hand, discard, deck, bench):
         possible_states = list()
 
@@ -189,6 +229,9 @@ class UltraBall(DiscardType):
         return possible_states
 
 class VSSeeker(Card):
+    def name(self):
+        return "VS Seeker"
+
     def play(self, hand, discard, deck, bench):
         possible_states = list()
 
@@ -208,5 +251,7 @@ class VSSeeker(Card):
         return False    
 
 class WaterEnergy(Energy):
-    pass
+    def name(self):
+        return "Water Energy"
+
 
