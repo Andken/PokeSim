@@ -25,9 +25,18 @@ class TestPlay(unittest.TestCase):
         
         possible_states = sorted(battle_compressor.play(p1))
 
-        print len(possible_states)
+        self.assertEqual(len(possible_states), 1)
 
+        p2 = PlayerState()
+        p2.discard.append(c.Blastoise())
+        p2.discard.append(c.BattleCompressor())
+        p2.deck.append(c.Blastoise())
+        p2.deck.append(c.Blastoise())
 
+        p2.printer()
+        possible_states[0].printer()
+
+        self.assertEqual(p2 == possible_states[0], True)
         
 
 if __name__ == '__main__':
