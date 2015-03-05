@@ -15,7 +15,7 @@ class TestPlay(unittest.TestCase):
 
             self.assertEquals(p == p2, True)
 
-    def test_playSimpleBattleCompressor1(self):
+    def test_playBattleCompressor1(self):
         p1 = PlayerState()
         battle_compressor = c.BattleCompressor()
         p1.hand.append(battle_compressor)
@@ -35,7 +35,7 @@ class TestPlay(unittest.TestCase):
 
         self.assertEqual(p2 == possible_states[0], True)
         
-    def test_playSimpleBattleCompressor2(self):
+    def test_playBattleCompressor2(self):
         p1 = PlayerState()
         p1.hand.append(c.BattleCompressor())
         p1.hand.append(c.BattleCompressor())
@@ -58,7 +58,7 @@ class TestPlay(unittest.TestCase):
 
         self.assertEqual(p2 == possible_states[0], True)
         
-    def test_playSimpleBattleCompressor3(self):
+    def test_playBattleCompressor3(self):
         p1 = PlayerState()
         p1.hand.append(c.BattleCompressor())
         p1.deck.append(c.Blastoise())
@@ -76,7 +76,7 @@ class TestPlay(unittest.TestCase):
 
         self.assertEqual(p2 == possible_states[0], True)
         
-    def test_playSimpleBattleCompressor4(self):
+    def test_playBattleCompressor4(self):
         p1 = PlayerState()
         p1.hand.append(c.BattleCompressor())
         p1.deck.append(c.Blastoise())
@@ -98,7 +98,7 @@ class TestPlay(unittest.TestCase):
 
         self.assertEqual(p2 == possible_states[0], True)
         
-    def test_playSimpleBattleCompressor5(self):
+    def test_playBattleCompressor5(self):
         p1 = PlayerState()
         p1.hand.append(c.BattleCompressor())
         p1.deck.append(c.Exeggcute())
