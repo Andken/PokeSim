@@ -1,5 +1,5 @@
-import DeckOperations as do
 from copy import deepcopy
+import itertools
 
 #base
 class Card:
@@ -39,7 +39,7 @@ class DiscardType(Card):
     def play(self, p):
         return [p]
 
-    def getDiscards(hand):
+    def getDiscards(self, hand):
         new_hand = deepcopy(hand)
         new_hand.remove(self)
         return itertools.combinations(new_hand, 2)
@@ -126,29 +126,29 @@ class ComputerTrainer(DiscardType):
     def play(self, p):
         possible_states = list()
 
-        discards = getDiscards(hand, discard, deck, bench)
+        discards = self.getDiscards(p.hand)
 
         for possibility in discards:
-            for new_card_name in ["Archie's Ace in the Hole",
-                                  "Battle Compressor",
-                                  "Blastoise",
-                                  "Exeggcute",
-                                  "Keldeo EX",
-                                  "VS Seeker"]:
-                        new_hand_after_card_added = deepcopy(possibility[0])
-                        new_deck = deepcopy(possibility[2])
-                        if(do.ContainsName(new_deck, new_card_name)):
-                            new_card = do.GetCard(new_deck, new_card_name)
-                            do.MoveCard(new_deck, new_hand_after_card_added, new_card)
-                        else:
-                            # we always have enough water energy
-                            new_hand_after_card_added.append(("Water Energy","0","Energy"))
+            assert len(possibility) > 0
+            for card_to_get in [ArchiesAceintheHole(),
+                                 BattleCompressor(),
+                                 Blastoise(),
+                                 Exeggcute(),
+                                 KeldeoEX(),
+                                 VSSeeker()]:
+                if card_to_get in p.deck:
+                    new_p = deepcopy(p)
+                    new_p.hand.remove(self)
+                    new_p.discard.append(self)
+                    new_p.hand.remove(possibility[0])
+                    new_p.discard.append(possibility[0])
+                    new_p.hand.remove(possibility[1])
+                    new_p.discard.append(possibility[1])
+                    new_p.deck.remove(card_to_get)
+                    new_p.hand.append(card_to_get)
+                    possible_states.append(new_p)
 
-                        possible_states.append(new_hand_after_card_added,
-                                               possiblity[1],
-                                               new_deck,
-                                               possibility[3])
-
+        assert len(possible_states) > 0
         return possible_states
 
 class EscapeRope(Card):
