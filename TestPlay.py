@@ -90,6 +90,27 @@ class TestPlay(unittest.TestCase):
 
         self.assertEqual(p4 in possible_states, True)
 
+    def test_playComputerTrainer4(self):
+        p = PlayerState(hand = [c.ComputerTrainer(), 
+                                c.Exeggcute(),
+                                c.WaterEnergy(),
+                                c.KeldeoEX()],
+                        deck = [c.Blastoise(), c.ArchiesAceintheHole()])
+
+        possible_states = c.ComputerTrainer().play(p)
+        self.assertEqual(len(possible_states), 6)
+
+        for ps in possible_states:
+            self.assertIn(c.ComputerTrainer(), ps.discard)
+            self.assertNotIn(c.ComputerTrainer(), ps.hand)
+
+            self.assertEqual(c.Blastoise() in ps.hand or
+                             c.ArchiesAceintheHole() in ps.hand, True)
+           
+            self.assertEqual(len(set(ps.discard) & set([c.Exeggcute(), 
+                                                        c.WaterEnergy(), 
+                                                        c.KeldeoEX()])), 2)
+ 
     def test_playBattleCompressor1(self):
         p1 = PlayerState()
         battle_compressor = c.BattleCompressor()
