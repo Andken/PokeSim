@@ -15,6 +15,52 @@ class TestPlay(unittest.TestCase):
 
             self.assertEquals(p == p2, True)
 
+    def test_playUltraBall1(self):
+        p1 = PlayerState(hand = [c.UltraBall(), 
+                                 c.KeldeoEX(),
+                                 c.KeldeoEX()],
+                         deck = [c.Blastoise()])
+
+        possible_states = c.UltraBall().play(p1)
+        self.assertEqual(len(possible_states), 2)
+
+        self.assertIn(PlayerState(hand = [c.Blastoise()],
+                                  discard = [c.UltraBall(), 
+                                             c.KeldeoEX(), 
+                                             c.KeldeoEX()]), 
+                      possible_states)
+
+        self.assertIn(PlayerState(deck = [c.Blastoise()],
+                                  discard = [c.UltraBall(), 
+                                             c.KeldeoEX(), 
+                                             c.KeldeoEX()]), 
+                      possible_states)
+
+
+    def test_playUltraBall2(self):
+        p1 = PlayerState(hand = [c.UltraBall(), 
+                                 c.KeldeoEX(),
+                                 c.KeldeoEX()],
+                         deck = [c.Blastoise(), c.Bicycle()])
+
+        possible_states = c.UltraBall().play(p1)
+        self.assertEqual(len(possible_states), 2)
+
+        self.assertIn(PlayerState(hand = [c.Blastoise()],
+                                  deck = [c.Bicycle()],
+                                  discard = [c.UltraBall(), 
+                                             c.KeldeoEX(), 
+                                             c.KeldeoEX()]), 
+                      possible_states)
+
+        self.assertIn(PlayerState(deck = [c.Blastoise(), 
+                                          c.Bicycle()],
+                                  discard = [c.UltraBall(), 
+                                             c.KeldeoEX(), 
+                                             c.KeldeoEX()]), 
+                      possible_states)
+
+
     def test_playComputerTrainer1(self):
         p1 = PlayerState(hand = [c.ComputerTrainer(), 
                                  c.KeldeoEX(),
