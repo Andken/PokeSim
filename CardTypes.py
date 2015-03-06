@@ -231,15 +231,17 @@ class VSSeeker(Card):
     def name(self):
         return "VS Seeker"
 
-    def play(self, h):
+    def play(self, p):
         possible_states = list()
 
-        for card in discard:
+        for card in p.discard:
             if isinstance(card, Supporter):
-                new_hand = deepcopy(hand)
-                new_discard = deepcopy(discard)
-                do.MoveCard(new_discard, new_hand, card)
-                possible_states.append((new_hand, new_discard, deck, bench))
+                new_p = deepcopy(p)
+                new_p.discard.append(self)
+                new_p.hand.remove(self)
+                new_p.hand.append(card)
+                new_p.discard.remove(card)
+                possible_states.append(new_p)
 
         return possible_states
 

@@ -5,6 +5,24 @@ import CardTypes as c
 from PlayerState import PlayerState
 
 class TestPlay(unittest.TestCase):
+    def test_playVSSeeker(self):
+        p = PlayerState(hand=[c.VSSeeker()],
+                        discard=[c.N(), c.Skyla()])
+
+        possible_states = c.VSSeeker().play(p)
+
+        self.assertEqual(len(possible_states), 2)
+        
+        pN = PlayerState(hand=[c.N()],
+                         discard=[c.VSSeeker(), c.Skyla()])
+
+        pSkyla = PlayerState(hand=[c.Skyla()],
+                             discard=[c.VSSeeker(), c.N()])
+    
+        self.assertIn(pN, possible_states)
+        self.assertIn(pSkyla, possible_states)
+        self.assertNotIn(p, possible_states)
+
     def test_playBasic(self):
         p1 = PlayerState()
         keldeo_ex = c.KeldeoEX()
@@ -14,6 +32,7 @@ class TestPlay(unittest.TestCase):
             p2.bench.append(c.KeldeoEX())
 
             self.assertEquals(p == p2, True)
+
 
     def test_playUltraBall1(self):
         p1 = PlayerState(hand = [c.UltraBall(), 
@@ -35,6 +54,8 @@ class TestPlay(unittest.TestCase):
                                              c.KeldeoEX(), 
                                              c.KeldeoEX()]), 
                       possible_states)
+
+        self.assertNotIn(p1, possible_states)
 
 
     def test_playUltraBall2(self):
@@ -59,6 +80,7 @@ class TestPlay(unittest.TestCase):
                                              c.KeldeoEX(), 
                                              c.KeldeoEX()]), 
                       possible_states)
+        self.assertNotIn(p1, possible_states)
 
 
     def test_playComputerTrainer1(self):
@@ -76,6 +98,7 @@ class TestPlay(unittest.TestCase):
                                     c.KeldeoEX()])
 
         self.assertEqual(possible_states[0] == p2, True)
+        self.assertNotIn(p1, possible_states)
 
     def test_playComputerTrainer2(self):
         p1 = PlayerState(hand = [c.ComputerTrainer(), 
@@ -101,6 +124,7 @@ class TestPlay(unittest.TestCase):
                                     c.KeldeoEX()])
 
         self.assertEqual(p3 in possible_states, True)
+        self.assertNotIn(p1, possible_states)
 
     def test_playComputerTrainer3(self):
         p1 = PlayerState(hand = [c.ComputerTrainer(), 
@@ -135,6 +159,7 @@ class TestPlay(unittest.TestCase):
                                     c.Exeggcute()])
 
         self.assertEqual(p4 in possible_states, True)
+        self.assertNotIn(p1, possible_states)
 
     def test_playComputerTrainer4(self):
         p = PlayerState(hand = [c.ComputerTrainer(), 
@@ -156,6 +181,7 @@ class TestPlay(unittest.TestCase):
             self.assertEqual(len(set(ps.discard) & set([c.Exeggcute(), 
                                                         c.WaterEnergy(), 
                                                         c.KeldeoEX()])), 2)
+        self.assertNotIn(p, possible_states)
  
     def test_playBattleCompressor1(self):
         p1 = PlayerState()
@@ -176,6 +202,7 @@ class TestPlay(unittest.TestCase):
         p2.deck.append(c.Blastoise())
 
         self.assertEqual(p2 == possible_states[0], True)
+        self.assertNotIn(p1, possible_states)
         
     def test_playBattleCompressor2(self):
         p1 = PlayerState()
@@ -201,6 +228,7 @@ class TestPlay(unittest.TestCase):
         p2.deck.append(c.Blastoise())
 
         self.assertEqual(p2 == possible_states[0], True)
+        self.assertNotIn(p1, possible_states)
         
     def test_playBattleCompressor3(self):
         p1 = PlayerState()
@@ -219,6 +247,7 @@ class TestPlay(unittest.TestCase):
                          deck=[c.Blastoise()])
 
         self.assertEqual(p2 == possible_states[0], True)
+        self.assertNotIn(p1, possible_states)
         
     def test_playBattleCompressor4(self):
         p1 = PlayerState()
@@ -243,6 +272,7 @@ class TestPlay(unittest.TestCase):
                          deck=[c.Blastoise(), c.WaterEnergy(), c.WaterEnergy()])
         
         self.assertEqual(p2 == possible_states[0], True)
+        self.assertNotIn(p1, possible_states)
         
     def test_playBattleCompressor5(self):
         p1 = PlayerState()
@@ -265,6 +295,7 @@ class TestPlay(unittest.TestCase):
                          deck=[c.WaterEnergy(), c.WaterEnergy(), c.WaterEnergy()])
 
         self.assertEqual(p2 == possible_states[0], True)
+        self.assertNotIn(p1, possible_states)
         
     def test_playBattleCompressor6(self):
         p1 = PlayerState()
@@ -301,6 +332,7 @@ class TestPlay(unittest.TestCase):
                          deck=[])
 
         self.assertEqual(p3 == possible_states[0], True)
+        self.assertNotIn(p1, possible_states)
         
 
 if __name__ == '__main__':
