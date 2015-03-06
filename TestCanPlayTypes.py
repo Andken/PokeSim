@@ -1,18 +1,14 @@
 #!/usr/bin/python
 
-#import unittest
-#import CardTypes as ct
-#
-#class TestCanPlayTypes(unittest.TestCase):
-#    def setUp(self):
-#        self.hand = list()
-#        self.discard = list()
-#        self.deck = list()
-#        self.bench = list()
-#
-#    def test_EmptyHand(self):
-#        pass
-#
+import unittest
+import CardTypes as ct
+from PlayerState import PlayerState
+
+class TestCanPlayTypes(unittest.TestCase):
+    def test_CanPlayBattleCompressor(self):
+        p = PlayerState()
+        self.assertEqual(ct.BattleCompressor().canPlay(p), True)
+
 #    def test_AnonymousCard(self):
 #        card = ct.Card()
 #        self.assertEqual(card.canPlay(self.hand, self.discard, self.bench, self.deck), False)
@@ -84,6 +80,6 @@
 #        vss = ct.VSSeeker()
 #        self.assertEqual(vss.canPlay(self.hand, self.discard, self.bench, self.deck), True)
 #
-#if __name__ == '__main__':
-#    unittest.main()
-#
+if __name__ == '__main__':
+    unittest.main()
+
