@@ -25,6 +25,8 @@ with open('WaterDeck.txt', 'r+') as f:
 
 for j in range(0,sims):
     print str(j) + ":" + str(sims) + "::" + str(successes)
+
+while disasters == 0:
     p = PlayerState()
 
     mulligans = 0
@@ -48,10 +50,13 @@ for j in range(0,sims):
     # prize cards
     p.setPrizes(6)
 
-    disaster = p.containsAllOf(c.Blastoise()) or p.containsAllOf(c.ArchiesAceintheHole())
+    disaster = p.disaster(c.Blastoise()) or p.disaster(c.ArchiesAceintheHole())
 
     print "====Disaster: " + str(disaster)
     disasters = disasters + int(disaster)
+
+    if disaster:
+        p.printer()
 #
 #    bench = []
 #

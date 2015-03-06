@@ -51,9 +51,6 @@ class PlayerState:
                 tuple(sorted(self.discard)),
                 self.attached_energy)
 
-    def disaster(self, card):
-        return (card not in self.hand) and (card not in self.deck)
-
     def draw(self, number_to_draw):
         for i in range(0,number_to_draw):
             self.hand.append(self.deck[0])
@@ -66,10 +63,13 @@ class PlayerState:
         return False
             
     def setPrizes(self, number_of_prizes):
-        for i in range(0,number_to_draw):
+        for i in range(0,number_of_prizes):
             self.prizes.append(self.deck[0])
             self.deck.remove(self.deck[0])
         
+    def disaster(self, card):
+        return (card not in self.hand) and (card not in self.deck)
+
     def printer(self):
         print "hand:"
         for card in self.hand:
