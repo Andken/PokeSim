@@ -1,7 +1,12 @@
 import CardTypes as ct
 
 class PlayerState:
-    def __init__(self, hand=None, deck=None, prizes=None, bench=None, discard=None):
+    def __init__(self, hand=None, 
+                 deck=None, 
+                 prizes=None, 
+                 bench=None, 
+                 discard=None, 
+                 attached_energy=False):
         if hand is None:
             self.hand = list()
         else:
@@ -27,6 +32,7 @@ class PlayerState:
         else:
             self.discard = discard
 
+        self.attached_energy = attached_energy
 
     def __hash__(self):
         return hash(self.tuplize())
@@ -42,7 +48,8 @@ class PlayerState:
                 tuple(sorted(self.deck)),
                 tuple(sorted(self.prizes)),
                 tuple(sorted(self.bench)),
-                tuple(sorted(self.discard)))
+                tuple(sorted(self.discard)),
+                attached_energy)
 
     def draw(self, number_to_draw):
         for i in range(0,number_to_draw):
@@ -67,7 +74,7 @@ class PlayerState:
         for card in self.prizes:
             print "\t" + card.name()
 
-        print "bench:"
+        print "bench: (attached energy: " + str(self.attached_energy) + ")"
         for card in self.bench:
             print "\t" + card.name()
 

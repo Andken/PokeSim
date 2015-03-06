@@ -58,14 +58,11 @@ class DiscardType(Card):
         return (len(hand)-1) >= 2
 
 class Energy(Card):
-    def play(self, hand, discard, bench, deck):
-        new_hand = deepcopy(hand)
-        new_bench = deepcopy(bench)
-        do.MoveCard(new_hand, new_bench, card)
-        return [(new_hand, discard, new_bench, deck)]
+    def play(self, p):
+        raise("do me")
 
-    def canPlay(self, hand, discard, bench, deck):
-        return not do.ContainsType(bench, "Energy")
+    def canPlay(self, p):
+        return self in p.hand and not p.attached_energy
 
 class Supporter(Card):
     pass

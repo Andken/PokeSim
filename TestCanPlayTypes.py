@@ -57,6 +57,12 @@ class TestCanPlayTypes(unittest.TestCase):
                          discard=[ct.Exeggcute()])
         self.assertEqual(ct.ArchiesAceintheHole().canPlay(p6), False)
 
+    def test_CanPlayWaterEnergy(self):
+        p1 = PlayerState(hand=[ct.WaterEnergy()])
+        self.assertEqual(ct.WaterEnergy().canPlay(p1), True)
+
+        p2 = PlayerState(hand=[ct.WaterEnergy()], attached_energy = True)
+        self.assertEqual(ct.WaterEnergy().canPlay(p2), False)
 
 #    def test_AnonymousCard(self):
 #        card = ct.Card()
