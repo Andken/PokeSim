@@ -31,14 +31,41 @@ class TestPlayerState(unittest.TestCase):
         p4 = ps.PlayerState(hand=[ct.KeldeoEX()])
         self.assertEquals(p4.startingHand(), True)
 
-    def test_placeActive(self):
+    def test_placeActive1(self):
         p1 = ps.PlayerState(hand=[ct.Exeggcute()])
         p1.placeActive()
 
         p2 = ps.PlayerState(bench=[ct.Exeggcute()])
         self.assertEquals(p1 == p2, True)
         
+    def test_placeActive2(self):
+        p1 = ps.PlayerState(hand=[ct.KeldeoEX(), ct.Exeggcute()])
+        p1.placeActive()
 
+        p2 = ps.PlayerState(hand=[ct.Exeggcute()], bench=[ct.KeldeoEX()])
+        self.assertEquals(p1 == p2, True)
+        
+    def test_placeActive3(self):
+        p1 = ps.PlayerState(hand=[ct.Exeggcute(), ct.KeldeoEX()])
+        p1.placeActive()
+
+        p2 = ps.PlayerState(hand=[ct.Exeggcute()], bench=[ct.KeldeoEX()])
+        self.assertEquals(p1 == p2, True)
+        
+    def test_placeActive4(self):
+        p1 = ps.PlayerState(hand=[ct.Exeggcute(), ct.Blastoise()])
+        p1.placeActive()
+
+        p2 = ps.PlayerState(hand=[ct.Blastoise()], bench=[ct.Exeggcute()])
+        self.assertEquals(p1 == p2, True)
+        
+    def test_placeActive1(self):
+        p1 = ps.PlayerState(hand=[ct.KeldeoEX()])
+        p1.placeActive()
+
+        p2 = ps.PlayerState(bench=[ct.KeldeoEX()])
+        self.assertEquals(p1 == p2, True)
+        
     def test_eq1(self):
         p1 = ps.PlayerState()
         p2 = ps.PlayerState()
