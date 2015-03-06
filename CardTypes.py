@@ -130,23 +130,17 @@ class ComputerTrainer(DiscardType):
 
         for possibility in discards:
             assert len(possibility) > 0
-            for card_to_get in [ArchiesAceintheHole(),
-                                 BattleCompressor(),
-                                 Blastoise(),
-                                 Exeggcute(),
-                                 KeldeoEX(),
-                                 VSSeeker()]:
-                if card_to_get in p.deck:
-                    new_p = deepcopy(p)
-                    new_p.hand.remove(self)
-                    new_p.discard.append(self)
-                    new_p.hand.remove(possibility[0])
-                    new_p.discard.append(possibility[0])
-                    new_p.hand.remove(possibility[1])
-                    new_p.discard.append(possibility[1])
-                    new_p.deck.remove(card_to_get)
-                    new_p.hand.append(card_to_get)
-                    possible_states.append(new_p)
+            for card_to_get in p.deck:
+                new_p = deepcopy(p)
+                new_p.hand.remove(self)
+                new_p.discard.append(self)
+                new_p.hand.remove(possibility[0])
+                new_p.discard.append(possibility[0])
+                new_p.hand.remove(possibility[1])
+                new_p.discard.append(possibility[1])
+                new_p.deck.remove(card_to_get)
+                new_p.hand.append(card_to_get)
+                possible_states.append(new_p)
 
         assert len(possible_states) > 0
         return possible_states
