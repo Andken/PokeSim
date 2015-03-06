@@ -43,6 +43,7 @@ class TestPlay(unittest.TestCase):
         p1.deck.append(c.Blastoise())
         p1.deck.append(c.ArchiesAceintheHole())
         p1.deck.append(c.Exeggcute())
+        p1.discard.append(c.KeldeoEX())
         
         possible_states = sorted(c.BattleCompressor().play(p1))
 
@@ -54,6 +55,7 @@ class TestPlay(unittest.TestCase):
         p2.discard.append(c.ArchiesAceintheHole())
         p2.discard.append(c.Exeggcute())
         p2.discard.append(c.BattleCompressor())
+        p2.discard.append(c.KeldeoEX())
         p2.deck.append(c.Blastoise())
 
         self.assertEqual(p2 == possible_states[0], True)
@@ -79,6 +81,7 @@ class TestPlay(unittest.TestCase):
     def test_playBattleCompressor4(self):
         p1 = PlayerState()
         p1.hand.append(c.BattleCompressor())
+        p1.hand.append(c.KeldeoEX())
         p1.deck.append(c.Blastoise())
         p1.deck.append(c.Blastoise())
         p1.deck.append(c.WaterEnergy())
@@ -90,12 +93,13 @@ class TestPlay(unittest.TestCase):
 
         self.assertEqual(len(possible_states), 1)
 
-        p2 = PlayerState(discard=[c.WaterEnergy(), 
+        p2 = PlayerState(hand = [c.KeldeoEX()],
+                         discard=[c.WaterEnergy(), 
                                   c.BattleCompressor(), 
                                   c.WaterEnergy(), 
                                   c.Blastoise()], 
                          deck=[c.Blastoise(), c.WaterEnergy(), c.WaterEnergy()])
-
+        
         self.assertEqual(p2 == possible_states[0], True)
         
     def test_playBattleCompressor5(self):
@@ -119,6 +123,42 @@ class TestPlay(unittest.TestCase):
                          deck=[c.WaterEnergy(), c.WaterEnergy(), c.WaterEnergy()])
 
         self.assertEqual(p2 == possible_states[0], True)
+        
+    def test_playBattleCompressor6(self):
+        p1 = PlayerState()
+        p1.hand.append(c.BattleCompressor())
+        p1.hand.append(c.BattleCompressor())
+        p1.deck.append(c.Exeggcute())
+        p1.deck.append(c.Blastoise())
+        p1.deck.append(c.WaterEnergy())
+        p1.deck.append(c.WaterEnergy())
+        p1.deck.append(c.ArchiesAceintheHole())
+        
+        possible_states = sorted(c.BattleCompressor().play(p1))
+
+        self.assertEqual(len(possible_states), 1)
+
+        p2 = PlayerState(hand = [c.BattleCompressor()],
+                         discard=[c.ArchiesAceintheHole(), 
+                                  c.BattleCompressor(), 
+                                  c.Exeggcute(),
+                                  c.Blastoise()], 
+                         deck=[c.WaterEnergy(), c.WaterEnergy()])
+
+        self.assertEqual(p2 == possible_states[0], True)
+        
+        possible_states = sorted(c.BattleCompressor().play(p2))
+
+        p3 = PlayerState(discard=[c.ArchiesAceintheHole(), 
+                                  c.BattleCompressor(), 
+                                  c.BattleCompressor(), 
+                                  c.Exeggcute(),
+                                  c.Blastoise(),
+                                  c.WaterEnergy(),
+                                  c.WaterEnergy()], 
+                         deck=[])
+
+        self.assertEqual(p3 == possible_states[0], True)
         
 
 if __name__ == '__main__':
