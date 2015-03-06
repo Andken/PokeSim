@@ -5,6 +5,27 @@ import CardTypes as ct
 from PlayerState import PlayerState
 
 class TestCanPlayTypes(unittest.TestCase):
+    def test_CanPlayVSSeeker(self):
+        p1 = PlayerState()
+        self.assertEqual(ct.VSSeeker().canPlay(p1), False)
+
+        p2 = PlayerState(hand=[ct.VSSeeker()], discard=[ct.WaterEnergy()])
+        self.assertEqual(ct.VSSeeker().canPlay(p2), False)
+
+        p3 = PlayerState(hand=[ct.VSSeeker()], discard=[ct.N()])
+        self.assertEqual(ct.VSSeeker().canPlay(p3), True)
+
+        p4 = PlayerState(hand=[ct.VSSeeker()])
+        self.assertEqual(ct.VSSeeker().canPlay(p4), False)
+
+        p5 = PlayerState(hand=[ct.VSSeeker(), ct.KeldeoEX()],
+                         discard=[ct.N(), ct.KeldeoEX()])
+        self.assertEqual(ct.VSSeeker().canPlay(p5), True)
+
+        p6 = PlayerState(hand=[ct.VSSeeker(), ct.KeldeoEX()],
+                         discard=[ct.KeldeoEX(), ct.N()])
+        self.assertEqual(ct.VSSeeker().canPlay(p6), True)
+
     def test_CanPlayUltraBall(self):
         p1 = PlayerState()
         self.assertEqual(ct.UltraBall().canPlay(p1), False)

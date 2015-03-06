@@ -231,7 +231,7 @@ class VSSeeker(Card):
     def name(self):
         return "VS Seeker"
 
-    def play(self, hand, discard, deck, bench):
+    def play(self, h):
         possible_states = list()
 
         for card in discard:
@@ -243,8 +243,8 @@ class VSSeeker(Card):
 
         return possible_states
 
-    def canPlay(self, hand, discard, deck, bench):
-        for card in discard:
+    def canPlay(self, p):
+        for card in p.discard:
             if isinstance(card, Supporter):
                 return True
         return False    
