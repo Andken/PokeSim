@@ -14,7 +14,7 @@ def create(name):
                 "Professor Juniper"         : ct.ProfessorJuniper(),
                 "Skyla"                     : ct.Skyla(),
                 "Suicune"                   : ct.Suicune(),
-                "Superior Energy Retriever" : st.SuperiorEnergyRetriever(),
+                "Superior Energy Retriever" : ct.SuperiorEnergyRetriever(),
                 "Ultra Ball"                : ct.UltraBall(),
                 "VS Seeker"                 : ct.VSSeeker(),
                 "Water Energy"              : ct.WaterEnergy()

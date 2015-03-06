@@ -19,10 +19,10 @@ memoized = {}
 with open('WaterDeck.txt', 'r+') as f:
     contents = f.readlines()
     for card in contents:
-        print card.rstrip()
-#        gold_deck.append(cf.Factory(card))        
+        gold_deck.append(cf.create(card.rstrip()))
 
 
+print gold_deck
 raise "not yet"
 
 for j in range(0,sims):
