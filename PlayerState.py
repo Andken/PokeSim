@@ -51,6 +51,9 @@ class PlayerState:
                 tuple(sorted(self.discard)),
                 self.attached_energy)
 
+    def disaster(self, card):
+        return (card not in self.hand) and (card not in self.deck)
+
     def draw(self, number_to_draw):
         for i in range(0,number_to_draw):
             self.hand.append(self.deck[0])
