@@ -8,7 +8,7 @@ from copy import deepcopy
 import CardFactory as cf
 import CardTypes as c
 
-sims = 1
+sims = 2500
 
 gold_deck = list()
 mulligans_by_number = {}
@@ -52,30 +52,20 @@ for j in range(0,sims):
     disasters = disasters + int(disaster)
 
     p.placeActive()
-#
-#    bench = []
-#
-#    # play a Basic and draw a card
-#    if(do.ContainsType(hand, "Basic")):
-#        do.PlayBasic(hand, bench)
-#
-#    do.DrawCard(hand, deck)
-#
-#    do.PrintCards("==========================New hand=", hand)
-#    do.PrintCards("==========================Bench=", bench)
-#    do.PrintCards("==========================Deck=", deck)
-#
-#    successes = successes + int(bft.BlastoiseFirstTurn(hand, discard, deck, bench, memoized))
-#
-#print "================================="
-#print "===Sims:      " + str(sims)
-#print "===Successes: " + str(successes) + "(" + str(100.0*successes/sims) + "%)"
-#print "===Disasters: " + str(disasters) + "(" + str(100.0*disasters/sims) + "%)"
-#print "===Mulligans: "
-#for key in sorted(mulligans_by_number.iterkeys()):
-#    print "   " + str(key) + ": " + str(mulligans_by_number[key]) + "(" + str(100.0*mulligans_by_number[key]/sims) + "%)"
-#
-#
+    
+    p.draw(1)
+
+    successes = successes + int(bft.BlastoiseFirstTurn(p, memoized))
+
+print "================================="
+print "===Sims:      " + str(sims)
+print "===Successes: " + str(successes) + "(" + str(100.0*successes/sims) + "%)"
+print "===Disasters: " + str(disasters) + "(" + str(100.0*disasters/sims) + "%)"
+print "===Mulligans: "
+for key in sorted(mulligans_by_number.iterkeys()):
+    print "   " + str(key) + ": " + str(mulligans_by_number[key]) + "(" + str(100.0*mulligans_by_number[key]/sims) + "%)"
+
+
 
 
 

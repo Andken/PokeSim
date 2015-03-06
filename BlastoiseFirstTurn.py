@@ -3,7 +3,8 @@ import itertools
 from copy import deepcopy
 import HandHash as hh
 
-def BlastoiseFirstTurn(hand, discard, deck, bench, memoization):
+def BlastoiseFirstTurn(p, memoization):
+    return True
 #    print "============"
 #    do.PrintCards("hand==", hand)
 #    do.PrintCards("discard==", discard)
