@@ -29,6 +29,9 @@ class Card:
 
 #types of cards
 class Pokemon(Card):
+    def __init__(self):
+        self.energy = list()
+
     def isPokemon(self):
         return True
 
@@ -57,7 +60,11 @@ class DiscardType(Card):
 
 class Energy(Card):
     def play(self, p):
-        raise("not implemented")
+        # do more than just remove it
+        new_p = deepcopy(p)
+        new_p.attached_energy = True
+        new_p.hand.remove(self)
+        return [new_p]
 
     def canPlay(self, p):
         return self in p.hand and not p.attached_energy
