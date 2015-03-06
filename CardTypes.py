@@ -15,10 +15,10 @@ class Card:
     def __eq__(self, other):
         return self.name() == other.name()
 
-    def play(self, hand, discard, bench, deck):
-        return [(hand, discard, bench, deck)]
+    def play(self, p):
+        return [p]
 
-    def canPlay(self, hand, discard, bench, deck):
+    def canPlay(self, p):
         return False
 
     def isWaterType(self):
@@ -36,30 +36,21 @@ class BasicPokemon(Card):
         return (len(p.bench)) < 5 and (self in p.hand)
 
 class DiscardType(Card):
-    def play(self, hand, discard, deck, bench):
-        return [(hand, discard, deck, bench)]
+    def play(self, p):
+        return [p]
 
-    def getDiscards(hand, discard, deck, bench):
+    def getDiscards(hand):
         new_hand = deepcopy(hand)
-        new_discard = deepcopy(discard)
-        do.MoveCard(new_hand, new_discard, card)
+        new_hand.remove(self)
+        return itertools.combinations(new_hand, 2)
 
-        possible_discards = list()
-        for subset in itertools.combinations(new_hand, 2):
-            new_hand_post_play = deepcopy(new_hand)
-            new_discard_post_play = deepcopy(new_discard)
-            do.MoveCard(new_hand_post_play, new_discard_post_play, subset[0])
-            do.MoveCard(new_hand_post_play, new_discard_post_play, subset[1])
-            possible_discards.append((new_hand_post_play, new_discard_post_play, deck, bench))
-
-        return possible_discards
-
-    def canPlay(self, hand, discard, deck, bench):
-        return (len(hand)-1) >= 2
+    def canPlay(self, p):
+        # -1 because of the Dicard Type
+        return ((len(p.hand)-1) >= 2) and (len(p.deck) >= 1)
 
 class Energy(Card):
     def play(self, p):
-        raise("do me")
+        raise("not implemented")
 
     def canPlay(self, p):
         return self in p.hand and not p.attached_energy
@@ -132,7 +123,7 @@ class ComputerTrainer(DiscardType):
     def name(self):
         return "Computer Trainer"
 
-    def play(self, hand, discard, deck, bench):
+    def play(self, p):
         possible_states = list()
 
         discards = getDiscards(hand, discard, deck, bench)
