@@ -25,8 +25,6 @@ with open('WaterDeck.txt', 'r+') as f:
 
 for j in range(0,sims):
     print str(j) + ":" + str(sims) + "::" + str(successes)
-
-while disasters == 0:
     p = PlayerState()
 
     mulligans = 0
@@ -35,7 +33,6 @@ while disasters == 0:
         p.deck = deepcopy(gold_deck)
 
         shuffle(p.deck)
-        p.printer()
 
         p.hand = list()
         p.draw(7)
@@ -52,11 +49,9 @@ while disasters == 0:
 
     disaster = p.disaster(c.Blastoise()) or p.disaster(c.ArchiesAceintheHole())
 
-    print "====Disaster: " + str(disaster)
     disasters = disasters + int(disaster)
 
-    if disaster:
-        p.printer()
+    p.placeActive()
 #
 #    bench = []
 #

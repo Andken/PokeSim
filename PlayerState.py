@@ -62,6 +62,22 @@ class PlayerState:
                 return True
         return False
             
+    def placeActive(self):
+        potential = list()
+        for card in self.hand:
+            if isinstance(card, ct.BasicPokemon):
+                potential.append(card)
+
+        assert len(potential) >= 1
+        if len(potential) == 1 or (ct.Exeggcute() not in potential):
+            self.hand.remove(potential[0])
+            self.bench.append(potential[0])
+        else:
+            for starter in potential:
+                if starter != ct.Exeggcute():
+                    self.hand.remove(starter)
+                    self.bench.append(starter)
+                    
     def setPrizes(self, number_of_prizes):
         for i in range(0,number_of_prizes):
             self.prizes.append(self.deck[0])

@@ -31,6 +31,13 @@ class TestPlayerState(unittest.TestCase):
         p4 = ps.PlayerState(hand=[ct.KeldeoEX()])
         self.assertEquals(p4.startingHand(), True)
 
+    def test_placeActive(self):
+        p1 = ps.PlayerState(hand=[ct.Exeggcute()])
+        p1.placeActive()
+
+        p2 = ps.PlayerState(bench=[ct.Exeggcute()])
+        self.assertEquals(p1 == p2, True)
+        
 
     def test_eq1(self):
         p1 = ps.PlayerState()
