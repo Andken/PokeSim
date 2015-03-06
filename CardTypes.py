@@ -75,10 +75,10 @@ class ArchiesAceintheHole(Supporter):
     def name(self):
         return "Archie's Ace in the Hole"
 
-    def canPlay(self, hand, discard, bench, deck):
-        for card in discard:
+    def canPlay(self, p):
+        for card in p.discard:
             if card.isWaterType():
-                return len(hand) == 1
+                return len(p.hand) == 1
         return False
 
 class Bicycle(Card):
@@ -88,7 +88,7 @@ class Bicycle(Card):
     def play(self, hand, discard, bench, deck):
         return [(hand, discard, bench, deck)]
 
-    def canPlay(self, hand, discard, bench, deck):
+    def canPlay(self, p):
         return False
 
 class BattleCompressor(Card):
@@ -100,7 +100,7 @@ class BattleCompressor(Card):
         new_p.hand.remove(self)
         new_p.discard.append(self)
 
-        # this might need to be smarter
+        # this might need to be smarter (and only deal with small numbers of card in the deck
         num_discarded_cards = 0
         if Blastoise() in new_p.deck:
             new_p.deck.remove(Blastoise())
@@ -122,7 +122,7 @@ class BattleCompressor(Card):
         return [new_p]
 
     def canPlay(self, p):
-        return True
+        return (self in p.hand) and (len(p.deck) >= 1)
     
 class Blastoise(Card):
     def name(self):
