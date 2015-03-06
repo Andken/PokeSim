@@ -15,6 +15,9 @@ class TestPlay(unittest.TestCase):
 
             self.assertEquals(p == p2, True)
 
+    def test_playComputerTrainer1(self):
+        pass
+
     def test_playBattleCompressor1(self):
         p1 = PlayerState()
         battle_compressor = c.BattleCompressor()
