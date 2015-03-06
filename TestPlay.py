@@ -56,6 +56,40 @@ class TestPlay(unittest.TestCase):
 
         self.assertEqual(p3 in possible_states, True)
 
+    def test_playComputerTrainer3(self):
+        p1 = PlayerState(hand = [c.ComputerTrainer(), 
+                                 c.Exeggcute(),
+                                 c.WaterEnergy(),
+                                 c.KeldeoEX()],
+                         deck = [c.ArchiesAceintheHole()])
+
+        possible_states = c.ComputerTrainer().play(p1)
+        self.assertEqual(len(possible_states), 3)
+
+        p2 = PlayerState(hand = [c.ArchiesAceintheHole(),
+                                 c.Exeggcute()],
+                         discard = [c.ComputerTrainer(), 
+                                    c.WaterEnergy(), 
+                                    c.KeldeoEX()])
+
+        self.assertEqual(p2 in possible_states, True)
+
+        p3 = PlayerState(hand = [c.ArchiesAceintheHole(),
+                                 c.KeldeoEX()],
+                         discard = [c.ComputerTrainer(), 
+                                    c.WaterEnergy(), 
+                                    c.Exeggcute()])
+
+        self.assertEqual(p3 in possible_states, True)
+
+        p4 = PlayerState(hand = [c.ArchiesAceintheHole(),
+                                 c.WaterEnergy()],
+                         discard = [c.ComputerTrainer(), 
+                                    c.KeldeoEX(), 
+                                    c.Exeggcute()])
+
+        self.assertEqual(p4 in possible_states, True)
+
     def test_playBattleCompressor1(self):
         p1 = PlayerState()
         battle_compressor = c.BattleCompressor()
@@ -203,5 +237,5 @@ class TestPlay(unittest.TestCase):
         
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(verbosity=2)
 
