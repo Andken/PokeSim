@@ -53,13 +53,19 @@ class PlayerState:
 
     def draw(self, number_to_draw):
         for i in range(0,number_to_draw):
-            hand.append(deepcopy(self.deck[0]))
-            del self.deck[0]
+            self.hand.append(self.deck[0])
+            self.deck.remove(self.deck[0])
 
+    def startingHand(self):
+        for card in self.hand:
+            if isinstance(card, ct.BasicPokemon):
+                return True
+        return False
+            
     def setPrizes(self, number_of_prizes):
         for i in range(0,number_to_draw):
-            prizes.append(deepcopy(self.deck[0]))
-            del self.deck[0]
+            self.prizes.append(self.deck[0])
+            self.deck.remove(self.deck[0])
         
     def printer(self):
         print "hand:"

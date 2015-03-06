@@ -6,6 +6,7 @@ from PlayerState import PlayerState
 import BlastoiseFirstTurn as bft
 from copy import deepcopy
 import CardFactory as cf
+import CardTypes as c
 
 sims = 1
 
@@ -22,56 +23,35 @@ with open('WaterDeck.txt', 'r+') as f:
         gold_deck.append(cf.create(card.rstrip()))
 
 
-print gold_deck
-raise "not yet"
-
 for j in range(0,sims):
     print str(j) + ":" + str(sims) + "::" + str(successes)
     p = PlayerState()
 
     mulligans = 0
-    playable_hand = False
 
-    while not playable_hand:
+    while not p.startingHand():
         p.deck = deepcopy(gold_deck)
 
         shuffle(p.deck)
         p.printer()
 
         p.hand = list()
-        for i in range(0,7):
-            p.draw()
+        p.draw(7)
 
-        playable_hand = c.BasicPokemon() in p.hand()
-
-        mulligans = mulligans + int(not playable_hand)
+        mulligans = mulligans + int(not p.startingHand())
 
     if(mulligans in mulligans_by_number):
         mulligans_by_number[mulligans] = mulligans_by_number[mulligans] + 1
     else:
         mulligans_by_number[mulligans] = 1
 
-    print "mulligans = " + str(mulligans)
-    p.printer()
+    # prize cards
+    p.setPrizes(6)
 
-    raise "not done yet"
+    disaster = p.containsAllOf(c.Blastoise()) or p.containsAllOf(c.ArchiesAceintheHole())
 
-#    # prize cards
-#    prizes = list()
-#    for i in range(0,6):
-#        do.DrawCard(prizes, deck)
-#
-#    do.PrintCards("====Prizes===", prizes)
-#    disaster = False
-#    for card in prizes:
-#        # each card has a value...if all card of that value are in the prizes, that's a disaster
-#        deck_indices = [i for i, x in enumerate(gold_deck) if x[1] == card[1]]
-#        prize_indices = [i for i, x in enumerate(prizes) if x[1] == card[1]]
-#
-#        disaster = disaster | (len(deck_indices) == len(prize_indices))
-#
-#    #print "====Disaster: " + str(disaster)
-#    disasters = disasters + disaster
+    print "====Disaster: " + str(disaster)
+    disasters = disasters + int(disaster)
 #
 #    bench = []
 #

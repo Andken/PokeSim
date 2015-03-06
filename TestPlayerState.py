@@ -8,6 +8,20 @@ class TestPlayerState(unittest.TestCase):
     def test_hash(self):
         self.assertEqual(hash(ps.PlayerState()), hash(ps.PlayerState()))
 
+    def test_startingHand(self):
+        p1 = ps.PlayerState(hand=[ct.Blastoise(), ct.N()])
+        self.assertEquals(p1.startingHand(), False)
+
+        p2 = ps.PlayerState(hand=[ct.Blastoise(), ct.N(), ct.KeldeoEX()])
+        self.assertEquals(p2.startingHand(), True)
+
+        p3 = ps.PlayerState(hand=[ct.KeldeoEX(), ct.Blastoise(), ct.N()])
+        self.assertEquals(p3.startingHand(), True)
+
+        p4 = ps.PlayerState(hand=[ct.KeldeoEX()])
+        self.assertEquals(p4.startingHand(), True)
+
+
     def test_eq1(self):
         p1 = ps.PlayerState()
         p2 = ps.PlayerState()
