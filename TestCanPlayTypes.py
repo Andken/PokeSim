@@ -5,6 +5,27 @@ import CardTypes as ct
 from PlayerState import PlayerState
 
 class TestCanPlayTypes(unittest.TestCase):
+    def test_CanPlayUltraBall(self):
+        p1 = PlayerState()
+        self.assertEqual(ct.UltraBall().canPlay(p1), False)
+
+        p2 = PlayerState(hand=[ct.UltraBall()], deck=[ct.WaterEnergy()])
+        self.assertEqual(ct.UltraBall().canPlay(p2), False)
+
+        p3 = PlayerState(hand=[ct.UltraBall(),
+                               ct.KeldeoEX(),
+                               ct.KeldeoEX()],
+                         deck=[ct.WaterEnergy()])
+        self.assertEqual(ct.UltraBall().canPlay(p3), True)
+
+        p4 = PlayerState(hand=[ct.UltraBall(),
+                               ct.KeldeoEX(),
+                               ct.KeldeoEX()])
+        self.assertEqual(ct.UltraBall().canPlay(p4), False)
+
+        p5 = PlayerState(hand=[ct.UltraBall(), ct.KeldeoEX()])
+        self.assertEqual(ct.UltraBall().canPlay(p5), False)
+
     def test_CanPlayComputerTrainer(self):
         p1 = PlayerState()
         self.assertEqual(ct.ComputerTrainer().canPlay(p1), False)

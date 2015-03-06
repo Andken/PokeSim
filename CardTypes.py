@@ -80,8 +80,9 @@ class Bicycle(Card):
     def name(self):
         return "Bicycle"
 
-    def play(self, hand, discard, bench, deck):
-        return [(hand, discard, bench, deck)]
+    def play(self, p):
+        assert "not implemented"
+        return [p]
 
     def canPlay(self, p):
         return False
@@ -198,29 +199,32 @@ class UltraBall(DiscardType):
     def name(self):
         return "Ultra Ball"
 
-    def play(self, hand, discard, deck, bench):
+    def play(self, p):
         possible_states = list()
-
-        discards = getDiscards(hand, discard, deck, bench)
+        discards = self.getDiscards(p.hand)
 
         for possibility in discards:
-            for new_card_name in ["Blastoise",
-                                  "Exeggcute",
-                                  "Keldeo EX",
-                                  "NOTHING"]:
-                        new_hand_after_card_added = deepcopy(possibility[0])
-                        new_deck = deepcopy(possibility[2])
-                        if(do.ContainsName(new_deck, new_card_name)):
-                            new_card = do.GetCard(new_deck, new_card_name)
-                            do.MoveCard(new_deck, new_hand_after_card_added, new_card)
-                        else:
-                            # we always have enough water energy
-                            new_hand_after_card_added.append(("Water Energy","0","Energy"))
+            assert len(possibility) > 0
 
-                        possible_states.append(new_hand_after_card_added,
-                                               possiblity[1],
-                                               new_deck,
-                                               possibility[3])
+            new_p = deepcopy(p)
+            new_p.hand.remove(self)
+            new_p.discard.append(self)
+            new_p.hand.remove(possibility[0])
+            new_p.discard.append(possibility[0])
+            new_p.hand.remove(possibility[1])
+            new_p.discard.append(possibility[1])
+
+            # copy this one as it's legal to grab nothing
+            possible_states.append(new_p)
+
+            for card_to_get in new_p.deck:
+                if card_to_get.isPokemon():
+                    new_p2 = deepcopy(new_p)
+                    new_p2.deck.remove(card_to_get)
+                    new_p2.hand.append(card_to_get)
+                    possible_states.append(new_p2)
+
+        assert len(possible_states) > 0
         return possible_states
 
 class VSSeeker(Card):
