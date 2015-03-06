@@ -55,6 +55,30 @@ class TestCardTypes(unittest.TestCase):
         c2 = ct.KeldeoEX()
         self.assertEqual(c1==c2, True)
 
+    def test_isPokemon(self):
+        self.assertEqual(ct.Card().isPokemon(), False)
+        self.assertEqual(ct.BasicPokemon().isPokemon(), True)
+        self.assertEqual(ct.DiscardType().isPokemon(), False)
+        self.assertEqual(ct.Energy().isPokemon(), False)
+        self.assertEqual(ct.Supporter().isPokemon(), False)
+        self.assertEqual(ct.ArchiesAceintheHole().isPokemon(), False)
+        self.assertEqual(ct.Bicycle().isPokemon(), False)
+        self.assertEqual(ct.BattleCompressor().isPokemon(), False)
+        self.assertEqual(ct.Blastoise().isPokemon(), True)
+        self.assertEqual(ct.ComputerTrainer().isPokemon(), False)
+        self.assertEqual(ct.EscapeRope().isPokemon(), False)
+        self.assertEqual(ct.Exeggcute().isPokemon(), True)
+        self.assertEqual(ct.KeldeoEX().isPokemon(), True)
+        self.assertEqual(ct.Maintenance().isPokemon(), False)
+        self.assertEqual(ct.N().isPokemon(), False)
+        self.assertEqual(ct.ProfessorJuniper().isPokemon(), False)
+        self.assertEqual(ct.Skyla().isPokemon(), False)
+        self.assertEqual(ct.Suicune().isPokemon(), True)
+        self.assertEqual(ct.SuperiorEnergyRetriever().isPokemon(), False)
+        self.assertEqual(ct.UltraBall().isPokemon(), False)
+        self.assertEqual(ct.VSSeeker().isPokemon(), False)
+        self.assertEqual(ct.WaterEnergy().isPokemon(), False)
+
 
 if __name__ == '__main__':
     unittest.main()

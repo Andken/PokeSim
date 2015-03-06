@@ -24,8 +24,15 @@ class Card:
     def isWaterType(self):
         return False
 
+    def isPokemon(self):
+        return False
+
 #types of cards
-class BasicPokemon(Card):
+class Pokemon(Card):
+    def isPokemon(self):
+        return True
+
+class BasicPokemon(Pokemon):
     def play(self, p):
         new_p = deepcopy(p)
         new_p.hand.remove(self)
@@ -112,7 +119,7 @@ class BattleCompressor(Card):
     def canPlay(self, p):
         return (self in p.hand) and (len(p.deck) >= 1)
     
-class Blastoise(Card):
+class Blastoise(Pokemon):
     def name(self):
         return "Blastoise"
 
