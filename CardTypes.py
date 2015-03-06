@@ -24,16 +24,10 @@ class Card:
     def isWaterType(self):
         return False
 
-    def isPokemon(self):
-        return False
-
 #types of cards
 class Pokemon(Card):
-    def __init__(self):
-        self.energy = list()
+    pass
 
-    def isPokemon(self):
-        return True
 
 class BasicPokemon(Pokemon):
     def play(self, p):
@@ -225,7 +219,7 @@ class UltraBall(DiscardType):
             possible_states.append(new_p)
 
             for card_to_get in new_p.deck:
-                if card_to_get.isPokemon():
+                if isinstance(card_to_get, Pokemon):
                     new_p2 = deepcopy(new_p)
                     new_p2.deck.remove(card_to_get)
                     new_p2.hand.append(card_to_get)
