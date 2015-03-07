@@ -52,7 +52,8 @@ class PlayerState:
                 tuple(sorted(self.prizes)),
                 tuple(sorted(self.bench)),
                 tuple(sorted(self.discard)),
-                self.attached_energy)
+                self.attached_energy,
+                self.nondeterministic)
 
     def draw(self, number_to_draw):
         for i in range(0,number_to_draw):

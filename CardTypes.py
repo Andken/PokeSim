@@ -1,5 +1,6 @@
 from copy import deepcopy
 import itertools
+from random import shuffle
 
 #base
 class Card:
@@ -291,7 +292,7 @@ class Maintenance(DiscardType):
             new_p.hand.remove(possibility[1])
             new_p.deck.append(possibility[1])
             shuffle(new_p.deck)
-            new_p.draw()
+            new_p.draw(1)
             possible_states.add(new_p)
 
         assert len(possible_states) > 0

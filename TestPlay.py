@@ -5,6 +5,29 @@ import CardTypes as c
 from PlayerState import PlayerState
 
 class TestPlay(unittest.TestCase):
+    def test_playMaintenance(self):
+        p = PlayerState(hand=[c.Maintenance(), 
+                              c.N(), 
+                              c.KeldeoEX()], 
+                        nondeterministic=True)
+
+        possible_states = c.Maintenance().play(p)
+
+        self.assertEqual(len(possible_states), 1)
+
+        p1 = PlayerState(hand=[c.N()],
+                         deck=[c.KeldeoEX()],
+                         discard=[c.Maintenance()],
+                         nondeterministic=True)
+
+        p2 = PlayerState(hand=[c.KeldeoEX()],
+                         deck=[c.N()],
+                         discard=[c.Maintenance()],
+                         nondeterministic=True)
+
+        self.assertEqual(p in possible_states, False)
+        self.assertEqual(p1 in possible_states or p2 in possible_states, True)
+
     def test_playJirachiEX1(self):
         p = PlayerState(hand=[c.JirachiEX()],
                         deck=[c.N()])
