@@ -277,6 +277,16 @@ class N(Supporter):
     def name(self):
         return "N"
 
+class PrimalKyogreEX(Pokemon):
+    def play(self):
+        assert "play: " + self.name()
+
+    def name(self):
+        return "Primal Kyogre EX"
+
+    def isWaterType(self):
+        return True
+
 class ProfessorJuniper(Supporter):
     def name(self):
         return "Professor Juniper"

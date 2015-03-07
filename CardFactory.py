@@ -13,6 +13,7 @@ def create(name):
                 "Keldeo EX"                 : ct.KeldeoEX(),
                 "Maintenance"               : ct.Maintenance(),
                 "N"                         : ct.N(),
+                "Primal Kyogre EX"          : ct.PrimalKyogreEX(),
                 "Professor Juniper"         : ct.ProfessorJuniper(),
                 "Skyla"                     : ct.Skyla(),
                 "Suicune"                   : ct.Suicune(),
