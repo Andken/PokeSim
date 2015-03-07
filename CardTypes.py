@@ -336,6 +336,9 @@ class SuperiorEnergyRetriever(DiscardType):
         assert "not implemented: " + self.name()
 
     def canPlay(self, p):
+        for card in p.discard:
+            if isinstance(card, Energy):
+                return self in p.hand and len(p.hand) - 1 >= 2 
         return False
 
     def name(self):
