@@ -5,6 +5,43 @@ import CardTypes as c
 from PlayerState import PlayerState
 
 class TestPlay(unittest.TestCase):
+    def test_playBicycle1(self):
+        p = PlayerState(hand=[c.Bicycle(), 
+                              c.N(), 
+                              c.N()],
+                        deck=[c.N(),c.N()],
+                        nondeterministic=True)
+
+        possible_states = c.Bicycle().play(p)
+
+        self.assertEqual(len(possible_states), 1)
+
+        p1 = PlayerState(hand=[c.N(),c.N(),c.N(),c.N()],
+                         discard=[c.Bicycle()],
+                         nondeterministic=True)
+
+        self.assertEqual(p in possible_states, False)
+        self.assertEqual(p1 in possible_states, True)
+
+    def test_playBicycle2(self):
+        p = PlayerState(hand=[c.Bicycle(), 
+                              c.N(), 
+                              c.N()],
+                        deck=[c.N(),c.N(),c.N()],
+                        nondeterministic=True)
+
+        possible_states = c.Bicycle().play(p)
+
+        self.assertEqual(len(possible_states), 1)
+
+        p1 = PlayerState(hand=[c.N(),c.N(),c.N(),c.N()],
+                         discard=[c.Bicycle()],
+                         deck=[c.N()],
+                         nondeterministic=True)
+
+        self.assertEqual(p in possible_states, False)
+        self.assertEqual(p1 in possible_states, True)
+
     def test_playMaintenance(self):
         p = PlayerState(hand=[c.Maintenance(), 
                               c.N(), 
