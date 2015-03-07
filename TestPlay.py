@@ -5,6 +5,63 @@ import CardTypes as c
 from PlayerState import PlayerState
 
 class TestPlay(unittest.TestCase):
+    def test_playArchiesAceintheHole1(self):
+        p = PlayerState(hand=[c.ArchiesAceintheHole()],
+                        deck=[c.WaterEnergy(),
+                              c.WaterEnergy(),
+                              c.WaterEnergy(),
+                              c.WaterEnergy(),
+                              c.WaterEnergy()],
+                        discard=[c.Blastoise()])
+
+        possible_states = c.ArchiesAceintheHole().play(p)
+
+        self.assertEqual(len(possible_states), 1)
+        for state in possible_states:
+            self.assertEqual(state.hand == [c.WaterEnergy(),
+                                            c.WaterEnergy(),
+                                            c.WaterEnergy(),
+                                            c.WaterEnergy(),
+                                            c.WaterEnergy()], True)
+            self.assertEqual(state.discard == [c.ArchiesAceintheHole()], True)
+            self.assertEqual(state.bench == [c.Blastoise()], True)
+
+    def test_playArchiesAceintheHole2(self):
+        p = PlayerState(hand=[c.ArchiesAceintheHole()],
+                        deck=[c.WaterEnergy(),
+                              c.WaterEnergy(),
+                              c.WaterEnergy(),
+                              c.WaterEnergy(),
+                              c.WaterEnergy(),
+                              c.UltraBall()],
+                        discard=[c.Blastoise(), c.KeldeoEX()])
+
+        possible_states = c.ArchiesAceintheHole().play(p)
+
+        self.assertEqual(len(possible_states), 2)
+
+        p1 = PlayerState(hand = [c.WaterEnergy(),
+                                 c.WaterEnergy(),
+                                 c.WaterEnergy(),
+                                 c.WaterEnergy(),
+                                 c.WaterEnergy()],
+                         deck = [c.UltraBall()],
+                         discard = [c.KeldeoEX(), c.ArchiesAceintheHole()],
+                         bench = [c.Blastoise()])
+        self.assertIn(p1, possible_states)
+
+        p2 = PlayerState(hand = [c.WaterEnergy(),
+                                 c.WaterEnergy(),
+                                 c.WaterEnergy(),
+                                 c.WaterEnergy(),
+                                 c.WaterEnergy()],
+                         deck = [c.UltraBall()],
+                         discard = [c.Blastoise(), c.ArchiesAceintheHole()],
+                         bench = [c.KeldeoEX()])
+        self.assertIn(p2, possible_states)
+
+        self.assertNotIn(p, possible_states)
+
     def test_playWaterEnergy(self):
         p = PlayerState(hand=[c.WaterEnergy()])
 

@@ -6,13 +6,11 @@ def BlastoiseFirstTurn(p, memoization):
     if p in memoization:
         return memoization[p]
 
-    if(len(p.hand) == 0):
-        return False
-
-    if(len(p.hand) == 1 and c.ArchiesAceintheHole() in p.hand and c.Blastoise() in p.discard):
+    if c.Blastoise() in p.bench:
+        memoization[p] = True
         return True
 
-    if(c.Exeggcute() in p.discard):
+    if c.Exeggcute() in p.discard:
         new_p = deepcopy(p)
         new_p.discard.remove(c.Exeggcute())
         new_p.hand.append(c.Exeggcute())
@@ -24,7 +22,7 @@ def BlastoiseFirstTurn(p, memoization):
         
     # play each card in turn
     for card in p.hand:
-        if(card.canPlay(p)):
+        if card.canPlay(p):
             possibilities = card.play(p)
             
             for possibility in possibilities:

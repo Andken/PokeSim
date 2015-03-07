@@ -15,8 +15,8 @@ class Card:
     def __eq__(self, other):
         return self.name() == other.name()
 
-    def play(self, p):
-        return set([new_p])
+    def play(self):
+        assert "play: " + self.name()
 
     def canPlay(self, p):
         return False
@@ -26,8 +26,8 @@ class Card:
 
 #types of cards
 class Pokemon(Card):
-    pass
-
+    def play(self):
+        assert "play: " + self.name()
 
 class BasicPokemon(Pokemon):
     def play(self, p):
@@ -40,8 +40,8 @@ class BasicPokemon(Pokemon):
         return (len(p.bench)) < 5 and (self in p.hand)
 
 class DiscardType(Card):
-    def play(self, p):
-        return set([new_p])
+    def play(self):
+        assert "play: " + self.name()
 
     def getDiscards(self, hand):
         new_hand = deepcopy(hand)
@@ -51,7 +51,6 @@ class DiscardType(Card):
             discards.add(tuple(sorted(discard)))
         return discards
         
-
     def canPlay(self, p):
         # -1 because of the Discard Type already in the hand
         return ((len(p.hand)-1) >= 2) and (len(p.deck) >= 1)
@@ -68,10 +67,25 @@ class Energy(Card):
         return self in p.hand and not p.attached_energy
 
 class Supporter(Card):
-    pass
+    def play(self):
+        assert "play: " + self.name()
 
 # concrete cards
 class ArchiesAceintheHole(Supporter):
+    def play(self, p):
+        possible_states = set()
+        for card in p.discard:
+            if card.isWaterType():
+                new_p = deepcopy(p)
+                new_p.hand.remove(self)
+                new_p.discard.append(self)
+                new_p.discard.remove(card)
+                new_p.bench.append(card)
+                new_p.draw(5)
+                possible_states.add(new_p)
+
+        return possible_states
+
     def name(self):
         return "Archie's Ace in the Hole"
 
@@ -126,6 +140,9 @@ class BattleCompressor(Card):
         return (self in p.hand) and (len(p.deck) >= 1)
     
 class Blastoise(Pokemon):
+    def play(self):
+        assert "play: " + self.name()
+
     def name(self):
         return "Blastoise"
 
