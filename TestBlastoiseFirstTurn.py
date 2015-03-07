@@ -372,6 +372,7 @@ class TestBlastoiseFirstTurn(unittest.TestCase):
         p.hand.append(cf.create("Computer Trainer"))
         p.hand.append(cf.create("Ultra Ball"))
         p.deck.append(cf.create("Blastoise"))
+        p.deck.append(cf.create("Blastoise"))
         checkHand(self, p, True)
 
 if __name__ == '__main__':
