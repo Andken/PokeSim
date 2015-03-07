@@ -143,6 +143,7 @@ class ComputerTrainer(DiscardType):
 
         for possibility in discards:
             assert len(possibility) > 0
+            cards_tried = set() # optimization to only try each card once
             for card_to_get in p.deck:
                 if card_to_get in [ArchiesAceintheHole(), 
                                    BattleCompressor(),
@@ -152,7 +153,8 @@ class ComputerTrainer(DiscardType):
                                    Suicune(),
                                    UltraBall(),
                                    VSSeeker(),
-                                   WaterEnergy()]:
+                                   WaterEnergy()] and card_to_get not in cards_tried:
+                    cards_tried.add(card_to_get)
                     new_p = deepcopy(p)
                     new_p.hand.remove(self)
                     new_p.discard.append(self)
