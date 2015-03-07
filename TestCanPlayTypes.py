@@ -68,6 +68,33 @@ class TestCanPlayTypes(unittest.TestCase):
         p5 = PlayerState(hand=[c.ComputerTrainer(), c.KeldeoEX()])
         self.assertEqual(c.ComputerTrainer().canPlay(p5), False)
 
+    def test_CanPlayDowsingMachine(self):
+        p1 = PlayerState()
+        self.assertEqual(c.DowsingMachine().canPlay(p1), False)
+
+        p2 = PlayerState(hand=[c.DowsingMachine()], discard=[c.WaterEnergy()])
+        self.assertEqual(c.DowsingMachine().canPlay(p2), False)
+
+        p3 = PlayerState(hand=[c.DowsingMachine(),
+                               c.KeldeoEX(),
+                               c.KeldeoEX()],
+                         discard=[c.WaterEnergy()])
+        self.assertEqual(c.DowsingMachine().canPlay(p3), False)
+
+        p4 = PlayerState(hand=[c.DowsingMachine(),
+                               c.KeldeoEX(),
+                               c.KeldeoEX()])
+        self.assertEqual(c.DowsingMachine().canPlay(p4), False)
+
+        p5 = PlayerState(hand=[c.DowsingMachine(), c.KeldeoEX()])
+        self.assertEqual(c.DowsingMachine().canPlay(p5), False)
+
+        p6 = PlayerState(hand=[c.DowsingMachine(),
+                               c.KeldeoEX(),
+                               c.KeldeoEX()],
+                         discard=[c.N()])
+        self.assertEqual(c.DowsingMachine().canPlay(p6), True)
+
     def test_CanPlayBattleCompressor(self):
         p1 = PlayerState()
         self.assertEqual(c.BattleCompressor().canPlay(p1), False)

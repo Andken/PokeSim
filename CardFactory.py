@@ -6,6 +6,7 @@ def create(name):
                 "Bicycle"                   : ct.Bicycle(),
                 "Blastoise"                 : ct.Blastoise(),
                 "Computer Trainer"          : ct.ComputerTrainer(),
+                "Dowsing Machine"           : ct.DowsingMachine(),
                 "Escape Rope"               : ct.EscapeRope(),
                 "Exeggcute"                 : ct.Exeggcute(),
                 "Keldeo EX"                 : ct.KeldeoEX(),
