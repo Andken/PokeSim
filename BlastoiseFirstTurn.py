@@ -1,7 +1,5 @@
-import DeckOperations as do
 import itertools
 from copy import deepcopy
-import HandHash as hh
 
 def BlastoiseFirstTurn(p, memoization):
     return True
