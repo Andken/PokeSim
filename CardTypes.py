@@ -109,7 +109,7 @@ class Bicycle(Trainer):
         return set([p])
 
     def canPlay(self, p):
-        return False
+        return len(p.hand) < 5 and (len(p.hand) + len(p.deck)) > 4 and self in p.hand and p.nondeterministic
 
 class BattleCompressor(Trainer):
     def name(self):
