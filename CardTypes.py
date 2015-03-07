@@ -91,8 +91,8 @@ class ArchiesAceintheHole(Supporter):
 
     def canPlay(self, p):
         for card in p.discard:
-            if card.isWaterType():
-                return len(p.hand) == 1
+            if card.isWaterType() and len(p.hand) == 1 and len(p.bench) < 5 and len(p.deck) >= 5:
+                return True
         return False
 
 class Bicycle(Card):
