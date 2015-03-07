@@ -5,14 +5,15 @@ import CardTypes as c
 from PlayerState import PlayerState
 
 class TestPlay(unittest.TestCase):
-    def test_playWaterenergy(self):
+    def test_playWaterEnergy(self):
         p = PlayerState(hand=[c.WaterEnergy()])
 
         possible_states = c.WaterEnergy().play(p)
 
         self.assertEqual(len(possible_states), 1)
-        self.assertEqual(possible_states[0].hand == [], True)
-        self.assertEqual(possible_states[0].attached_energy, True)
+        for state in possible_states:
+            self.assertEqual(state.hand == [], True)
+            self.assertEqual(state.attached_energy, True)
 
     def test_playVSSeeker(self):
         p = PlayerState(hand=[c.VSSeeker()],
@@ -106,7 +107,7 @@ class TestPlay(unittest.TestCase):
                                     c.KeldeoEX(), 
                                     c.KeldeoEX()])
 
-        self.assertEqual(possible_states[0] == p2, True)
+        self.assertIn(p2, possible_states)
         self.assertNotIn(p1, possible_states)
 
     def test_playComputerTrainer2(self):

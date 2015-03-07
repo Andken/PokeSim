@@ -16,7 +16,7 @@ class Card:
         return self.name() == other.name()
 
     def play(self, p):
-        return [p]
+        return set([new_p])
 
     def canPlay(self, p):
         return False
@@ -34,14 +34,14 @@ class BasicPokemon(Pokemon):
         new_p = deepcopy(p)
         new_p.hand.remove(self)
         new_p.bench.append(self)
-        return [new_p]
+        return set([new_p])
 
     def canPlay(self, p):
         return (len(p.bench)) < 5 and (self in p.hand)
 
 class DiscardType(Card):
     def play(self, p):
-        return [p]
+        return set([new_p])
 
     def getDiscards(self, hand):
         new_hand = deepcopy(hand)
@@ -62,7 +62,7 @@ class Energy(Card):
         new_p = deepcopy(p)
         new_p.attached_energy = True
         new_p.hand.remove(self)
-        return [new_p]
+        return set([new_p])
 
     def canPlay(self, p):
         return self in p.hand and not p.attached_energy
@@ -87,7 +87,7 @@ class Bicycle(Card):
 
     def play(self, p):
         assert "not implemented"
-        return [p]
+        return set([p])
 
     def canPlay(self, p):
         return False
@@ -120,7 +120,7 @@ class BattleCompressor(Card):
             new_p.discard.append(WaterEnergy())
             num_discarded_cards += 1            
         
-        return [new_p]
+        return set([new_p])
 
     def canPlay(self, p):
         return (self in p.hand) and (len(p.deck) >= 1)
@@ -148,6 +148,7 @@ class ComputerTrainer(DiscardType):
                 if card_to_get in [ArchiesAceintheHole(), 
                                    BattleCompressor(),
                                    Blastoise(),
+                                   ComputerTrainer(),
                                    Exeggcute(),
                                    KeldeoEX(),
                                    Suicune(),
