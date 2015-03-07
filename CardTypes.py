@@ -49,7 +49,7 @@ class DiscardType(Card):
         return itertools.combinations(new_hand, 2)
 
     def canPlay(self, p):
-        # -1 because of the Dicard Type
+        # -1 because of the Discard Type already in the hand
         return ((len(p.hand)-1) >= 2) and (len(p.deck) >= 1)
 
 class Energy(Card):

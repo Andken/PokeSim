@@ -299,6 +299,7 @@ class TestBlastoiseFirstTurn(unittest.TestCase):
         p.hand.append(cf.create("Archie's Ace in the Hole"))
         p.hand.append(cf.create("Ultra Ball"))
         p.discard.append(cf.create("Blastoise"))
+        p.deck.append(cf.create("VS Seeker"))
         checkHand(self, p, True)
 
     def test_UltraBallToGetExeggcute(self):
