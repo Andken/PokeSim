@@ -55,7 +55,8 @@ for sim_number in range(1,sims+1):
 
     p.placeActive()
 
-    bad_news += int(c.Exeggcute() in p.bench)
+    is_bad_news = c.Exeggcute() in p.bench or c.JirachiEX() in p.bench
+    bad_news += int(is_bad_news)
     disasters += int(disaster)
     
     p.draw(1)
@@ -63,7 +64,7 @@ for sim_number in range(1,sims+1):
     if not disaster:
         is_successful = bft.BlastoiseFirstTurn(p, memoized)
         successes += int(is_successful)
-        bad_news_and_success += int(is_successful and bad_news)
+        bad_news_and_success += int(is_successful and is_bad_news)
 
     
 
