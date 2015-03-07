@@ -5,6 +5,69 @@ import CardTypes as c
 from PlayerState import PlayerState
 
 class TestPlay(unittest.TestCase):
+    def test_playJirachiEX1(self):
+        p = PlayerState(hand=[c.JirachiEX()],
+                        deck=[c.N()])
+
+        possible_states = c.JirachiEX().play(p)
+
+        self.assertEqual(len(possible_states), 2)
+
+        wo_supporter = PlayerState(bench=[c.JirachiEX()],
+                                   deck=[c.N()])
+
+        w_supporter = PlayerState(bench=[c.JirachiEX()],
+                                  hand=[c.N()])
+
+        self.assertNotIn(p, possible_states)
+        self.assertIn(w_supporter, possible_states)
+        self.assertIn(wo_supporter, possible_states)
+
+    def test_playJirachiEX2(self):
+        p = PlayerState(hand=[c.JirachiEX()],
+                        deck=[c.N(), c.N()])
+
+        possible_states = c.JirachiEX().play(p)
+
+        self.assertEqual(len(possible_states), 2)
+
+        wo_supporter = PlayerState(bench=[c.JirachiEX()],
+                                   deck=[c.N(), c.N()])
+
+        w_supporter = PlayerState(bench=[c.JirachiEX()],
+                                  hand=[c.N()],
+                                  deck=[c.N()])
+
+        self.assertNotIn(p, possible_states)
+        self.assertIn(w_supporter, possible_states)
+        self.assertIn(wo_supporter, possible_states)
+
+    def test_playJirachiEX3(self):
+        p = PlayerState(hand=[c.JirachiEX()],
+                        deck=[c.WaterEnergy()])
+
+        possible_states = c.JirachiEX().play(p)
+
+        self.assertEqual(len(possible_states), 1)
+
+        p2 = PlayerState(bench=[c.JirachiEX()],
+                         deck=[c.WaterEnergy()])
+
+        self.assertNotIn(p, possible_states)
+        self.assertIn(p2, possible_states)
+
+    def test_playJirachiEX3(self):
+        p = PlayerState(hand=[c.JirachiEX()])
+
+        possible_states = c.JirachiEX().play(p)
+
+        self.assertEqual(len(possible_states), 1)
+
+        p2 = PlayerState(bench=[c.JirachiEX()])
+
+        self.assertNotIn(p, possible_states)
+        self.assertIn(p2, possible_states)
+
     def test_playArchiesAceintheHole1(self):
         p = PlayerState(hand=[c.ArchiesAceintheHole()],
                         deck=[c.WaterEnergy(),
