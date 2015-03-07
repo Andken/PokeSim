@@ -6,8 +6,8 @@ def BlastoiseFirstTurn(p, memoization):
     if(len(p.hand) == 0):
         return False
 
-    if(len(p.hand) == 1):
-        return c.ArchiesAceintheHole() in p.hand and c.Blastoise() in p.discard
+    if(len(p.hand) == 1 and c.ArchiesAceintheHole() in p.hand and c.Blastoise() in p.discard):
+        return True
 
     if(c.Exeggcute() in p.discard):
         new_p = deepcopy(p)
