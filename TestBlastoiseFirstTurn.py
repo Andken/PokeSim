@@ -216,6 +216,7 @@ class TestBlastoiseFirstTurn(unittest.TestCase):
         p.hand.append(cf.create("Blastoise"))
         p.hand.append(cf.create("Ultra Ball"))
         p.discard.append(cf.create("Exeggcute"))
+        p.deck.append(cf.create("Exeggcute"))
         checkHand(self, p, True)
 
     def test_BlastoiseBattleCompressor(self):
