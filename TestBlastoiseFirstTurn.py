@@ -88,6 +88,7 @@ class TestBlastoiseFirstTurn(unittest.TestCase):
         p.hand.append(cf.create("Blastoise"))
         p.hand.append(cf.create("Blastoise"))
         p.hand.append(cf.create("Ultra Ball"))
+        p.deck.append(cf.create("Ultra Ball"))
         checkHand(self, p, True)
 
     def test_DiscardAndVSSeeker(self):
@@ -96,6 +97,7 @@ class TestBlastoiseFirstTurn(unittest.TestCase):
         p.hand.append(cf.create("Blastoise"))
         p.hand.append(cf.create("VS Seeker"))
         p.hand.append(cf.create("Ultra Ball"))
+        p.deck.append(cf.create("Ultra Ball"))
         checkHand(self, p, True)
 
     def test_MultiDiscard(self):
