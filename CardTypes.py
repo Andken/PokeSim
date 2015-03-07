@@ -46,7 +46,11 @@ class DiscardType(Card):
     def getDiscards(self, hand):
         new_hand = deepcopy(hand)
         new_hand.remove(self)
-        return itertools.combinations(new_hand, 2)
+        discards = set()
+        for discard in itertools.combinations(new_hand, 2):
+            discards.add(tuple(sorted(discard)))
+        return discards
+        
 
     def canPlay(self, p):
         # -1 because of the Discard Type already in the hand
