@@ -312,6 +312,7 @@ class TestBlastoiseFirstTurn(unittest.TestCase):
         p.hand.append(cf.create("Ultra Ball"))
         p.discard.append(cf.create("Blastoise"))
         p.deck.append(cf.create("Exeggcute"))
+        p.deck.append(cf.create("Ultra Ball"))
         checkHand(self, p, True)
 
     def test_ComputerTrainerToGetArchie(self):
