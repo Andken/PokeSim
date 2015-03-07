@@ -7,7 +7,8 @@ class PlayerState:
                  prizes=None, 
                  bench=None, 
                  discard=None, 
-                 attached_energy=False):
+                 attached_energy=False,
+                 nondeterministic=False):
         if hand is None:
             self.hand = list()
         else:
@@ -34,6 +35,7 @@ class PlayerState:
             self.discard = discard
 
         self.attached_energy = attached_energy
+        self.nondeterministic = nondeterministic
 
     def __hash__(self):
         return hash(self.tuplize())

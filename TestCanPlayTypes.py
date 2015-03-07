@@ -5,6 +5,21 @@ import CardTypes as c
 from PlayerState import PlayerState
 
 class TestCanPlayTypes(unittest.TestCase):
+    def test_CanPlayMaintenance(self):
+        p1 = PlayerState(nondeterministic = True)
+        self.assertEqual(c.Maintenance().canPlay(p1), False)
+
+        p2 = PlayerState(hand=[c.Maintenance()],
+                         nondeterministic = True)
+        self.assertEqual(c.Maintenance().canPlay(p2), False)
+
+        p3 = PlayerState(hand=[c.Maintenance(), c.N(), c.N()],
+                         nondeterministic = True)
+        self.assertEqual(c.Maintenance().canPlay(p3), True)
+
+        p4 = PlayerState(hand=[c.Maintenance(), c.N(), c.N()])
+        self.assertEqual(c.Maintenance().canPlay(p4), False)
+
     def test_CanPlayVSSeeker(self):
         p1 = PlayerState()
         self.assertEqual(c.VSSeeker().canPlay(p1), False)
@@ -177,5 +192,5 @@ class TestCanPlayTypes(unittest.TestCase):
         self.assertEqual(c.WaterEnergy().canPlay(p2), False)
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()
 
