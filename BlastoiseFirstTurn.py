@@ -3,6 +3,9 @@ from copy import deepcopy
 import CardTypes as c
 
 def BlastoiseFirstTurn(p, memoization):
+    if p in memoization:
+        return memoization[p]
+
     if(len(p.hand) == 0):
         return False
 

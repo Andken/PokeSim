@@ -8,7 +8,7 @@ from copy import deepcopy
 import CardFactory as cf
 import CardTypes as c
 
-sims = 2500
+sims = 1
 
 gold_deck = list()
 mulligans_by_number = {}
@@ -49,13 +49,17 @@ for j in range(0,sims):
 
     disaster = p.disaster(c.Blastoise()) or p.disaster(c.ArchiesAceintheHole())
 
-    disasters = disasters + int(disaster)
-
     p.placeActive()
+
+    disaster = disaster or c.Exeggcute() in p.bench
+    disasters = disasters + int(disaster)
     
     p.draw(1)
 
-    successes = successes + int(bft.BlastoiseFirstTurn(p, memoized))
+    if not disaster:
+        successes = successes + int(bft.BlastoiseFirstTurn(p, memoized))
+
+    p.printer()
 
 print "================================="
 print "===Sims:      " + str(sims)
