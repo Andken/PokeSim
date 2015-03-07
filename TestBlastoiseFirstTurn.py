@@ -12,7 +12,7 @@ def checkHand(test, p, expr):
     test.assertEqual(bft.BlastoiseFirstTurn(deepcopy(p), 
                                             memoization), expr)
 
-class TestDeckOperations(unittest.TestCase):
+class TestBlastoiseFirstTurn(unittest.TestCase):
     def test_EmptyHand(self):
         checkHand(self, PlayerState(), False)
 
