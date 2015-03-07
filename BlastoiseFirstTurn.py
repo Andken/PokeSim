@@ -24,7 +24,7 @@ def BlastoiseFirstTurn(p, memoization):
     for card in p.hand:
         if card.canPlay(p):
             possibilities = card.play(p)
-            
+
             for possibility in possibilities:
                 if(BlastoiseFirstTurn(possibility, memoization)):
                     memoization[possibility] = True

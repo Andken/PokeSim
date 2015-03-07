@@ -212,6 +212,7 @@ class DowsingMachine(DiscardType):
                             BattleCompressor(),
                             Blastoise(),
                             ComputerTrainer(),
+                            DowsingMachine(),
                             Exeggcute(),
                             KeldeoEX(),
                             Suicune(),
@@ -225,7 +226,7 @@ class DowsingMachine(DiscardType):
                     new_p.discard.append(possibility[0])
                     new_p.hand.remove(possibility[1])
                     new_p.discard.append(possibility[1])
-                    new_p.deck.remove(card)
+                    new_p.discard.remove(card)
                     new_p.hand.append(card)
                     possible_states.add(new_p)
 
@@ -273,6 +274,10 @@ class Suicune(BasicPokemon):
 class SuperiorEnergyRetriever(DiscardType):
     def play(self, p):
         assert "not implemented: " + self.name()
+
+    def canPlay(self, p):
+        return False
+
     def name(self):
         return "Superior Energy Retriever"
 
