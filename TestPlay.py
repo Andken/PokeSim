@@ -250,6 +250,106 @@ class TestPlay(unittest.TestCase):
                                                         c.KeldeoEX()])), 2)
         self.assertNotIn(p, possible_states)
  
+    def test_playDowsingMachine1(self):
+        p1 = PlayerState(hand = [c.DowsingMachine(), 
+                                 c.KeldeoEX(),
+                                 c.KeldeoEX()],
+                         discard = [c.ArchiesAceintheHole()])
+
+        possible_states = c.DowsingMachine().play(p1)
+        self.assertEqual(len(possible_states), 1)
+
+        p2 = PlayerState(hand = [c.ArchiesAceintheHole()],
+                         discard = [c.DowsingMachine(), 
+                                    c.KeldeoEX(), 
+                                    c.KeldeoEX()])
+
+        self.assertIn(p2, possible_states)
+        self.assertNotIn(p1, possible_states)
+
+    def test_playDowsingMachine2(self):
+        p1 = PlayerState(hand = [c.DowsingMachine(), 
+                                 c.KeldeoEX(),
+                                 c.KeldeoEX()],
+                         discard = [c.VSSeeker(), c.ArchiesAceintheHole()])
+
+        possible_states = c.DowsingMachine().play(p1)
+        self.assertEqual(len(possible_states), 2)
+
+        p2 = PlayerState(hand = [c.VSSeeker()],
+                         discard = [c.ArchiesAceintheHole(),
+                                    c.DowsingMachine(), 
+                                    c.KeldeoEX(), 
+                                    c.KeldeoEX()])
+
+        self.assertEqual(p2 in possible_states, True)
+
+        p3 = PlayerState(hand = [c.ArchiesAceintheHole()],
+                         discard = [c.VSSeeker(),
+                                    c.DowsingMachine(), 
+                                    c.KeldeoEX(), 
+                                    c.KeldeoEX()])
+
+        self.assertEqual(p3 in possible_states, True)
+        self.assertNotIn(p1, possible_states)
+
+    def test_playDowsingMachine3(self):
+        p1 = PlayerState(hand = [c.DowsingMachine(), 
+                                 c.Exeggcute(),
+                                 c.WaterEnergy(),
+                                 c.KeldeoEX()],
+                         discard = [c.ArchiesAceintheHole()])
+
+        possible_states = c.DowsingMachine().play(p1)
+        self.assertEqual(len(possible_states), 3)
+
+        p2 = PlayerState(hand = [c.ArchiesAceintheHole(),
+                                 c.Exeggcute()],
+                         discard = [c.DowsingMachine(), 
+                                    c.WaterEnergy(), 
+                                    c.KeldeoEX()])
+
+        self.assertEqual(p2 in possible_states, True)
+
+        p3 = PlayerState(hand = [c.ArchiesAceintheHole(),
+                                 c.KeldeoEX()],
+                         discard = [c.DowsingMachine(), 
+                                    c.WaterEnergy(), 
+                                    c.Exeggcute()])
+
+        self.assertEqual(p3 in possible_states, True)
+
+        p4 = PlayerState(hand = [c.ArchiesAceintheHole(),
+                                 c.WaterEnergy()],
+                         discard = [c.DowsingMachine(), 
+                                    c.KeldeoEX(), 
+                                    c.Exeggcute()])
+
+        self.assertEqual(p4 in possible_states, True)
+        self.assertNotIn(p1, possible_states)
+
+    def test_playDowsingMachine4(self):
+        p = PlayerState(hand = [c.DowsingMachine(), 
+                                c.Exeggcute(),
+                                c.WaterEnergy(),
+                                c.KeldeoEX()],
+                        discard = [c.VSSeeker(), c.ArchiesAceintheHole()])
+
+        possible_states = c.DowsingMachine().play(p)
+        self.assertEqual(len(possible_states), 6)
+
+        for ps in possible_states:
+            self.assertIn(c.DowsingMachine(), ps.discard)
+            self.assertNotIn(c.DowsingMachine(), ps.hand)
+
+            self.assertEqual(c.VSSeeker() in ps.hand or
+                             c.ArchiesAceintheHole() in ps.hand, True)
+           
+            self.assertEqual(len(set(ps.discard) & set([c.Exeggcute(), 
+                                                        c.WaterEnergy(), 
+                                                        c.KeldeoEX()])), 2)
+        self.assertNotIn(p, possible_states)
+ 
     def test_playBattleCompressor1(self):
         p1 = PlayerState()
         battle_compressor = c.BattleCompressor()
