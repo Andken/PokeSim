@@ -137,7 +137,7 @@ class BattleCompressor(Card):
         return set([new_p])
 
     def canPlay(self, p):
-        return (self in p.hand) and (len(p.deck) >= 1)
+        return (self in p.hand) and (len(p.deck) >= 3)
     
 class Blastoise(Pokemon):
     def play(self):
@@ -160,19 +160,17 @@ class ComputerTrainer(DiscardType):
 
         for possibility in discards:
             assert len(possibility) > 0
-            cards_tried = set() # optimization to only try each card once
-            for card_to_get in p.deck:
-                if card_to_get in [ArchiesAceintheHole(), 
-                                   BattleCompressor(),
-                                   Blastoise(),
-                                   ComputerTrainer(),
-                                   Exeggcute(),
-                                   KeldeoEX(),
-                                   Suicune(),
-                                   UltraBall(),
-                                   VSSeeker(),
-                                   WaterEnergy()] and card_to_get not in cards_tried:
-                    cards_tried.add(card_to_get)
+            for card in set(p.deck):
+                if card in [ArchiesAceintheHole(), 
+                            BattleCompressor(),
+                            Blastoise(),
+                            ComputerTrainer(),
+                            Exeggcute(),
+                            KeldeoEX(),
+                            Suicune(),
+                            UltraBall(),
+                            VSSeeker(),
+                            WaterEnergy()]:
                     new_p = deepcopy(p)
                     new_p.hand.remove(self)
                     new_p.discard.append(self)
@@ -180,8 +178,8 @@ class ComputerTrainer(DiscardType):
                     new_p.discard.append(possibility[0])
                     new_p.hand.remove(possibility[1])
                     new_p.discard.append(possibility[1])
-                    new_p.deck.remove(card_to_get)
-                    new_p.hand.append(card_to_get)
+                    new_p.deck.remove(card)
+                    new_p.hand.append(card)
                     possible_states.add(new_p)
 
         assert len(possible_states) > 0
