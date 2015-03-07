@@ -1,25 +1,15 @@
 import itertools
 from copy import deepcopy
+import CardTypes as c
 
 def BlastoiseFirstTurn(p, memoization):
-    return True
-#    print "============"
-#    do.PrintCards("hand==", hand)
-#    do.PrintCards("discard==", discard)
-#    do.PrintCards("deck==", deck)
-#    do.PrintCards("bench==", bench)
-
-    if(hh.AlreadyCalculated(hand, discard, deck, bench, memoization)):
-        return hh.PreviousCalculation(hand, discard, deck, bench, memoization)
-    
-    if(len(hand) == 0):
+    if(len(p.hand) == 0):
         return False
 
-    if(len(hand) == 1):
-        if do.ContainsName(hand, "Archie's Ace in the Hole"):
-            return do.ContainsName(discard, "Blastoise")
-        if do.ContainsName(hand, "VS Seeker"):
-            return (do.ContainsName(discard, "Archie's Ace in the Hole") and do.ContainsName(discard, "Blastoise"))
+    if(len(p.hand) == 1):
+        return c.ArchiesAceintheHole() in p.hand and c.Blastoise() in p.discard
+
+    return False
 
     if(do.ContainsName(discard, "Exeggcute")):
         exeggcute = do.GetCard(discard, "Exeggcute")
