@@ -107,6 +107,7 @@ class TestBlastoiseFirstTurn(unittest.TestCase):
         p.hand.append(cf.create("Blastoise"))
         p.hand.append(cf.create("Ultra Ball"))
         p.hand.append(cf.create("Ultra Ball"))
+        p.deck.append(cf.create("Ultra Ball"))
         checkHand(self, p, True)
 
     def test_MultiDiscardExtraItem(self):
@@ -119,6 +120,7 @@ class TestBlastoiseFirstTurn(unittest.TestCase):
         p.hand.append(cf.create("Blastoise"))
         p.hand.append(cf.create("Ultra Ball"))
         p.hand.append(cf.create("Ultra Ball"))
+        p.deck.append(cf.create("Ultra Ball"))
         checkHand(self, p, True)
 
     def test_MultiDiscardManySupporters(self):
