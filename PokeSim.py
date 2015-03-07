@@ -1,14 +1,12 @@
 #!/usr/bin/python
 
-import csv
+import sys
 from random import shuffle
 from PlayerState import PlayerState
 import BlastoiseFirstTurn as bft
 from copy import deepcopy
 import CardFactory as cf
 import CardTypes as c
-
-sims = 1
 
 gold_deck = list()
 mulligans_by_number = {}
@@ -17,14 +15,17 @@ disasters = 0
 successes = 0
 memoized = {}
 
+sims = int(sys.argv[1])
+filename = sys.argv[2]
+
 with open('WaterDeck.txt', 'r+') as f:
     contents = f.readlines()
     for card in contents:
         gold_deck.append(cf.create(card.rstrip()))
 
 
-for j in range(0,sims):
-    print str(j) + ":" + str(sims) + "::" + str(successes)
+for sim_number in range(0,sims):
+    print str(sim_number) + ":" + str(sims) + "::" + str(successes)
     p = PlayerState()
 
     mulligans = 0
@@ -58,8 +59,6 @@ for j in range(0,sims):
 
     if not disaster:
         successes = successes + int(bft.BlastoiseFirstTurn(p, memoized))
-
-    p.printer()
 
 print "================================="
 print "===Sims:      " + str(sims)
