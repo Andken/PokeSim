@@ -75,7 +75,10 @@ class TestCanPlayTypes(unittest.TestCase):
         p2 = PlayerState(hand=[c.KeldeoEX()], deck=[c.WaterEnergy()])
         self.assertEqual(c.BattleCompressor().canPlay(p2), False)
 
-        p3 = PlayerState(hand=[c.BattleCompressor()], deck=[c.WaterEnergy()])
+        p3 = PlayerState(hand=[c.BattleCompressor()], 
+                         deck=[c.WaterEnergy(),
+                               c.WaterEnergy(),
+                               c.WaterEnergy()])
         self.assertEqual(c.BattleCompressor().canPlay(p3), True)
 
         p4 = PlayerState(hand=[c.BattleCompressor()])

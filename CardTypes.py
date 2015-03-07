@@ -29,6 +29,10 @@ class Pokemon(Card):
     def play(self):
         assert "play: " + self.name()
 
+class Trainer(Card):
+    def play(self):
+        assert "play: " + self.name()
+
 class BasicPokemon(Pokemon):
     def play(self, p):
         new_p = deepcopy(p)
@@ -39,7 +43,7 @@ class BasicPokemon(Pokemon):
     def canPlay(self, p):
         return (len(p.bench)) < 5 and (self in p.hand)
 
-class DiscardType(Card):
+class DiscardType(Trainer):
     def play(self):
         assert "play: " + self.name()
 
@@ -66,7 +70,7 @@ class Energy(Card):
     def canPlay(self, p):
         return self in p.hand and not p.attached_energy
 
-class Supporter(Card):
+class Supporter(Trainer):
     def play(self):
         assert "play: " + self.name()
 
@@ -95,7 +99,7 @@ class ArchiesAceintheHole(Supporter):
                 return True
         return False
 
-class Bicycle(Card):
+class Bicycle(Trainer):
     def name(self):
         return "Bicycle"
 
@@ -106,7 +110,7 @@ class Bicycle(Card):
     def canPlay(self, p):
         return False
 
-class BattleCompressor(Card):
+class BattleCompressor(Trainer):
     def name(self):
         return "Battle Compressor"
 
@@ -185,7 +189,7 @@ class ComputerTrainer(DiscardType):
         assert len(possible_states) > 0
         return possible_states
 
-class EscapeRope(Card):
+class EscapeRope(Trainer):
     def name(self):
         return "Escape Rope"
 
@@ -200,7 +204,7 @@ class KeldeoEX(BasicPokemon):
     def isWaterType(self):
         return True
 
-class Maintenance(Card):
+class Maintenance(Trainer):
     def name(self):
         return "Maintenance"
 
@@ -223,7 +227,9 @@ class Suicune(BasicPokemon):
     def isWaterType(self):
         return True
 
-class SuperiorEnergyRetriever(Card):
+class SuperiorEnergyRetriever(DiscardType):
+    def play(self, p):
+        assert "not implemented: " + self.name()
     def name(self):
         return "Superior Energy Retriever"
 
@@ -259,7 +265,7 @@ class UltraBall(DiscardType):
         assert len(possible_states) > 0
         return possible_states
 
-class VSSeeker(Card):
+class VSSeeker(Trainer):
     def name(self):
         return "VS Seeker"
 

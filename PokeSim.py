@@ -14,11 +14,12 @@ mulligans_by_number[0] = 0
 disasters = 0
 successes = 0
 memoized = {}
+bad_news = 0
 
 sims = int(sys.argv[1])
 filename = sys.argv[2]
 
-with open('WaterDeck.txt', 'r+') as f:
+with open(filename, 'r+') as f:
     contents = f.readlines()
     for card in contents:
         gold_deck.append(cf.create(card.rstrip()))
@@ -52,8 +53,8 @@ for sim_number in range(0,sims):
 
     p.placeActive()
 
-    disaster = disaster or c.Exeggcute() in p.bench
-    disasters = disasters + int(disaster)
+    bad_news += int(c.Exeggcute() in p.bench)
+    disasters += int(disaster)
     
     p.draw(1)
 
@@ -64,6 +65,7 @@ print "================================="
 print "===Sims:      " + str(sims)
 print "===Successes: " + str(successes) + "(" + str(100.0*successes/sims) + "%)"
 print "===Disasters: " + str(disasters) + "(" + str(100.0*disasters/sims) + "%)"
+print "===Bad News: " + str(bad_news) + "(" + str(100.0*bad_news/sims) + "%)"
 print "===Mulligans: "
 for key in sorted(mulligans_by_number.iterkeys()):
     print "   " + str(key) + ": " + str(mulligans_by_number[key]) + "(" + str(100.0*mulligans_by_number[key]/sims) + "%)"
