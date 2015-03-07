@@ -156,6 +156,7 @@ class TestBlastoiseFirstTurn(unittest.TestCase):
         p.hand.append(cf.create("Water Energy"))
         p.hand.append(cf.create("Water Energy"))
         p.hand.append(cf.create("Ultra Ball"))
+        p.deck.append(cf.create("N"))
         p.discard.append(cf.create("Blastoise"))
         checkHand(self, p, True)
 
@@ -166,6 +167,7 @@ class TestBlastoiseFirstTurn(unittest.TestCase):
         p.hand.append(cf.create("Water Energy"))
         p.hand.append(cf.create("Ultra Ball"))
         p.hand.append(cf.create("Blastoise"))
+        p.deck.append(cf.create("Blastoise"))
         checkHand(self, p, True)
 
     def test_Basic(self):
