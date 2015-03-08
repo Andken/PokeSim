@@ -212,17 +212,7 @@ class DowsingMachine(DiscardType):
         for possibility in discards:
             assert len(possibility) > 0
             for card in set(p.discard):
-                if card in [ArchiesAceintheHole(), 
-                            BattleCompressor(),
-                            Blastoise(),
-                            ComputerTrainer(),
-                            DowsingMachine(),
-                            Exeggcute(),
-                            KeldeoEX(),
-                            Suicune(),
-                            UltraBall(),
-                            VSSeeker(),
-                            WaterEnergy()]:
+                if isinstance(card, Trainer):
                     new_p = deepcopy(p)
                     new_p.hand.remove(self)
                     new_p.discard.append(self)
