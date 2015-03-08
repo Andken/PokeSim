@@ -674,5 +674,5 @@ class TestBlastoiseFirstTurn(unittest.TestCase):
         checkHand(self, p, False)
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()
 

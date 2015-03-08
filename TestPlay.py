@@ -23,6 +23,32 @@ class TestPlay(unittest.TestCase):
         self.assertEqual(p in possible_states, False)
         self.assertEqual(p1 in possible_states, True)
 
+    def test_playSuperiorEnergyRetriever2(self):
+        p = PlayerState(hand=[c.SuperiorEnergyRetriever(), 
+                              c.N(), 
+                              c.N()],
+                        discard=[c.WaterEnergy(), 
+                                 c.WaterEnergy(),
+                                 c.WaterEnergy(),
+                                 c.WaterEnergy(),
+                                 c.WaterEnergy()])
+
+        possible_states = c.SuperiorEnergyRetriever().play(p)
+
+        self.assertEqual(len(possible_states), 1)
+
+        p1 = PlayerState(hand=[c.WaterEnergy(),
+                               c.WaterEnergy(),
+                               c.WaterEnergy(),
+                               c.WaterEnergy()],
+                         discard=[c.SuperiorEnergyRetriever(),
+                                  c.N(),
+                                  c.N(),
+                                  c.WaterEnergy()])
+
+        self.assertEqual(p in possible_states, False)
+        self.assertEqual(p1 in possible_states, True)
+
     def test_playBicycle1(self):
         p = PlayerState(hand=[c.Bicycle(), 
                               c.N(), 

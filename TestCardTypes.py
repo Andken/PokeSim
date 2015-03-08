@@ -8,7 +8,7 @@ class TestCardTypes(unittest.TestCase):
         self.assertEqual(ct.Card().isWaterType(), False)
         self.assertEqual(ct.BasicPokemon().isWaterType(), False)
         self.assertEqual(ct.DiscardType().isWaterType(), False)
-        self.assertEqual(ct.Energy().isWaterType(), False)
+        self.assertEqual(ct.BasicEnergy().isWaterType(), False)
         self.assertEqual(ct.Supporter().isWaterType(), False)
         self.assertEqual(ct.ArchiesAceintheHole().isWaterType(), False)
         self.assertEqual(ct.Bicycle().isWaterType(), False)
@@ -63,7 +63,7 @@ class TestCardTypes(unittest.TestCase):
         self.assertEqual(isinstance(ct.Card(), ct.Pokemon), False)
         self.assertEqual(isinstance(ct.BasicPokemon(), ct.Pokemon), True)
         self.assertEqual(isinstance(ct.DiscardType(), ct.Pokemon), False)
-        self.assertEqual(isinstance(ct.Energy(), ct.Pokemon), False)
+        self.assertEqual(isinstance(ct.BasicEnergy(), ct.Pokemon), False)
         self.assertEqual(isinstance(ct.Supporter(), ct.Pokemon), False)
         self.assertEqual(isinstance(ct.ArchiesAceintheHole(), ct.Pokemon), False)
         self.assertEqual(isinstance(ct.Bicycle(), ct.Pokemon), False)
@@ -88,7 +88,7 @@ class TestCardTypes(unittest.TestCase):
         self.assertEqual(isinstance(ct.Card(), ct.Trainer), False)
         self.assertEqual(isinstance(ct.BasicPokemon(), ct.Trainer), False)
         self.assertEqual(isinstance(ct.DiscardType(), ct.Trainer), True)
-        self.assertEqual(isinstance(ct.Energy(), ct.Trainer), False)
+        self.assertEqual(isinstance(ct.BasicEnergy(), ct.Trainer), False)
         self.assertEqual(isinstance(ct.Supporter(), ct.Trainer), True)
         self.assertEqual(isinstance(ct.ArchiesAceintheHole(), ct.Trainer), True)
         self.assertEqual(isinstance(ct.Bicycle(), ct.Trainer), True)
@@ -113,7 +113,7 @@ class TestCardTypes(unittest.TestCase):
         self.assertEqual(isinstance(ct.Card(), ct.Supporter), False)
         self.assertEqual(isinstance(ct.BasicPokemon(), ct.Supporter), False)
         self.assertEqual(isinstance(ct.DiscardType(), ct.Supporter), False)
-        self.assertEqual(isinstance(ct.Energy(), ct.Supporter), False)
+        self.assertEqual(isinstance(ct.BasicEnergy(), ct.Supporter), False)
         self.assertEqual(isinstance(ct.Supporter(), ct.Supporter), True)
         self.assertEqual(isinstance(ct.ArchiesAceintheHole(), ct.Supporter), True)
         self.assertEqual(isinstance(ct.Bicycle(), ct.Supporter), False)
@@ -136,5 +136,5 @@ class TestCardTypes(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()
 

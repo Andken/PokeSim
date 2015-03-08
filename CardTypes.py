@@ -60,7 +60,7 @@ class DiscardType(Trainer):
         # -1 because of the Discard Type already in the hand
         return ((len(p.hand)-1) >= 2) and (len(p.deck) >= 1)
 
-class Energy(Card):
+class BasicEnergy(Card):
     def play(self, p):
         # do more than just remove it
         new_p = deepcopy(p)
@@ -245,6 +245,10 @@ class Exeggcute(BasicPokemon):
     def name(self):
         return "Exeggcute"
 
+class GrassEnergy(BasicEnergy):
+    def name(self):
+        return "Grass Energy"
+
 class JirachiEX(BasicPokemon):
     def name(self):
         return "Jirachi EX"
@@ -337,7 +341,7 @@ class SuperiorEnergyRetriever(DiscardType):
 
     def canPlay(self, p):
         for card in p.discard:
-            if isinstance(card, Energy):
+            if isinstance(card, BasicEnergy):
                 return self in p.hand and len(p.hand) - 1 >= 2 
         return False
 
@@ -346,25 +350,37 @@ class SuperiorEnergyRetriever(DiscardType):
         discards = self.getDiscards(p.hand)
 
         for possibility in discards:
+
             assert len(possibility) > 0
 
-            new_p = deepcopy(p)
-            new_p.hand.remove(self)
-            new_p.discard.append(self)
-            new_p.hand.remove(possibility[0])
-            new_p.discard.append(possibility[0])
-            new_p.hand.remove(possibility[1])
-            new_p.discard.append(possibility[1])
+            energies_in_discard = list()
+            for card in p.discard:
+                if isinstance(card, BasicEnergy):
+                    energies_in_discard.append(deepcopy(card))
 
-            number_of_energy = 0
-            for card in new_p.discard:
-                if isinstance(card, Energy) and number_of_energy < 4:
+            assert len(energies_in_discard) > 0
+            
+            number_of_energies = min(4, len(energies_in_discard))
+
+            energies = set()
+            for energies_combo in itertools.combinations(energies_in_discard, 
+                                                         number_of_energies):
+                energies.add(tuple(sorted(energies_combo)))
+
+            for energies_combo in energies:
+                new_p = deepcopy(p)
+                new_p.hand.remove(self)
+                new_p.discard.append(self)
+                new_p.hand.remove(possibility[0])
+                new_p.discard.append(possibility[0])
+                new_p.hand.remove(possibility[1])
+                new_p.discard.append(possibility[1])
+
+                for card in energies_combo:
                     new_p.discard.remove(card)
                     new_p.hand.append(card)
-                    number_of_energy += 1
 
-            assert number_of_energy > 0
-            possible_states.add(new_p)
+                possible_states.add(new_p)
 
         return possible_states
 
@@ -427,7 +443,7 @@ class VSSeeker(Trainer):
                 return True
         return False    
 
-class WaterEnergy(Energy):
+class WaterEnergy(BasicEnergy):
     def name(self):
         return "Water Energy"
 

@@ -9,6 +9,7 @@ def create(name):
                 "Dowsing Machine"           : ct.DowsingMachine(),
                 "Escape Rope"               : ct.EscapeRope(),
                 "Exeggcute"                 : ct.Exeggcute(),
+                "GrassEnergy"               : ct.GrassEnergy(),
                 "Jirachi EX"                : ct.JirachiEX(),
                 "Keldeo EX"                 : ct.KeldeoEX(),
                 "Maintenance"               : ct.Maintenance(),
