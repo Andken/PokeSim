@@ -69,7 +69,7 @@ for sim_number in range(1,sims+1):
     
 
 print "================================="
-print "=====: " + filename
+print "=====: " + filename + "(nondeterministic: " + str(p.nondeterministic) + ")"
 print "===Sims:      " + str(sims)
 print "===Successes: " + str(successes) + "(" + str(100.0*successes/sims) + "%)"
 print "===Disasters: " + str(disasters) + "(" + str(100.0*disasters/sims) + "%)"
