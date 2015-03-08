@@ -29,7 +29,7 @@ with open(filename, 'r+') as f:
 for sim_number in range(1,sims+1):
     print str(sim_number) + ":" + str(sims) + ":: successes: " + str(successes) + " (" + str(100.0*successes/sim_number) + "%) :: disasters: " + str(disasters) + " (" + str(100.0*disasters/sim_number) + "%) :: bad_news: " + str(bad_news) + " (" + str(100.0*bad_news/sim_number) + "%) :: bad_news * success: " + str(bad_news_and_success) + " (" + str(100.0*bad_news_and_success/sim_number) + "%)"
 
-    p = PlayerState()
+    p = PlayerState(nondeterministic=True)
 
     mulligans = 0
 

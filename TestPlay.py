@@ -5,6 +5,24 @@ import CardTypes as c
 from PlayerState import PlayerState
 
 class TestPlay(unittest.TestCase):
+    def test_playSuperiorEnergyRetriever1(self):
+        p = PlayerState(hand=[c.SuperiorEnergyRetriever(), 
+                              c.N(), 
+                              c.N()],
+                        discard=[c.WaterEnergy()])
+
+        possible_states = c.SuperiorEnergyRetriever().play(p)
+
+        self.assertEqual(len(possible_states), 1)
+
+        p1 = PlayerState(hand=[c.WaterEnergy()],
+                         discard=[c.SuperiorEnergyRetriever(),
+                                  c.N(),
+                                  c.N()])
+
+        self.assertEqual(p in possible_states, False)
+        self.assertEqual(p1 in possible_states, True)
+
     def test_playBicycle1(self):
         p = PlayerState(hand=[c.Bicycle(), 
                               c.N(), 

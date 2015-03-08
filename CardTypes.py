@@ -341,6 +341,33 @@ class SuperiorEnergyRetriever(DiscardType):
                 return self in p.hand and len(p.hand) - 1 >= 2 
         return False
 
+    def play(self, p):
+        possible_states = set()
+        discards = self.getDiscards(p.hand)
+
+        for possibility in discards:
+            assert len(possibility) > 0
+
+            new_p = deepcopy(p)
+            new_p.hand.remove(self)
+            new_p.discard.append(self)
+            new_p.hand.remove(possibility[0])
+            new_p.discard.append(possibility[0])
+            new_p.hand.remove(possibility[1])
+            new_p.discard.append(possibility[1])
+
+            number_of_energy = 0
+            for card in new_p.discard:
+                if isinstance(card, Energy) and number_of_energy < 4:
+                    new_p.discard.remove(card)
+                    new_p.hand.append(card)
+                    number_of_energy += 1
+
+            assert number_of_energy > 0
+            possible_states.add(new_p)
+
+        return possible_states
+
     def name(self):
         return "Superior Energy Retriever"
 
