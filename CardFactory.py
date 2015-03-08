@@ -16,6 +16,7 @@ def create(name):
                 "N"                         : ct.N(),
                 "Primal Kyogre EX"          : ct.PrimalKyogreEX(),
                 "Professor Juniper"         : ct.ProfessorJuniper(),
+                "Random Receiver"           : ct.RandomReceiver(),
                 "Skyla"                     : ct.Skyla(),
                 "Suicune"                   : ct.Suicune(),
                 "Superior Energy Retriever" : ct.SuperiorEnergyRetriever(),

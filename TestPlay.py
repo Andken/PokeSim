@@ -5,6 +5,52 @@ import CardTypes as c
 from PlayerState import PlayerState
 
 class TestPlay(unittest.TestCase):
+    def test_playRandomReceiver1(self):
+        p = PlayerState(hand=[c.RandomReceiver()], 
+                        deck=[c.N()], nondeterministic=True)
+
+        possible_states = c.RandomReceiver().play(p)
+
+        self.assertEqual(len(possible_states), 1)
+
+        p1 = PlayerState(hand=[c.N()],
+                         discard=[c.RandomReceiver()], 
+                         nondeterministic=True)
+
+        self.assertEqual(p in possible_states, False)
+        self.assertEqual(p1 in possible_states, True)
+
+    def test_playRandomReceiver2(self):
+        p = PlayerState(hand=[c.RandomReceiver()], 
+                        deck=[c.WaterEnergy()], nondeterministic=True)
+
+        possible_states = c.RandomReceiver().play(p)
+
+        self.assertEqual(len(possible_states), 1)
+
+        p1 = PlayerState(deck=[c.WaterEnergy()],
+                         discard=[c.RandomReceiver()], 
+                         nondeterministic=True)
+
+        self.assertEqual(p in possible_states, False)
+        self.assertEqual(p1 in possible_states, True)
+
+    def test_playRandomReceiver3(self):
+        p = PlayerState(hand=[c.RandomReceiver()], 
+                        deck=[c.N(), c.N()], nondeterministic=True)
+
+        possible_states = c.RandomReceiver().play(p)
+
+        self.assertEqual(len(possible_states), 1)
+
+        p1 = PlayerState(hand=[c.N()],
+                         discard=[c.RandomReceiver()],
+                         deck=[c.N()],
+                         nondeterministic=True)
+
+        self.assertEqual(p in possible_states, False)
+        self.assertEqual(p1 in possible_states, True)
+
     def test_playSuperiorEnergyRetriever1(self):
         p = PlayerState(hand=[c.SuperiorEnergyRetriever(), 
                               c.N(), 
