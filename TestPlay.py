@@ -51,6 +51,29 @@ class TestPlay(unittest.TestCase):
         self.assertEqual(p in possible_states, False)
         self.assertEqual(p1 in possible_states, True)
 
+    def test_playRandomReceiver3(self):
+        p = PlayerState(hand=[c.RandomReceiver()], 
+                        deck=[c.WaterEnergy(), 
+                              c.N(), 
+                              c.WaterEnergy(), 
+                              c.N(), 
+                              c.KeldeoEX()], nondeterministic=True)
+
+        possible_states = c.RandomReceiver().play(p)
+
+        self.assertEqual(len(possible_states), 1)
+
+        p1 = PlayerState(hand=[c.N()],
+                         discard=[c.RandomReceiver()],
+                         deck=[c.N(),
+                               c.WaterEnergy(),
+                               c.KeldeoEX(),
+                               c.WaterEnergy()],
+                         nondeterministic=True)
+
+        self.assertEqual(p in possible_states, False)
+        self.assertEqual(p1 in possible_states, True)
+
     def test_playSuperiorEnergyRetriever1(self):
         p = PlayerState(hand=[c.SuperiorEnergyRetriever(), 
                               c.N(), 
