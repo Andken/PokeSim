@@ -267,6 +267,10 @@ class KeldeoEX(BasicPokemon):
     def isWaterType(self):
         return True
 
+class LysandersTrumpCard(Supporter):
+    def name(self):
+        return "Lysander's Trump Card"
+
 class Maintenance(DiscardType):
     def name(self):
         return "Maintenance"

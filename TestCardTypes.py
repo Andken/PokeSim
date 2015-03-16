@@ -19,6 +19,8 @@ class TestCardTypes(unittest.TestCase):
         self.assertEqual(ct.EscapeRope().isWaterType(), False)
         self.assertEqual(ct.Exeggcute().isWaterType(), False)
         self.assertEqual(ct.KeldeoEX().isWaterType(), True)
+        self.assertEqual(ct.KyuremLTR().isWaterType(), True)
+        self.assertEqual(ct.KyuremPLF().isWaterType(), True)
         self.assertEqual(ct.JirachiEX().isWaterType(), False)
         self.assertEqual(ct.Maintenance().isWaterType(), False)
         self.assertEqual(ct.N().isWaterType(), False)
