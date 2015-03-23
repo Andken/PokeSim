@@ -9,8 +9,6 @@ import Exeggcute
 import GrassEnergy
 import JirachiEX
 import KeldeoEX
-import KyuremPLF
-import KyuremLTR
 import LysandersTrumpCard
 import Maintenance
 import N
@@ -36,8 +34,6 @@ def create(name):
                 "GrassEnergy"               : GrassEnergy.GrassEnergy(),
                 "Jirachi EX"                : JirachiEX.JirachiEX(),
                 "Keldeo EX"                 : KeldeoEX.KeldeoEX(),
-                "Kyurem PLF"                : KyuremPLF.KyuremPLF(),
-                "Kyurem LTR"                : KyuremLTR.KyuremLTR(),
                 "Lysander's Trump Card"     : LysandersTrumpCard.LysandersTrumpCard(),
                 "Maintenance"               : Maintenance.Maintenance(),
                 "N"                         : N.N(),

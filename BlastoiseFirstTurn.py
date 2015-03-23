@@ -1,19 +1,21 @@
 import itertools
 from copy import deepcopy
-import CardTypes as c
+
+import Blastoise
+import Exeggcute
 
 def BlastoiseFirstTurn(p, memoization):
     if p in memoization:
         return memoization[p]
 
-    if c.Blastoise() in p.bench:
+    if Blastoise.Blastoise() in p.bench:
         memoization[p] = True
         return True
 
-    if c.Exeggcute() in p.discard:
+    if Exeggcute.Exeggcute() in p.discard:
         new_p = deepcopy(p)
-        new_p.discard.remove(c.Exeggcute())
-        new_p.hand.append(c.Exeggcute())
+        new_p.discard.remove(Exeggcute.Exeggcute())
+        new_p.hand.append(Exeggcute.Exeggcute())
         if(BlastoiseFirstTurn(new_p, memoization)):
             memoization[new_p] = True
             return True

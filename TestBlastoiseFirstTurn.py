@@ -7,6 +7,31 @@ from PlayerState import PlayerState
 import CardTypes as c
 import CardFactory as cf
 
+import ArchiesAceintheHole
+import BattleCompressor
+import Bicycle
+import Blastoise
+import ComputerTrainer
+import DowsingMachine
+import EscapeRope
+import Exeggcute
+import GrassEnergy
+import JirachiEX
+import KeldeoEX
+import LysandersTrumpCard
+import Maintenance
+import N
+import PrimalKyogreEX
+import ProfessorJuniper
+import RandomReceiver
+import Skyla
+import Suicune
+import SuperiorEnergyRetriever
+import UltraBall
+import VSSeeker
+import WaterEnergy
+
+
 def checkHand(test, p, expr):
     memoization = dict()
     test.assertEqual(bft.BlastoiseFirstTurn(deepcopy(p), 
@@ -17,11 +42,11 @@ class TestBlastoiseFirstTurn(unittest.TestCase):
         checkHand(self, PlayerState(), False)
 
     def test_SimpleSingleVSSeeker(self):
-        checkHand(self, PlayerState(hand=[c.VSSeeker()]), False)
+        checkHand(self, PlayerState(hand=[VSSeeker.VSSeeker()]), False)
 
     def test_SimpleSingleVSSeekerAndBlastoise(self):
-        p = PlayerState(hand=[c.VSSeeker()],
-                        discard=[c.Blastoise()])
+        p = PlayerState(hand=[VSSeeker.VSSeeker()],
+                        discard=[Blastoise.Blastoise()])
         checkHand(self, p, False)
 
     def test_SimpleSingleVSSeekerArchieAndBlastoise(self):
