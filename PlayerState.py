@@ -1,5 +1,6 @@
 import CardTypes as ct
 from copy import deepcopy
+import Exeggcute
 
 class PlayerState:
     def __init__(self, hand=None, 
@@ -76,15 +77,15 @@ class PlayerState:
 
         potential_wo_Exeggcute = deepcopy(potential)
         for card in potential_wo_Exeggcute:
-            if card == ct.Exeggcute():
+            if card == Exeggcute.Exeggcute():
                 potential_wo_Exeggcute.remove(card)
 
         if len(potential_wo_Exeggcute) > 0:
             self.hand.remove(potential_wo_Exeggcute[0])
             self.bench.append(potential_wo_Exeggcute[0])
         else:
-            self.hand.remove(ct.Exeggcute())
-            self.bench.append(ct.Exeggcute())
+            self.hand.remove(Exeggcute.Exeggcute())
+            self.bench.append(Exeggcute.Exeggcute())
         
                     
     def setPrizes(self, number_of_prizes):
