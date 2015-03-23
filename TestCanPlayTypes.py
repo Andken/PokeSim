@@ -4,248 +4,273 @@ import unittest
 import CardTypes as c
 from PlayerState import PlayerState
 
+import ArchiesAceintheHole
+import BattleCompressor
+import Bicycle
+import Blastoise
+import ComputerTrainer
+import DowsingMachine
+import EscapeRope
+import Exeggcute
+import GrassEnergy
+import JirachiEX
+import KeldeoEX
+import LysandersTrumpCard
+import Maintenance
+import N
+import PrimalKyogreEX
+import ProfessorJuniper
+import RandomReceiver
+import Skyla
+import Suicune
+import SuperiorEnergyRetriever
+import UltraBall
+import VSSeeker
+import WaterEnergy
+
+
 class TestCanPlayTypes(unittest.TestCase):
     def test_CanPlayRandomReceiver(self):
         p1 = PlayerState(nondeterministic=True)
-        self.assertEqual(c.RandomReceiver().canPlay(p1), False)
+        self.assertEqual(RandomReceiver.RandomReceiver().canPlay(p1), False)
 
-        p2 = PlayerState(hand=[c.RandomReceiver()],
-                         deck=[c.WaterEnergy()],
+        p2 = PlayerState(hand=[RandomReceiver.RandomReceiver()],
+                         deck=[WaterEnergy.WaterEnergy()],
                          nondeterministic=True)
-        self.assertEqual(c.RandomReceiver().canPlay(p2), True)
+        self.assertEqual(RandomReceiver.RandomReceiver().canPlay(p2), True)
 
-        p3 = PlayerState(hand=[c.RandomReceiver()],nondeterministic=True)
-        self.assertEqual(c.RandomReceiver().canPlay(p3), False)
+        p3 = PlayerState(hand=[RandomReceiver.RandomReceiver()],nondeterministic=True)
+        self.assertEqual(RandomReceiver.RandomReceiver().canPlay(p3), False)
 
-        p4 = PlayerState(hand=[c.RandomReceiver()],
-                         deck=[c.WaterEnergy()])
-        self.assertEqual(c.RandomReceiver().canPlay(p4), False)
+        p4 = PlayerState(hand=[RandomReceiver.RandomReceiver()],
+                         deck=[WaterEnergy.WaterEnergy()])
+        self.assertEqual(RandomReceiver.RandomReceiver().canPlay(p4), False)
 
     def test_CanPlaySuperiorEnergyRetriever(self):
         p1 = PlayerState()
-        self.assertEqual(c.SuperiorEnergyRetriever().canPlay(p1), False)
+        self.assertEqual(SuperiorEnergyRetriever.SuperiorEnergyRetriever().canPlay(p1), False)
 
-        p2 = PlayerState(hand=[c.SuperiorEnergyRetriever(), c.N(), c.N()],
-                         discard=[c.WaterEnergy()])
-        self.assertEqual(c.SuperiorEnergyRetriever().canPlay(p2), True)
+        p2 = PlayerState(hand=[SuperiorEnergyRetriever.SuperiorEnergyRetriever(), N.N(), N.N()],
+                         discard=[WaterEnergy.WaterEnergy()])
+        self.assertEqual(SuperiorEnergyRetriever.SuperiorEnergyRetriever().canPlay(p2), True)
 
-        p3 = PlayerState(hand=[c.SuperiorEnergyRetriever(), c.N()],
-                         discard=[c.WaterEnergy()])
-        self.assertEqual(c.SuperiorEnergyRetriever().canPlay(p3), False)
+        p3 = PlayerState(hand=[SuperiorEnergyRetriever.SuperiorEnergyRetriever(), N.N()],
+                         discard=[WaterEnergy.WaterEnergy()])
+        self.assertEqual(SuperiorEnergyRetriever.SuperiorEnergyRetriever().canPlay(p3), False)
 
     def test_CanPlayBicycle(self):
         p1 = PlayerState(nondeterministic = True)
-        self.assertEqual(c.Bicycle().canPlay(p1), False)
+        self.assertEqual(Bicycle.Bicycle().canPlay(p1), False)
 
-        p2 = PlayerState(hand=[c.Bicycle()],
-                         deck=[c.N(), c.N(), c.N(), c.N()],
+        p2 = PlayerState(hand=[Bicycle.Bicycle()],
+                         deck=[N.N(), N.N(), N.N(), N.N()],
                          nondeterministic = True)
-        self.assertEqual(c.Bicycle().canPlay(p2), True)
+        self.assertEqual(Bicycle.Bicycle().canPlay(p2), True)
 
-        p2 = PlayerState(hand=[c.Bicycle(), c.N(), c.N()],
-                         deck=[c.N(), c.N()],
+        p2 = PlayerState(hand=[Bicycle.Bicycle(), N.N(), N.N()],
+                         deck=[N.N(), N.N()],
                          nondeterministic = True)
-        self.assertEqual(c.Bicycle().canPlay(p2), True)
+        self.assertEqual(Bicycle.Bicycle().canPlay(p2), True)
 
-        p3 = PlayerState(hand=[c.Bicycle(), c.N(), c.N(), c.N(), c.N()],
-                         deck=[c.N(), c.N()],
+        p3 = PlayerState(hand=[Bicycle.Bicycle(), N.N(), N.N(), N.N(), N.N()],
+                         deck=[N.N(), N.N()],
                          nondeterministic = True)
-        self.assertEqual(c.Bicycle().canPlay(p3), False)
+        self.assertEqual(Bicycle.Bicycle().canPlay(p3), False)
 
-        p4 = PlayerState(hand=[c.Bicycle()],
-                         deck=[c.N(), c.N()],
+        p4 = PlayerState(hand=[Bicycle.Bicycle()],
+                         deck=[N.N(), N.N()],
                          nondeterministic = True)
-        self.assertEqual(c.Bicycle().canPlay(p4), False)
+        self.assertEqual(Bicycle.Bicycle().canPlay(p4), False)
 
-        p5 = PlayerState(hand=[c.Bicycle(), c.N(), c.N()],
-                         deck=[c.N(), c.N()])
-        self.assertEqual(c.Bicycle().canPlay(p5), False)
+        p5 = PlayerState(hand=[Bicycle.Bicycle(), N.N(), N.N()],
+                         deck=[N.N(), N.N()])
+        self.assertEqual(Bicycle.Bicycle().canPlay(p5), False)
 
     def test_CanPlayMaintenance(self):
         p1 = PlayerState(nondeterministic = True)
-        self.assertEqual(c.Maintenance().canPlay(p1), False)
+        self.assertEqual(Maintenance.Maintenance().canPlay(p1), False)
 
-        p2 = PlayerState(hand=[c.Maintenance()],
+        p2 = PlayerState(hand=[Maintenance.Maintenance()],
                          nondeterministic = True)
-        self.assertEqual(c.Maintenance().canPlay(p2), False)
+        self.assertEqual(Maintenance.Maintenance().canPlay(p2), False)
 
-        p3 = PlayerState(hand=[c.Maintenance(), c.N(), c.N()],
+        p3 = PlayerState(hand=[Maintenance.Maintenance(), N.N(), N.N()],
                          nondeterministic = True)
-        self.assertEqual(c.Maintenance().canPlay(p3), True)
+        self.assertEqual(Maintenance.Maintenance().canPlay(p3), True)
 
-        p4 = PlayerState(hand=[c.Maintenance(), c.N(), c.N()])
-        self.assertEqual(c.Maintenance().canPlay(p4), False)
+        p4 = PlayerState(hand=[Maintenance.Maintenance(), N.N(), N.N()])
+        self.assertEqual(Maintenance.Maintenance().canPlay(p4), False)
 
     def test_CanPlayVSSeeker(self):
         p1 = PlayerState()
-        self.assertEqual(c.VSSeeker().canPlay(p1), False)
+        self.assertEqual(VSSeeker.VSSeeker().canPlay(p1), False)
 
-        p2 = PlayerState(hand=[c.VSSeeker()], discard=[c.WaterEnergy()])
-        self.assertEqual(c.VSSeeker().canPlay(p2), False)
+        p2 = PlayerState(hand=[VSSeeker.VSSeeker()], discard=[WaterEnergy.WaterEnergy()])
+        self.assertEqual(VSSeeker.VSSeeker().canPlay(p2), False)
 
-        p3 = PlayerState(hand=[c.VSSeeker()], discard=[c.N()])
-        self.assertEqual(c.VSSeeker().canPlay(p3), True)
+        p3 = PlayerState(hand=[VSSeeker.VSSeeker()], discard=[N.N()])
+        self.assertEqual(VSSeeker.VSSeeker().canPlay(p3), True)
 
-        p4 = PlayerState(hand=[c.VSSeeker()])
-        self.assertEqual(c.VSSeeker().canPlay(p4), False)
+        p4 = PlayerState(hand=[VSSeeker.VSSeeker()])
+        self.assertEqual(VSSeeker.VSSeeker().canPlay(p4), False)
 
-        p5 = PlayerState(hand=[c.VSSeeker(), c.KeldeoEX()],
-                         discard=[c.N(), c.KeldeoEX()])
-        self.assertEqual(c.VSSeeker().canPlay(p5), True)
+        p5 = PlayerState(hand=[VSSeeker.VSSeeker(), KeldeoEX.KeldeoEX()],
+                         discard=[N.N(), KeldeoEX.KeldeoEX()])
+        self.assertEqual(VSSeeker.VSSeeker().canPlay(p5), True)
 
-        p6 = PlayerState(hand=[c.VSSeeker(), c.KeldeoEX()],
-                         discard=[c.KeldeoEX(), c.N()])
-        self.assertEqual(c.VSSeeker().canPlay(p6), True)
+        p6 = PlayerState(hand=[VSSeeker.VSSeeker(), KeldeoEX.KeldeoEX()],
+                         discard=[KeldeoEX.KeldeoEX(), N.N()])
+        self.assertEqual(VSSeeker.VSSeeker().canPlay(p6), True)
 
     def test_CanPlayUltraBall(self):
         p1 = PlayerState()
-        self.assertEqual(c.UltraBall().canPlay(p1), False)
+        self.assertEqual(UltraBall.UltraBall().canPlay(p1), False)
 
-        p2 = PlayerState(hand=[c.UltraBall()], deck=[c.WaterEnergy()])
-        self.assertEqual(c.UltraBall().canPlay(p2), False)
+        p2 = PlayerState(hand=[UltraBall.UltraBall()], deck=[WaterEnergy.WaterEnergy()])
+        self.assertEqual(UltraBall.UltraBall().canPlay(p2), False)
 
-        p3 = PlayerState(hand=[c.UltraBall(),
-                               c.KeldeoEX(),
-                               c.KeldeoEX()],
-                         deck=[c.WaterEnergy()])
-        self.assertEqual(c.UltraBall().canPlay(p3), True)
+        p3 = PlayerState(hand=[UltraBall.UltraBall(),
+                               KeldeoEX.KeldeoEX(),
+                               KeldeoEX.KeldeoEX()],
+                         deck=[WaterEnergy.WaterEnergy()])
+        self.assertEqual(UltraBall.UltraBall().canPlay(p3), True)
 
-        p4 = PlayerState(hand=[c.UltraBall(),
-                               c.KeldeoEX(),
-                               c.KeldeoEX()])
-        self.assertEqual(c.UltraBall().canPlay(p4), False)
+        p4 = PlayerState(hand=[UltraBall.UltraBall(),
+                               KeldeoEX.KeldeoEX(),
+                               KeldeoEX.KeldeoEX()])
+        self.assertEqual(UltraBall.UltraBall().canPlay(p4), False)
 
-        p5 = PlayerState(hand=[c.UltraBall(), c.KeldeoEX()])
-        self.assertEqual(c.UltraBall().canPlay(p5), False)
+        p5 = PlayerState(hand=[UltraBall.UltraBall(), KeldeoEX.KeldeoEX()])
+        self.assertEqual(UltraBall.UltraBall().canPlay(p5), False)
 
     def test_CanPlayComputerTrainer(self):
         p1 = PlayerState()
-        self.assertEqual(c.ComputerTrainer().canPlay(p1), False)
+        self.assertEqual(ComputerTrainer.ComputerTrainer().canPlay(p1), False)
 
-        p2 = PlayerState(hand=[c.ComputerTrainer()], deck=[c.WaterEnergy()])
-        self.assertEqual(c.ComputerTrainer().canPlay(p2), False)
+        p2 = PlayerState(hand=[ComputerTrainer.ComputerTrainer()], deck=[WaterEnergy.WaterEnergy()])
+        self.assertEqual(ComputerTrainer.ComputerTrainer().canPlay(p2), False)
 
-        p3 = PlayerState(hand=[c.ComputerTrainer(),
-                               c.KeldeoEX(),
-                               c.KeldeoEX()],
-                         deck=[c.WaterEnergy()])
-        self.assertEqual(c.ComputerTrainer().canPlay(p3), True)
+        p3 = PlayerState(hand=[ComputerTrainer.ComputerTrainer(),
+                               KeldeoEX.KeldeoEX(),
+                               KeldeoEX.KeldeoEX()],
+                         deck=[WaterEnergy.WaterEnergy()])
+        self.assertEqual(ComputerTrainer.ComputerTrainer().canPlay(p3), True)
 
-        p4 = PlayerState(hand=[c.ComputerTrainer(),
-                               c.KeldeoEX(),
-                               c.KeldeoEX()])
-        self.assertEqual(c.ComputerTrainer().canPlay(p4), False)
+        p4 = PlayerState(hand=[ComputerTrainer.ComputerTrainer(),
+                               KeldeoEX.KeldeoEX(),
+                               KeldeoEX.KeldeoEX()])
+        self.assertEqual(ComputerTrainer.ComputerTrainer().canPlay(p4), False)
 
-        p5 = PlayerState(hand=[c.ComputerTrainer(), c.KeldeoEX()])
-        self.assertEqual(c.ComputerTrainer().canPlay(p5), False)
+        p5 = PlayerState(hand=[ComputerTrainer.ComputerTrainer(), KeldeoEX.KeldeoEX()])
+        self.assertEqual(ComputerTrainer.ComputerTrainer().canPlay(p5), False)
 
     def test_CanPlayDowsingMachine(self):
         p1 = PlayerState()
-        self.assertEqual(c.DowsingMachine().canPlay(p1), False)
+        self.assertEqual(DowsingMachine.DowsingMachine().canPlay(p1), False)
 
-        p2 = PlayerState(hand=[c.DowsingMachine()], discard=[c.WaterEnergy()])
-        self.assertEqual(c.DowsingMachine().canPlay(p2), False)
+        p2 = PlayerState(hand=[DowsingMachine.DowsingMachine()], discard=[WaterEnergy.WaterEnergy()])
+        self.assertEqual(DowsingMachine.DowsingMachine().canPlay(p2), False)
 
-        p3 = PlayerState(hand=[c.DowsingMachine(),
-                               c.KeldeoEX(),
-                               c.KeldeoEX()],
-                         discard=[c.WaterEnergy()])
-        self.assertEqual(c.DowsingMachine().canPlay(p3), False)
+        p3 = PlayerState(hand=[DowsingMachine.DowsingMachine(),
+                               KeldeoEX.KeldeoEX(),
+                               KeldeoEX.KeldeoEX()],
+                         discard=[WaterEnergy.WaterEnergy()])
+        self.assertEqual(DowsingMachine.DowsingMachine().canPlay(p3), False)
 
-        p4 = PlayerState(hand=[c.DowsingMachine(),
-                               c.KeldeoEX(),
-                               c.KeldeoEX()])
-        self.assertEqual(c.DowsingMachine().canPlay(p4), False)
+        p4 = PlayerState(hand=[DowsingMachine.DowsingMachine(),
+                               KeldeoEX.KeldeoEX(),
+                               KeldeoEX.KeldeoEX()])
+        self.assertEqual(DowsingMachine.DowsingMachine().canPlay(p4), False)
 
-        p5 = PlayerState(hand=[c.DowsingMachine(), c.KeldeoEX()])
-        self.assertEqual(c.DowsingMachine().canPlay(p5), False)
+        p5 = PlayerState(hand=[DowsingMachine.DowsingMachine(), KeldeoEX.KeldeoEX()])
+        self.assertEqual(DowsingMachine.DowsingMachine().canPlay(p5), False)
 
-        p6 = PlayerState(hand=[c.DowsingMachine(),
-                               c.KeldeoEX(),
-                               c.KeldeoEX()],
-                         discard=[c.N()])
-        self.assertEqual(c.DowsingMachine().canPlay(p6), True)
+        p6 = PlayerState(hand=[DowsingMachine.DowsingMachine(),
+                               KeldeoEX.KeldeoEX(),
+                               KeldeoEX.KeldeoEX()],
+                         discard=[N.N()])
+        self.assertEqual(DowsingMachine.DowsingMachine().canPlay(p6), True)
 
     def test_CanPlayBattleCompressor(self):
         p1 = PlayerState()
-        self.assertEqual(c.BattleCompressor().canPlay(p1), False)
+        self.assertEqual(BattleCompressor.BattleCompressor().canPlay(p1), False)
 
-        p2 = PlayerState(hand=[c.KeldeoEX()], deck=[c.WaterEnergy()])
-        self.assertEqual(c.BattleCompressor().canPlay(p2), False)
+        p2 = PlayerState(hand=[KeldeoEX.KeldeoEX()], deck=[WaterEnergy.WaterEnergy()])
+        self.assertEqual(BattleCompressor.BattleCompressor().canPlay(p2), False)
 
-        p3 = PlayerState(hand=[c.BattleCompressor()], 
-                         deck=[c.WaterEnergy(),
-                               c.WaterEnergy(),
-                               c.WaterEnergy()])
-        self.assertEqual(c.BattleCompressor().canPlay(p3), True)
+        p3 = PlayerState(hand=[BattleCompressor.BattleCompressor()], 
+                         deck=[WaterEnergy.WaterEnergy(),
+                               WaterEnergy.WaterEnergy(),
+                               WaterEnergy.WaterEnergy()])
+        self.assertEqual(BattleCompressor.BattleCompressor().canPlay(p3), True)
 
-        p4 = PlayerState(hand=[c.BattleCompressor()])
-        self.assertEqual(c.BattleCompressor().canPlay(p4), False)
+        p4 = PlayerState(hand=[BattleCompressor.BattleCompressor()])
+        self.assertEqual(BattleCompressor.BattleCompressor().canPlay(p4), False)
 
     def test_CanPlayBasic(self):
-        p = PlayerState(hand=[c.KeldeoEX()])
-        self.assertEqual(c.KeldeoEX().canPlay(p), True)
+        p = PlayerState(hand=[KeldeoEX.KeldeoEX()])
+        self.assertEqual(KeldeoEX.KeldeoEX().canPlay(p), True)
 
-        p.bench.append(c.KeldeoEX())
-        p.bench.append(c.KeldeoEX())
-        p.bench.append(c.KeldeoEX())
-        p.bench.append(c.KeldeoEX())
-        self.assertEqual(c.KeldeoEX().canPlay(p), True)
+        p.bench.append(KeldeoEX.KeldeoEX())
+        p.bench.append(KeldeoEX.KeldeoEX())
+        p.bench.append(KeldeoEX.KeldeoEX())
+        p.bench.append(KeldeoEX.KeldeoEX())
+        self.assertEqual(KeldeoEX.KeldeoEX().canPlay(p), True)
 
-        p.bench.append(c.KeldeoEX())
-        self.assertEqual(c.KeldeoEX().canPlay(p), False)
+        p.bench.append(KeldeoEX.KeldeoEX())
+        self.assertEqual(KeldeoEX.KeldeoEX().canPlay(p), False)
 
-        p.bench.append(c.KeldeoEX())
-        self.assertEqual(c.KeldeoEX().canPlay(p), False)
+        p.bench.append(KeldeoEX.KeldeoEX())
+        self.assertEqual(KeldeoEX.KeldeoEX().canPlay(p), False)
 
     def test_CanPlayArchiesAceintheHole(self):
         p1 = PlayerState()
-        self.assertEqual(c.ArchiesAceintheHole().canPlay(p1), False)
+        self.assertEqual(ArchiesAceintheHole.ArchiesAceintheHole().canPlay(p1), False)
 
-        p2 = PlayerState(hand=[c.ArchiesAceintheHole()])
-        self.assertEqual(c.ArchiesAceintheHole().canPlay(p2), False)
+        p2 = PlayerState(hand=[ArchiesAceintheHole.ArchiesAceintheHole()])
+        self.assertEqual(ArchiesAceintheHole.ArchiesAceintheHole().canPlay(p2), False)
 
-        p3 = PlayerState(hand=[c.ArchiesAceintheHole()],
-                         discard=[c.KeldeoEX()],
-                         deck=[c.N(),
-                               c.N(),
-                               c.N(),
-                               c.N(),
-                               c.N()])
-        self.assertEqual(c.ArchiesAceintheHole().canPlay(p3), True)
+        p3 = PlayerState(hand=[ArchiesAceintheHole.ArchiesAceintheHole()],
+                         discard=[KeldeoEX.KeldeoEX()],
+                         deck=[N.N(),
+                               N.N(),
+                               N.N(),
+                               N.N(),
+                               N.N()])
+        self.assertEqual(ArchiesAceintheHole.ArchiesAceintheHole().canPlay(p3), True)
 
-        p4 = PlayerState(hand=[c.ArchiesAceintheHole(), c.ArchiesAceintheHole()],
-                         discard=[c.KeldeoEX()])
-        self.assertEqual(c.ArchiesAceintheHole().canPlay(p4), False)
+        p4 = PlayerState(hand=[ArchiesAceintheHole.ArchiesAceintheHole(), ArchiesAceintheHole.ArchiesAceintheHole()],
+                         discard=[KeldeoEX.KeldeoEX()])
+        self.assertEqual(ArchiesAceintheHole.ArchiesAceintheHole().canPlay(p4), False)
 
         p5 = PlayerState(hand=[],
-                         discard=[c.KeldeoEX()])
-        self.assertEqual(c.ArchiesAceintheHole().canPlay(p5), False)
+                         discard=[KeldeoEX.KeldeoEX()])
+        self.assertEqual(ArchiesAceintheHole.ArchiesAceintheHole().canPlay(p5), False)
 
-        p6 = PlayerState(hand=[c.ArchiesAceintheHole()],
-                         discard=[c.Exeggcute()])
-        self.assertEqual(c.ArchiesAceintheHole().canPlay(p6), False)
+        p6 = PlayerState(hand=[ArchiesAceintheHole.ArchiesAceintheHole()],
+                         discard=[Exeggcute.Exeggcute()])
+        self.assertEqual(ArchiesAceintheHole.ArchiesAceintheHole().canPlay(p6), False)
 
-        p7 = PlayerState(hand=[c.ArchiesAceintheHole()],
-                         discard=[c.KeldeoEX()],
-                         deck=[c.N(),
-                               c.N(),
-                               c.N(),
-                               c.N(),
-                               c.N()],
-                         bench=[c.KeldeoEX(),
-                                c.KeldeoEX(),
-                                c.KeldeoEX(),
-                                c.KeldeoEX(),
-                                c.KeldeoEX()])
-        self.assertEqual(c.ArchiesAceintheHole().canPlay(p7), False)
+        p7 = PlayerState(hand=[ArchiesAceintheHole.ArchiesAceintheHole()],
+                         discard=[KeldeoEX.KeldeoEX()],
+                         deck=[N.N(),
+                               N.N(),
+                               N.N(),
+                               N.N(),
+                               N.N()],
+                         bench=[KeldeoEX.KeldeoEX(),
+                                KeldeoEX.KeldeoEX(),
+                                KeldeoEX.KeldeoEX(),
+                                KeldeoEX.KeldeoEX(),
+                                KeldeoEX.KeldeoEX()])
+        self.assertEqual(ArchiesAceintheHole.ArchiesAceintheHole().canPlay(p7), False)
 
     def test_CanPlayWaterEnergy(self):
-        p1 = PlayerState(hand=[c.WaterEnergy()])
-        self.assertEqual(c.WaterEnergy().canPlay(p1), True)
+        p1 = PlayerState(hand=[WaterEnergy.WaterEnergy()])
+        self.assertEqual(WaterEnergy.WaterEnergy().canPlay(p1), True)
 
-        p2 = PlayerState(hand=[c.WaterEnergy()], attached_energy = True)
-        self.assertEqual(c.WaterEnergy().canPlay(p2), False)
+        p2 = PlayerState(hand=[WaterEnergy.WaterEnergy()], attached_energy = True)
+        self.assertEqual(WaterEnergy.WaterEnergy().canPlay(p2), False)
 
 if __name__ == '__main__':
     unittest.main()
