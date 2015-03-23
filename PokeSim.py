@@ -8,6 +8,12 @@ from copy import deepcopy
 import CardFactory as cf
 import CardTypes as c
 
+import ArchiesAceintheHole
+import Blastoise
+import Exeggcute
+import JirachiEX
+
+
 gold_deck = list()
 mulligans_by_number = {}
 mulligans_by_number[0] = 0
@@ -51,11 +57,11 @@ for sim_number in range(1,sims+1):
     # prize cards
     p.setPrizes(6)
 
-    disaster = p.disaster(c.Blastoise()) or p.disaster(c.ArchiesAceintheHole())
+    disaster = p.disaster(Blastoise.Blastoise()) or p.disaster(ArchiesAceintheHole.ArchiesAceintheHole())
 
     p.placeActive()
 
-    is_bad_news = c.Exeggcute() in p.bench or c.JirachiEX() in p.bench
+    is_bad_news = Exeggcute.Exeggcute() in p.bench or JirachiEX.JirachiEX() in p.bench
     bad_news += int(is_bad_news)
     disasters += int(disaster)
     
